@@ -2,7 +2,6 @@ package ru.fenki.view;
 
 import java.awt.Color;
 
-import ru.fenki.model.NodeIndex;
 import ru.fenki.model.Schema;
 
 public class SchemaAdapter extends SimpleSchemaAdapter {
