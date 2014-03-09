@@ -13,7 +13,9 @@ public class Rhomb {
 	private boolean _fill = true;
 	private boolean _visible = true;
 	
-	private int _shift=0;
+	private double _mult = 1;
+	
+	private int _shift = 0;
 	
 	public Rhomb(int a){
 		_a = a;
@@ -24,6 +26,12 @@ public class Rhomb {
 		_p = p;
 		return this;
 	}
+	
+	public Rhomb setMult(double mult){
+		_mult = mult; 
+		return this;
+	}
+
 	
 	public Rhomb setText(String s){
 		string = s;
@@ -55,7 +63,7 @@ public class Rhomb {
 		}
 		int x = _p.x+_shift;
 		int y = _p.y;
-		int w = 2*_a;
+		int w = (int)(2*_a*_mult);
 
 		int[] xPoints = { x, (int) (x - w / 2.), x, (int) (x + w / 2.) };
 		int[] yPoints = { (int) (y - w / 2.), y, (int) (y + w / 2.), y };
@@ -71,8 +79,13 @@ public class Rhomb {
 		g.drawString(string, x, y);
 	}
 	
-	public void clear(){
-		setText("").setColor(Color.WHITE).setFill(true).setVisible(true);
+	public Rhomb clear(){
+		setText("")
+			.setColor(Color.WHITE)
+			.setFill(true)
+			.setVisible(true)
+			.setMult(1);
+		return this;
 	}
 
 }

@@ -13,7 +13,7 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 	@Override
 	protected Node createRandomObject(int i, int j) 
 	{
-		return new Node(Node.NODE_BACK_RIGHT);
+		return new Node(Node.NODE_NONE);
 	}
 	
 	public int getThread(ThreadIndex ti) {

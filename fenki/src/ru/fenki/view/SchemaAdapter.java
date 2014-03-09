@@ -53,6 +53,55 @@ public class SchemaAdapter extends SimpleSchemaAdapter {
 		}
 		return r;
 	}
+	
+	public Rhomb getNode(SimpleIterator it){
+		int i = it.i;
+		int j = it.j;	
+		i = i/2;
+		j = (j-1)/2;
+		
+		if(mSchema.getDimensions().isNode(it.i, it.j-1)){
+			Color c = Color.WHITE;
+			int ci = mSchema.node(i, j).getColor()%3;
+			if(ci >= 0){
+				c = colors[ci];
+			}
+			return super.getRhomb(it).clear().setColor(c);
+		}
+		return null;
+	}
+	
+	public Rhomb getThread(SimpleIterator it){
+		int i = it.i;
+		int j = it.j;
+		i=it.i/2;
+		j=it.j-1;
+		if(mSchema.getDimensions().isThread(it.i, it.j-1)){
+			Color c = Color.WHITE;
+			int ci = mSchema.thread(j, i)%3;
+			if(ci >= 0){
+				c = colors[ci];
+			}
+			return super.getRhomb(it).clear().setColor(c);
+		}
+		return null;
+	}
+	
+	public Rhomb getCorner(SimpleIterator it){
+		int i = it.i;
+		int j = it.j;
+		i=it.i/2;
+		j=(it.j)/2-1;
+		if(mSchema.getDimensions().isCorner(it.i, it.j-1)){
+			Color c = Color.WHITE;
+			int ci = mSchema.corner(j, i)%3;
+			if(ci >= 0){
+				c = colors[ci];
+			}
+			return super.getRhomb(it).clear().setColor(c);
+		}
+		return null;
+	}
 
 	Color[] colors = { new Color(255, 215, 0), new Color(50, 205, 50),
 			new Color(0, 206, 209) };

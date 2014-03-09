@@ -122,9 +122,15 @@ public class NodeStoreDimensions {
 		if(!isValidIndex(i,j)){
 			return false;
 		}
+		
 		if(i%2==0){
 			return false;
 		}
+		
+		if(isNode(i,j)){
+			return false;
+		}
+		
 		if(j==-1&&(isShort(i/2, Const.LEFT))){
 			return true;
 		}
