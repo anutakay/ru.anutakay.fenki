@@ -7,13 +7,17 @@ import java.awt.Point;
 public class Rhomb {
 
 	private Point _p;
-	private int _a;	
+	private int _a;	//от центра до угла
 	private Color _color;
 	private String string = "";
 	private boolean _fill = true;
+	private boolean _visible = true;
+	
+	private int _shift=0;
 	
 	public Rhomb(int a){
 		_a = a;
+		_shift=-a;
 	}
 	
 	public Rhomb setLocation(Point p){
@@ -32,7 +36,12 @@ public class Rhomb {
 	}
 	
 	public Rhomb setFill(boolean fill){
-		_fill=fill;
+		_fill = fill;
+		return this;
+	}
+	
+	public Rhomb setVisible(boolean visible){
+		_visible = visible;
 		return this;
 	}
 	
@@ -40,8 +49,11 @@ public class Rhomb {
 		draw(g,_fill);
 	}
 	
-	public void draw(Graphics g, boolean fill){
-		int x = _p.x;
+	private void draw(Graphics g, boolean fill){
+		if(_visible==false){
+			return;
+		}
+		int x = _p.x+_shift;
 		int y = _p.y;
 		int w = 2*_a;
 
@@ -60,7 +72,7 @@ public class Rhomb {
 	}
 	
 	public void clear(){
-		setText("").setColor(Color.WHITE).setFill(true);
+		setText("").setColor(Color.WHITE).setFill(true).setVisible(true);
 	}
 
 }

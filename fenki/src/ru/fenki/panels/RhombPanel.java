@@ -24,9 +24,9 @@ public class RhombPanel extends JPanel  {
 	
 	public RhombPanel(){
 		super();
-		mSchema = new Schema(5, 3, false);
+		mSchema = new Schema(4, 22, true);
 		mDimension = mSchema.getDimensions().toDimension();
-		setPreferredSize(new java.awt.Dimension(mDimension.getColumnNumber()*2*a+a+1, mDimension.getStringNumber()*a+a+1));
+		setPreferredSize(new java.awt.Dimension(mDimension.getColumnNumber()*2*a+1, mDimension.getStringNumber()*a+a+1));
 		adapter = new SchemaAdapter(mSchema, a);
 	}
 	
@@ -40,10 +40,6 @@ public class RhombPanel extends JPanel  {
 	protected void paintComponent(Graphics g){
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getPreferredSize().width, getPreferredSize().height);
-		for(SimpleIterator it = new SimpleIterator(mDimension)
-				.begin(); it != null; it = it.next()){
-			adapter.getRhomb(it).draw(g, false);
-		}
 		
 		for(SimpleIterator it = new SchemaIterator(mDimension)
 				.begin(); it != null; it = it.next()){

@@ -112,13 +112,7 @@ public class NodeStoreDimensions {
 		if(!isValidIndex(i,j)){
 			return false;
 		}
-		if(i%2==0){
-			return false;
-		}
-		if(j<0||j >= numberOfNodeInColumn(i/2+1)*2){
-			return false;
-		}
-		if(j%2==(isShort(i/2, Const.LEFT) ? 1 : 0)){
+		if(isCorner(i,j)||isNode(i,j)||isThread(i, j)){
 			return false;
 		}
 		return true;
@@ -128,11 +122,39 @@ public class NodeStoreDimensions {
 		if(!isValidIndex(i,j)){
 			return false;
 		}
+		if(i%2==0){
+			return false;
+		}
 		if(j==-1&&(isShort(i/2, Const.LEFT))){
 			return true;
 		}
+		
+
+		if(j%2==0&&j==numberOfNodeInColumn(i)*2&&(isShort(i/2, Const.RIGHT))){
+			if(isNode(i,j-1)||j==0){
+				return false;
+			}
+			return true;
+		}
+		if(j%2==1&&(j+1==numberOfNodeInColumn(i)*2||j-1==numberOfNodeInColumn(i)*2)&&(isShort(i/2, Const.RIGHT))){
+			if(isNode(i,j-1)||j==0){
+				return false;
+			}
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean isEmptyCorner(int i, int j){
+		if(!isValidIndex(i,j)){
+			return false;
+		}
+		if(j==-1&&!(isShort(i/2, Const.LEFT))){
+			return true;
+		}
 		if(j==numberOfNodeInColumn(i)*2
-				&&i%2==1&&(isShort(i/2, Const.RIGHT))){
+				&&i%2==1&&!(isShort(i/2, Const.RIGHT))){
 			return true;
 		}
 		return false;

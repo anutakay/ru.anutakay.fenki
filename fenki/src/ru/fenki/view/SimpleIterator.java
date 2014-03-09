@@ -12,7 +12,7 @@ public class SimpleIterator extends Index {
 	}
 	
 	public SimpleIterator(Dimension d) {
-		this(-1, -1);
+		this(0, 0);
 		mDimension = d;
 	}
 	

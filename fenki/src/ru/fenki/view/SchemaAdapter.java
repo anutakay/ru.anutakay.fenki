@@ -25,8 +25,8 @@ public class SchemaAdapter extends SimpleSchemaAdapter {
 		int i = it.i;
 		int j = it.j;
 		
-		i=i/2;
-		j=(j-1)/2;
+		i = i/2;
+		j = (j-1)/2;
 		
 		if(mSchema.getDimensions().isNode(it.i, it.j-1)){
 			r.setColor(colors[mSchema.node(i, j).getColor()%3]);
@@ -34,7 +34,7 @@ public class SchemaAdapter extends SimpleSchemaAdapter {
 		}
 		
 		if(mSchema.getDimensions().isEmpty(it.i, it.j-1)){
-			r.setFill(false);
+			r.setVisible(false);
 			return r;
 		}
 		
@@ -50,8 +50,6 @@ public class SchemaAdapter extends SimpleSchemaAdapter {
 		j=(it.j)/2-1;
 		if(mSchema.getDimensions().isCorner(it.i, it.j-1)){
 			r.setColor(colors[mSchema.corner(j, i)%3]);
-			
-			mSchema.corner(j, i);
 		}
 		return r;
 	}
