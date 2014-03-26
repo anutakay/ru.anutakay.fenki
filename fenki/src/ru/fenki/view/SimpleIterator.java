@@ -18,7 +18,7 @@ public class SimpleIterator extends Index {
 	
 	public SimpleIterator begin() {
 		i = 0; 
-		j = -1;
+		j = 0;
 		return this;
 	}
 	
@@ -46,7 +46,7 @@ public class SimpleIterator extends Index {
 		return mDimension;
 	}
 	
-	protected boolean isSatisfies(){
+	public boolean isSatisfies(){
 		if(j<0||i<0){
 			return false;
 		}

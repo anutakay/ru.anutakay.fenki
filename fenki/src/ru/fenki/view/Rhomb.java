@@ -15,11 +15,8 @@ public class Rhomb {
 	
 	private double _mult = 1;
 	
-	private int _shift = 0;
-	
 	public Rhomb(int a){
 		_a = a;
-		_shift=-a;
 	}
 	
 	public Rhomb setLocation(Point p){
@@ -53,15 +50,15 @@ public class Rhomb {
 		return this;
 	}
 	
-	public void draw(Graphics g){
-		draw(g,_fill);
+	public void draw(Graphics g, int shift){
+		draw(g,_fill, shift);
 	}
 	
-	private void draw(Graphics g, boolean fill){
+	private void draw(Graphics g, boolean fill, int shift){
 		if(_visible==false){
 			return;
 		}
-		int x = _p.x+_shift;
+		int x = _p.x+shift;
 		int y = _p.y;
 		int w = (int)(2*_a*_mult);
 

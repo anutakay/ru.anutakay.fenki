@@ -18,7 +18,7 @@ public class SchemaAdapter extends SimpleSchemaAdapter {
 		mSchema = schema;
 	}
 	
-	@Override
+	/*@Override
 	public Rhomb getRhomb(SimpleIterator it) {
 		Rhomb r = super.getRhomb(it);
 		r.clear();
@@ -52,7 +52,7 @@ public class SchemaAdapter extends SimpleSchemaAdapter {
 			r.setColor(colors[mSchema.corner(j, i)%3]);
 		}
 		return r;
-	}
+	}*/
 	
 	public Rhomb getNode(SimpleIterator it){
 		int i = it.i;

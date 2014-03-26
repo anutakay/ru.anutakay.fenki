@@ -9,7 +9,7 @@ public class SchemaIterator extends SimpleIterator{
 	}
 	
 	@Override
-	protected boolean isSatisfies(){
+	public boolean isSatisfies(){
 		if(!super.isSatisfies()){
 			return false;
 		}

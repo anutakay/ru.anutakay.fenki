@@ -4,6 +4,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
 
+import ru.fenki.view.mouse.RhombMouseListener;
+
 
 public class MyTabbedPane extends JTabbedPane {
 
