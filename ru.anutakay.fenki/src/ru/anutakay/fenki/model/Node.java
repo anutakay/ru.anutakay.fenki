@@ -16,9 +16,9 @@ public class Node {
 	
 	private HDirection exit;
 	
-	private int firstColor = -1;
+	private Thread firstColor = new Thread(-1);
 	
-	private int secondColor = -1;
+	private Thread secondColor = new Thread(-1);
 	
 	Node() {
 		this(Direction.NONE);
@@ -69,23 +69,23 @@ public class Node {
 		}
 	}
 
-	public void setFirstColor(final int firstColor) {
-		this.firstColor = firstColor;
+	public void setFirstColor(final Thread rightColor) {
+		this.firstColor = rightColor;
 	}
 	
-	public void setSecondColor(final int secondColor) {
-		this.secondColor = secondColor;
+	public void setSecondColor(final Thread leftColor) {
+		this.secondColor = leftColor;
 	}
 
 	public Direction getDirection() {
 		return direction;
 	}
 
-	public int getFirstColor() {
+	public Thread getFirstColor() {
 		return firstColor;
 	}
 	
-	public int getSecondColor() {
+	public Thread getSecondColor() {
 		return secondColor;
 	}
 	

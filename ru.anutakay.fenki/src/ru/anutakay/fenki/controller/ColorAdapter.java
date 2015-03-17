@@ -26,7 +26,7 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 			int i = it.getI()/2;
 			int j = it.getJ()/2;
 			//System.out.println(j + " " + i + " " +mSchema.thread( j, i));
-			int a = mSchema.thread( j, i);
+			int a = mSchema.thread( j, i).getIndex();
 			if(a == -1){
 				return Color.WHITE;
 			}
@@ -36,7 +36,7 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 		if(isNode(it)){
 			int i = (it.getI()-1)/2;
 			int j = ((it.getJ())-2)/4;
-			int a = mSchema.node( i, j).getFirstColor();
+			int a = mSchema.node( i, j).getFirstColor().getIndex();
 			if(a == -1){
 				return Color.WHITE;
 			}
@@ -49,7 +49,7 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 			if(it.getJ()==0){
 				left_right = HDirection.LEFT;
 			}
-			int a = mSchema.corner(i, left_right);
+			int a = mSchema.corner(i, left_right).getIndex();
 			if(a == -1){
 				return Color.WHITE;
 			}

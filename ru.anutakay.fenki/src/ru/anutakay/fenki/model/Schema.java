@@ -36,7 +36,7 @@ public class Schema
 		return mNodeStorage.getNode(new NodeIndex(j, i));
 	}
 	
-	public int thread(int i, int j) {
+	public Thread thread(int i, int j) {
 		return mNodeStorage.getThread(new ThreadIndex(i,j));
 	}
 	
@@ -48,7 +48,7 @@ public class Schema
 		return mNodeStorage.getCorner(j, left_right);
 	}*/
 	
-	public int corner(int j, HDirection left_right){
+	public Thread corner(int j, HDirection left_right){
 		return mNodeStorage.getCorner(j, left_right);
 	}
 

@@ -30,17 +30,17 @@ public class ThreadStorage {
 		}
 	}
 
-	public int getThread(final ThreadIndex ti) {
-		return threads.get(ti.i).get(ti.j).getIndex();
+	public Thread getThread(final ThreadIndex ti) {
+		return threads.get(ti.i).get(ti.j);
 	}
 
-	public void setThread(final ThreadIndex ti, int value) {
-		threads.get(ti.i).set(ti.j, new Thread(value));
+	public void setThread(final ThreadIndex ti, final Thread thread) {
+		threads.get(ti.i).set(ti.j, thread);
 	}
 
 	
 
-	public int getNeighborThreadForNode(
+	public Thread getNeighborThreadForNode(
 							final NodeIndex ni, 
 							final HDirection left_right,
 							final VDirection prev) {	
@@ -51,7 +51,7 @@ public class ThreadStorage {
 	public void setNeighbor(final NodeIndex ni, 
 							final HDirection right, 
 							final VDirection prev_next,
-							final int value) {
+							final Thread value) {
 		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, right, prev_next);
 		setThread(ti, value);
 	}
