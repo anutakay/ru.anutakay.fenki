@@ -1,52 +1,69 @@
 package ru.anutakay.fenki.model;
 
-
-
 public class Node {
+	
+	public enum Direction { NONE, 
+							DIRECT_RIGHT, 
+							DIRECT_LEFT, 
+							BACK_RIGHT, 
+							BACK_LEFT }
 
-	public final static int NODE_NONE = -1;
-	public final static int NODE_DIRECT_RIGHT = 0;
-	public final static int NODE_DIRECT_LEFT = 1;
-	public final static int NODE_BACK_RIGHT = 2;
-	public final static int NODE_BACK_LEFT = 3;
-
-	private int direction = -1;
+	private Direction direction = Direction.NONE;
+	
 	private int mFirstColor = -1;
+	
 	private int mSecondColor = -1;
+	
 	private int enter = -1;
+	
 	private int exit = -1;
 
-	Node(int d) {
+	Node(final Direction d) {
 		setDirection(d);
 	}
 
-	public void setDirection(int d) {
+	public void setDirection(final Direction d) {
 		direction = d;
-		if(direction == -1){
-			enter = exit = -1;
-			return;
+		enter =  getEnterFromDirection(d);
+		exit = getExitFromDirection(d);
+	}
+	
+	private int getEnterFromDirection(final Direction d) {
+		
+		if(d == Direction.NONE || d == null) {
+			return -1;
 		}
-		if(direction == NODE_DIRECT_RIGHT ||direction == NODE_BACK_RIGHT){
-			enter = Const.RIGHT;
-		}else{
-			enter = Const.LEFT;
+		
+		if(d == Direction.DIRECT_RIGHT ||
+				d == Direction.BACK_RIGHT) {
+			return Const.RIGHT;
+		} else {
+			return Const.LEFT;
 		}
-		if(direction == NODE_DIRECT_RIGHT ||direction == NODE_BACK_LEFT){
-			exit = Const.LEFT;
-		}else{
-			exit = Const.RIGHT;
+		
+	}
+	
+	private int getExitFromDirection(final Direction d) {
+		if(d == Direction.NONE || d == null) {
+			return -1;
+		}
+		if(d == Direction.DIRECT_RIGHT ||
+				d == Direction.BACK_LEFT) {
+			return Const.LEFT;
+		} else {
+			return Const.RIGHT;
 		}
 	}
 
-	public void setColor(int c) {
+	public void setColor(final int c) {
 		mFirstColor = c;
 	}
 	
-	public void setSecondColor(int c){
+	public void setSecondColor(final int c) {
 		mSecondColor = c;
 	}
 
-	public int getDirection() {
+	public Direction getDirection() {
 		return direction;
 	}
 
@@ -54,15 +71,15 @@ public class Node {
 		return mFirstColor;
 	}
 	
-	public int getSecondColor(){
+	public int getSecondColor() {
 		return mSecondColor;
 	}
 	
-	public int getExit(){
+	public int getExit() {
 		return exit;
 	}
 	
-	public int getEnter(){
+	public int getEnter() {
 		return enter;
 	}
 

@@ -18,7 +18,7 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 	protected Node createRandomObject(int i, int j) 
 	{
 		r = new Random();
-		return new Node(Math.abs(r.nextInt())%4);
+		return new Node(Node.Direction.values()[Math.abs(r.nextInt())%4+1]);
 	}
 	
 	public int getThread(ThreadIndex ti) {
@@ -53,7 +53,7 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 		int exit = node.getExit();
 		int leftColor = getPrevThreadForNode(ni, Const.LEFT);
 		int rightColor = getPrevThreadForNode(ni, Const.RIGHT);
-		if(enter == Node.NODE_NONE){
+		if(enter == -1){
 			setNextThreadForNode(ni, Const.RIGHT, -1);
 			setNextThreadForNode(ni, Const.LEFT, -1);
 			return;
