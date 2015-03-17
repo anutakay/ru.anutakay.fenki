@@ -9,50 +9,57 @@ import ru.anutakay.fenki.model.Const.VDirection;
 public class ThreadStorage {
 
 	private NodeStoreDimensions mDimensions;
-	private ArrayList<ArrayList<Integer>> threads;
+	
+	private ArrayList<ArrayList<Thread>> threads;
 
-	public ThreadStorage(NodeStoreDimensions dimensions) {
+	public ThreadStorage(final NodeStoreDimensions dimensions) {
 		mDimensions = dimensions;
 
-		ArrayList<Integer> n;
-		threads = new ArrayList<ArrayList<Integer>>();
+		ArrayList<Thread> n;
+		threads = new ArrayList<ArrayList<Thread>>();
 		for (int i = 0; i < mDimensions.getThreadNumber(); i++) {
-			n = new ArrayList<Integer>();
+			n = new ArrayList<Thread>();
 			for (int j = 0; j < mDimensions.getColumnNumber() + 1; j++) {
 				if (j == 0) {
-					n.add(i);
+					n.add(new Thread(i));
 				} else {
-					n.add(-1);
+					n.add(new Thread(-1));
 				}
 			}
 			threads.add(n);
 		}
 	}
 
-	public int getThread(ThreadIndex ti) {
-		return threads.get(ti.i).get(ti.j);
+	public int getThread(final ThreadIndex ti) {
+		return threads.get(ti.i).get(ti.j).getIndex();
 	}
 
-	public void setThread(ThreadIndex ti, int value) {
-		threads.get(ti.i).set(ti.j, value);
+	public void setThread(final ThreadIndex ti, int value) {
+		threads.get(ti.i).set(ti.j, new Thread(value));
 	}
 
 	
 
-	public int getNeighborThreadForNode(NodeIndex ni, HDirection left_right,
-			VDirection prev) {	
+	public int getNeighborThreadForNode(
+							final NodeIndex ni, 
+							final HDirection left_right,
+							final VDirection prev) {	
 		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, left_right, prev);
 		return getThread(ti);
 	}
 
-	public void setNeighbor(NodeIndex ni, HDirection right, VDirection prev_next,
-			int value) {
+	public void setNeighbor(final NodeIndex ni, 
+							final HDirection right, 
+							final VDirection prev_next,
+							final int value) {
 		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, right, prev_next);
 		setThread(ti, value);
 	}
 	
-	ThreadIndex neighborThreadIndexForNodeIndex(NodeIndex ni, HDirection right, VDirection prev)
-	{
+	ThreadIndex neighborThreadIndexForNodeIndex(
+							final NodeIndex ni, 
+							final HDirection right, 
+							final VDirection prev) {
 		int i = ni.i;
 		int j = ni.j;
 		int t = mDimensions.isShort(j, HDirection.LEFT) ? 1 : 0;
