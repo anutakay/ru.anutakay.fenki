@@ -1,6 +1,9 @@
 package ru.anutakay.fenki.model;
 import java.util.ArrayList;
 
+import ru.anutakay.fenki.model.Const.HDirection;
+import ru.anutakay.fenki.model.Const.VDirection;
+
 
 
 public class ThreadStorage {
@@ -36,28 +39,28 @@ public class ThreadStorage {
 
 	
 
-	public int getNeighborThreadForNode(NodeIndex ni, int left_right,
-			int prev_next) {	
-		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, left_right, prev_next);
+	public int getNeighborThreadForNode(NodeIndex ni, HDirection left_right,
+			VDirection prev) {	
+		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, left_right, prev);
 		return getThread(ti);
 	}
 
-	public void setNeighbor(NodeIndex ni, int left_right, int prev_next,
+	public void setNeighbor(NodeIndex ni, HDirection right, VDirection prev_next,
 			int value) {
-		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, left_right, prev_next);
+		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, right, prev_next);
 		setThread(ti, value);
 	}
 	
-	ThreadIndex neighborThreadIndexForNodeIndex(NodeIndex ni, int left_right, int prev_next)
+	ThreadIndex neighborThreadIndexForNodeIndex(NodeIndex ni, HDirection right, VDirection prev)
 	{
 		int i = ni.i;
 		int j = ni.j;
-		int t = mDimensions.isShort(j, Const.LEFT) ? 1 : 0;
+		int t = mDimensions.isShort(j, HDirection.LEFT) ? 1 : 0;
 		i = i * 2 + t;
-		if (prev_next == Const.NEXT) {
+		if (prev == VDirection.NEXT) {
 			j = j + 1;
 		}
-		if (left_right == Const.RIGHT) {
+		if (right == HDirection.RIGHT) {
 			i = i + 1;
 		}
 		return new ThreadIndex(i, j);

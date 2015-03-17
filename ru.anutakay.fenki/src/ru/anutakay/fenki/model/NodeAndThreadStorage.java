@@ -2,6 +2,9 @@ package ru.anutakay.fenki.model;
 
 import java.util.Random;
 
+import ru.anutakay.fenki.model.Const.HDirection;
+import ru.anutakay.fenki.model.Const.VDirection;
+
 public class NodeAndThreadStorage extends NodeStorage<Node> 
 {
 	private ThreadStorage mThreadStorage;
@@ -25,64 +28,64 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 		return mThreadStorage.getThread(ti);
 	}
 	
-	public int getCorner(int j, int left_right){
-		if (left_right == Const.LEFT) {
-			return getPrevThreadForNode(new NodeIndex(-1, j), Const.RIGHT);
+	public int getCorner(int j, HDirection left_right){
+		if (left_right == HDirection.LEFT) {
+			return getPrevThreadForNode(new NodeIndex(-1, j), HDirection.RIGHT);
 		} else {
 			int n = mDimensions.numberOfNodeInColumn(j);
-			return getPrevThreadForNode(new NodeIndex(n, j), Const.LEFT);
+			return getPrevThreadForNode(new NodeIndex(n, j), HDirection.LEFT);
 		}
 	}
 	
-	public int getPrevThreadForNode(NodeIndex ni, int left_right)
+	public int getPrevThreadForNode(NodeIndex ni, HDirection right)
 	{
-		return mThreadStorage.getNeighborThreadForNode(ni, left_right, 
-				Const.PREV);
+		return mThreadStorage.getNeighborThreadForNode(ni, right, 
+				VDirection.PREV);
 	}
 		
-	public void setNextThreadForNode(NodeIndex ni, int left_right, int value)
+	public void setNextThreadForNode(NodeIndex ni, HDirection right, int value)
 	{
-		mThreadStorage.setNeighbor(ni, left_right,
-				Const.NEXT, value);
+		mThreadStorage.setNeighbor(ni, right,
+				VDirection.NEXT, value);
 	}
 		
 	public void build_node(NodeIndex ni) 
 	{
 		Node node = getNode(ni);
-		int enter = node.getEnter();
-		int exit = node.getExit();
-		int leftColor = getPrevThreadForNode(ni, Const.LEFT);
-		int rightColor = getPrevThreadForNode(ni, Const.RIGHT);
-		if(enter == -1){
-			setNextThreadForNode(ni, Const.RIGHT, -1);
-			setNextThreadForNode(ni, Const.LEFT, -1);
+		HDirection enter = node.getEnter();
+		HDirection exit = node.getExit();
+		int leftColor = getPrevThreadForNode(ni, HDirection.LEFT);
+		int rightColor = getPrevThreadForNode(ni, HDirection.RIGHT);
+		if(enter == HDirection.NONE){
+			setNextThreadForNode(ni, HDirection.RIGHT, -1);
+			setNextThreadForNode(ni, HDirection.LEFT, -1);
 			return;
-		}else if(enter == Const.RIGHT){
+		}else if(enter == HDirection.RIGHT){
 			node.setFirstColor(rightColor);
 			node.setSecondColor(leftColor);
 		}else{
 			node.setFirstColor(leftColor);
 			node.setSecondColor(rightColor);
 		}
-		if(exit == Const.RIGHT){
-			setNextThreadForNode(ni, Const.RIGHT, node.getFirstColor());
-			setNextThreadForNode(ni, Const.LEFT, node.getSecondColor());
+		if(exit == HDirection.RIGHT){
+			setNextThreadForNode(ni, HDirection.RIGHT, node.getFirstColor());
+			setNextThreadForNode(ni, HDirection.LEFT, node.getSecondColor());
 		}else{
-			setNextThreadForNode(ni, Const.RIGHT, node.getSecondColor());
-			setNextThreadForNode(ni, Const.LEFT, node.getFirstColor());
+			setNextThreadForNode(ni, HDirection.RIGHT, node.getSecondColor());
+			setNextThreadForNode(ni, HDirection.LEFT, node.getFirstColor());
 		}
 	}
 	
-	public void build_corner(int j, int left_right) {
-		if (mDimensions.isShort(j, Const.LEFT) && left_right == Const.LEFT) {
+	public void build_corner(int j, HDirection left_right) {
+		if (mDimensions.isShort(j, HDirection.LEFT) && left_right == HDirection.LEFT) {
 			NodeIndex index = new NodeIndex(-1, j);
-			int value = getPrevThreadForNode(index, Const.RIGHT);
-			setNextThreadForNode(index, Const.RIGHT, value);
+			int value = getPrevThreadForNode(index, HDirection.RIGHT);
+			setNextThreadForNode(index, HDirection.RIGHT, value);
 		}
-		if ((left_right == Const.RIGHT && mDimensions .isShort(j, Const.RIGHT))) {
+		if ((left_right == HDirection.RIGHT && mDimensions .isShort(j, HDirection.RIGHT))) {
 			NodeIndex index = new NodeIndex(mDimensions.numberOfNodeInColumn(j), j);
-			int value = getPrevThreadForNode(index, Const.LEFT);
-			setNextThreadForNode(index, Const.LEFT, value);
+			int value = getPrevThreadForNode(index, HDirection.LEFT);
+			setNextThreadForNode(index, HDirection.LEFT, value);
 		}
 	}
 }

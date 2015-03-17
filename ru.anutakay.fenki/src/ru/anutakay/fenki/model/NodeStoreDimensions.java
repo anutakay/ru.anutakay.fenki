@@ -1,5 +1,6 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.model.Const.HDirection;
 import ru.anutakay.fenki.service.Dimension;
 
 
@@ -43,10 +44,10 @@ public class NodeStoreDimensions {
 		return i;
 	}
 	
-	public boolean isShort(int j, int left_right) {
+	public boolean isShort(int j, HDirection left2) {
 		boolean left = (j % 2 == 1 && getFirst())
 				|| (j % 2 == 0 && !getFirst());
-		if (left_right == Const.LEFT) {
+		if (left2 == HDirection.LEFT) {
 			return left;
 		} else {
 			return (left &&getThreadNumber() % 2 == 0)
@@ -102,7 +103,7 @@ public class NodeStoreDimensions {
 		if(j<0||j >= numberOfNodeInColumn(i/2)*2){
 			return false;
 		}
-		if(j%2!=(isShort(i/2, Const.LEFT) ? 1 : 0)){
+		if(j%2!=(isShort(i/2, HDirection.LEFT) ? 1 : 0)){
 			return false;
 		}
 		return true;
@@ -131,18 +132,18 @@ public class NodeStoreDimensions {
 			return false;
 		}
 		
-		if(j==-1&&(isShort(i/2, Const.LEFT))){
+		if(j==-1&&(isShort(i/2, HDirection.LEFT))){
 			return true;
 		}
 		
 
-		if(j%2==0&&j==numberOfNodeInColumn(i)*2&&(isShort(i/2, Const.RIGHT))){
+		if(j%2==0&&j==numberOfNodeInColumn(i)*2&&(isShort(i/2, HDirection.RIGHT))){
 			if(isNode(i,j-1)||j==0){
 				return false;
 			}
 			return true;
 		}
-		if(j%2==1&&(j+1==numberOfNodeInColumn(i)*2||j-1==numberOfNodeInColumn(i)*2)&&(isShort(i/2, Const.RIGHT))){
+		if(j%2==1&&(j+1==numberOfNodeInColumn(i)*2||j-1==numberOfNodeInColumn(i)*2)&&(isShort(i/2, HDirection.RIGHT))){
 			if(isNode(i,j-1)||j==0){
 				return false;
 			}
@@ -156,11 +157,11 @@ public class NodeStoreDimensions {
 		if(!isValidIndex(i,j)){
 			return false;
 		}
-		if(j==-1&&!(isShort(i/2, Const.LEFT))){
+		if(j==-1&&!(isShort(i/2, HDirection.LEFT))){
 			return true;
 		}
 		if(j==numberOfNodeInColumn(i)*2
-				&&i%2==1&&!(isShort(i/2, Const.RIGHT))){
+				&&i%2==1&&!(isShort(i/2, HDirection.RIGHT))){
 			return true;
 		}
 		return false;

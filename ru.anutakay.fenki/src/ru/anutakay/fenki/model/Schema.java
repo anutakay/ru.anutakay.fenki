@@ -1,5 +1,7 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.model.Const.HDirection;
+
 public class Schema 
 {
 	private NodeAndThreadStorage mNodeStorage;
@@ -18,11 +20,11 @@ public class Schema
 
 	public void build() {
 		for (int j = 0; j < mDimensions.getColumnNumber(); j++) {
-			mNodeStorage.build_corner(j, Const.LEFT);
+			mNodeStorage.build_corner(j, HDirection.LEFT);
 			for (int i = 0; i < mDimensions.numberOfNodeInColumn(j); i++) {
 				mNodeStorage.build_node(new NodeIndex(i, j));
 			}
-			mNodeStorage.build_corner(j, Const.RIGHT);
+			mNodeStorage.build_corner(j, HDirection.RIGHT);
 		}
 	}
 	
@@ -46,7 +48,7 @@ public class Schema
 		return mNodeStorage.getCorner(j, left_right);
 	}*/
 	
-	public int corner(int j, int left_right){
+	public int corner(int j, HDirection left_right){
 		return mNodeStorage.getCorner(j, left_right);
 	}
 

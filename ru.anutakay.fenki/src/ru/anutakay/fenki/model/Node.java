@@ -1,5 +1,7 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.model.Const.HDirection;
+
 public class Node {
 	
 	public enum Direction { NONE, 
@@ -10,9 +12,9 @@ public class Node {
 
 	private Direction direction = Direction.NONE;
 	
-	private int enter = -1;
+	private HDirection enter;
 	
-	private int exit = -1;
+	private HDirection exit;
 	
 	private int firstColor = -1;
 	
@@ -40,30 +42,30 @@ public class Node {
 		}
 	}
 	
-	private int getEnterFromDirection(final Direction direction) {
+	private HDirection getEnterFromDirection(final Direction direction) {
 		
 		if(direction == Direction.NONE) {
-			return -1;
+			return HDirection.NONE;
 		}
 		
 		if(direction == Direction.DIRECT_RIGHT ||
 				direction == Direction.BACK_RIGHT) {
-			return Const.RIGHT;
+			return HDirection.RIGHT;
 		} else {
-			return Const.LEFT;
+			return HDirection.LEFT;
 		}
 		
 	}
 	
-	private int getExitFromDirection(final Direction direction) {
+	private HDirection getExitFromDirection(final Direction direction) {
 		if(direction == Direction.NONE) {
-			return -1;
+			return HDirection.NONE;
 		}
 		if(direction == Direction.DIRECT_RIGHT ||
 				direction == Direction.BACK_LEFT) {
-			return Const.LEFT;
+			return HDirection.LEFT;
 		} else {
-			return Const.RIGHT;
+			return HDirection.RIGHT;
 		}
 	}
 
@@ -87,11 +89,11 @@ public class Node {
 		return secondColor;
 	}
 	
-	public int getExit() {
+	public HDirection getExit() {
 		return exit;
 	}
 	
-	public int getEnter() {
+	public HDirection getEnter() {
 		return enter;
 	}
 

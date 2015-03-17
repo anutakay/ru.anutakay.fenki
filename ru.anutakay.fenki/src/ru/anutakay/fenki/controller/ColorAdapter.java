@@ -3,6 +3,7 @@ import java.awt.Color;
 
 import ru.anutakay.fenki.graph.Iterator2D;
 import ru.anutakay.fenki.model.Const;
+import ru.anutakay.fenki.model.Const.HDirection;
 import ru.anutakay.fenki.model.NodeStoreDimensions;
 import ru.anutakay.fenki.model.Schema;
 
@@ -45,9 +46,9 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 
 		if(isCorner(it)){
 			int i = (it.getI()-1)/2;
-			int left_right = Const.RIGHT;
+			HDirection left_right = HDirection.RIGHT;
 			if(it.getJ()==0){
-				left_right = Const.LEFT;
+				left_right = HDirection.LEFT;
 			}
 			int a = mSchema.corner(i, left_right);
 			if(a == -1){

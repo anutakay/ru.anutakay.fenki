@@ -3,9 +3,15 @@ package ru.anutakay.fenki.model;
 
 public class Const 
 {
-	public final static int RIGHT = 0;
-	public final static int LEFT = 1;
+	public enum HDirection {
+		NONE,
+		RIGHT,
+		LEFT
+	}
 	
-	public final static int PREV = 2;
-	public final static int NEXT = 3;
+	public enum VDirection {
+		NONE,
+		PREV,
+		NEXT
+	}
 }
