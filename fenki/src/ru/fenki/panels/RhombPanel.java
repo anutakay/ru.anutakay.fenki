@@ -46,8 +46,8 @@ public class RhombPanel extends JPanel implements ClickHandlerInterface  {
 
 	@Override
 	protected void paintComponent(Graphics g){
-		//g.setColor(getBackground());
-		g.setColor(Color.CYAN);
+		g.setColor(getBackground());
+		/*g.setColor(Color.CYAN);
 		g.fillRect(a+shift, 0, getPreferredSize().width, getPreferredSize().height);
 		
 		for(SimpleIterator it = new SchemaIterator(mDimension)
@@ -63,18 +63,18 @@ public class RhombPanel extends JPanel implements ClickHandlerInterface  {
 				r.setText(i+","+j);
 			}
 			drawIfExist(g, r);
-		}
+		}*/
 		
-		/*for(SimpleIterator it = new SchemaIterator(mDimension)
+		for(SimpleIterator it = new SchemaIterator(mDimension)
 				.begin(); it != null; it = it.next()){
 			Rhomb r = adapter.getThread(it);
-			//drawIfExist(g, r);
+			drawIfExist(g, r);
 		}
 		
 		for(SimpleIterator it = new SchemaIterator(mDimension)
 				.begin(); it != null; it = it.next()){
 			Rhomb r = adapter.getCorner(it);
-			//drawIfExist(g, r);
+			drawIfExist(g, r);
 		}
 		
 		for(SimpleIterator it = new SchemaIterator(mDimension)
@@ -85,7 +85,7 @@ public class RhombPanel extends JPanel implements ClickHandlerInterface  {
 				r.setText(it.i+","+it.j);
 			}
 			drawIfExist(g, r);
-		}*/
+		}
 		
 	}
 	
