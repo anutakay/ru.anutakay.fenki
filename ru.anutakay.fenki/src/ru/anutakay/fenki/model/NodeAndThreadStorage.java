@@ -58,18 +58,18 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 			setNextThreadForNode(ni, Const.LEFT, -1);
 			return;
 		}else if(enter == Const.RIGHT){
-			node.setColor(rightColor);
+			node.setFirstColor(rightColor);
 			node.setSecondColor(leftColor);
 		}else{
-			node.setColor(leftColor);
+			node.setFirstColor(leftColor);
 			node.setSecondColor(rightColor);
 		}
 		if(exit == Const.RIGHT){
-			setNextThreadForNode(ni, Const.RIGHT, node.getColor());
+			setNextThreadForNode(ni, Const.RIGHT, node.getFirstColor());
 			setNextThreadForNode(ni, Const.LEFT, node.getSecondColor());
 		}else{
 			setNextThreadForNode(ni, Const.RIGHT, node.getSecondColor());
-			setNextThreadForNode(ni, Const.LEFT, node.getColor());
+			setNextThreadForNode(ni, Const.LEFT, node.getFirstColor());
 		}
 	}
 	

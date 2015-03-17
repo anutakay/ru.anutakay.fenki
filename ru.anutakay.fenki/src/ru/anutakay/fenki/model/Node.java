@@ -55,19 +55,19 @@ public class Node {
 		}
 	}
 
-	public void setColor(final int c) {
-		mFirstColor = c;
+	public void setFirstColor(final int color) {
+		mFirstColor = color;
 	}
 	
-	public void setSecondColor(final int c) {
-		mSecondColor = c;
+	public void setSecondColor(final int color) {
+		mSecondColor = color;
 	}
 
 	public Direction getDirection() {
 		return direction;
 	}
 
-	public int getColor() {
+	public int getFirstColor() {
 		return mFirstColor;
 	}
 	
