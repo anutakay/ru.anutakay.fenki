@@ -7,74 +7,82 @@ import ru.anutakay.fenki.service.Dimension;
 
 public class NodeStoreDimensions {
 
-	private boolean mFirst;
-	private int mThreadNumber;
-	private int mColumnNumber;
+	private boolean first;
+	
+	private int numberOfThreads;
+	
+	private int numberOfColumns;
 
-	public NodeStoreDimensions(int threadNumber, int columnNumber, boolean first) {
-		if (threadNumber < 2) {
-			threadNumber = 2;
+	public NodeStoreDimensions(final int numberOfThreads, final int numberOfColumns, final boolean first) {
+		this.numberOfThreads = numberOfThreads;
+		this.numberOfColumns = numberOfColumns;
+		this.first = first;
+		
+		if (this.numberOfThreads < 2) {
+			this.numberOfThreads = 2;
 		}
-		if (columnNumber < 1) {
-			columnNumber = 2;
+		if (this.numberOfColumns < 1) {
+			this.numberOfColumns = 2;
 		}
-		mThreadNumber = threadNumber;
-		mColumnNumber = columnNumber;
-		mFirst = first;
+		
 	}
 
 	public int getThreadNumber() {
-		return mThreadNumber;
+		return numberOfThreads;
 	}
 
 	public int getColumnNumber() {
-		return mColumnNumber;
+		return numberOfColumns;
 	}
 
 	public boolean getFirst() {
-		return mFirst;
+		return first;
 	}
 
-	public int numberOfNodeInColumn(int j) {
-		int i = mThreadNumber/ 2
-				- ((mThreadNumber % 2 == 0 && j % 2 == 1 && getFirst())
-						|| (mThreadNumber % 2 == 0 && j % 2 == 0 && !mFirst) ? 1
+	public int numberOfNodeInColumn(final int columnNumber) {
+		int j = columnNumber;
+		int i = numberOfThreads/ 2
+				- ((numberOfThreads % 2 == 0 && j % 2 == 1 && getFirst())
+						|| (numberOfThreads % 2 == 0 && j % 2 == 0 && !first) ? 1
 						: 0);
 		//System.out.println("в " + j + " ряду " + i + " узлов ");
 		return i;
 	}
 	
-	public boolean isShort(int j, HDirection left2) {
+	public boolean isShort(final int columnNumber, final HDirection left2) {
+		int j = columnNumber;
 		boolean left = (j % 2 == 1 && getFirst())
 				|| (j % 2 == 0 && !getFirst());
 		if (left2 == HDirection.LEFT) {
 			return left;
 		} else {
-			return (left &&getThreadNumber() % 2 == 0)
+			return (left && getThreadNumber() % 2 == 0)
 					|| (!left && getThreadNumber() % 2 == 1);
 		}
 	}
 	
-	public boolean leftCorner(int j){
-		j=j/2;
+	public boolean leftCorner(final int columnNumber){
+		int j = columnNumber;
+		j = j/2;
 		boolean first = getFirst();
-		boolean t = (first && j % 2 == 1) || (!first && j % 2 == 0);
+		boolean t = (first && j%2 == 1) || (!first && j%2 == 0);
 		return t;
 	}
 	
-	public boolean rightCorner(int j){
-		if(getThreadNumber() % 2 == 1){
+	public boolean rightCorner(final int columnNumber){
+		int j = columnNumber;
+		if(getThreadNumber()%2 == 1){
 			return !leftCorner(j);
 		}else{
 			return leftCorner(j);
 		}
 	}
 	
-	boolean isValidIndex(int i, int j){
-		if(i<0||i >= getColumnNumber()*2+1){
+	boolean isValidIndex(final int i, final int j){
+		if(i < 0 || i >= getColumnNumber()*2 + 1){
 			return false;
 		}
-		if(j<-1||j>= getThreadNumber()){
+		if(j < -1 || j >= getThreadNumber()){
 			
 		}
 		if((j>-1)||(i%2 != 0)){
@@ -83,7 +91,7 @@ public class NodeStoreDimensions {
 		return false;
 	}
 	
-	public boolean isThread(int i, int j){
+	public boolean isThread(final int i, final int j){
 		if(!isValidIndex(i,j)){
 			return false;
 		}
@@ -93,58 +101,58 @@ public class NodeStoreDimensions {
 		return true;
 	}
 	
-	public boolean isNode(int i, int j){		
-		if(!isValidIndex(i,j)){
+	public boolean isNode(final int i, final int j){		
+		if(!isValidIndex(i, j)){
 			return false;
 		}
-		if(i%2==0){
+		if(i%2 == 0){
 			return false;
 		}
-		if(j<0||j >= numberOfNodeInColumn(i/2)*2){
+		if(j < 0 || j >= numberOfNodeInColumn(i/2)*2){
 			return false;
 		}
-		if(j%2!=(isShort(i/2, HDirection.LEFT) ? 1 : 0)){
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean isEmpty(int i, int j){		
-		if(!isValidIndex(i,j)){
-			return false;
-		}
-		if(isCorner(i,j)||isNode(i,j)||isThread(i, j)){
+		if(j%2 != (isShort(i/2, HDirection.LEFT) ? 1 : 0)){
 			return false;
 		}
 		return true;
 	}
 	
-	public boolean isCorner(int i, int j){
+	public boolean isEmpty(final int i, final int j){		
+		if(!isValidIndex(i, j)){
+			return false;
+		}
+		if(isCorner(i, j)||isNode(i, j)||isThread(i, j)){
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean isCorner(final int i, final int j){
 		if(!isValidIndex(i,j)){
 			return false;
 		}
 		
-		if(i%2==0){
+		if(i%2 == 0){
 			return false;
 		}
 		
-		if(isNode(i,j)){
+		if(isNode(i, j)){
 			return false;
 		}
 		
-		if(j==-1&&(isShort(i/2, HDirection.LEFT))){
+		if(j == -1 && (isShort(i/2, HDirection.LEFT))){
 			return true;
 		}
 		
 
-		if(j%2==0&&j==numberOfNodeInColumn(i)*2&&(isShort(i/2, HDirection.RIGHT))){
-			if(isNode(i,j-1)||j==0){
+		if(j%2 == 0 && j == numberOfNodeInColumn(i)*2 && (isShort(i/2, HDirection.RIGHT))){
+			if(isNode(i, j - 1) || j == 0){
 				return false;
 			}
 			return true;
 		}
-		if(j%2==1&&(j+1==numberOfNodeInColumn(i)*2||j-1==numberOfNodeInColumn(i)*2)&&(isShort(i/2, HDirection.RIGHT))){
-			if(isNode(i,j-1)||j==0){
+		if(j%2 == 1 && (j + 1 == numberOfNodeInColumn(i)*2 || j - 1 == numberOfNodeInColumn(i)*2) && (isShort(i/2, HDirection.RIGHT))){
+			if(isNode(i, j - 1) || j == 0){
 				return false;
 			}
 			return true;
@@ -153,22 +161,22 @@ public class NodeStoreDimensions {
 		return false;
 	}
 	
-	public boolean isEmptyCorner(int i, int j){
-		if(!isValidIndex(i,j)){
+	public boolean isEmptyCorner(final int i, final int j){
+		if(!isValidIndex(i, j)){
 			return false;
 		}
-		if(j==-1&&!(isShort(i/2, HDirection.LEFT))){
+		if(j == -1 && !(isShort(i/2, HDirection.LEFT))){
 			return true;
 		}
-		if(j==numberOfNodeInColumn(i)*2
-				&&i%2==1&&!(isShort(i/2, HDirection.RIGHT))){
+		if(j == numberOfNodeInColumn(i)*2
+				&& i%2 == 1 && !(isShort(i/2, HDirection.RIGHT))){
 			return true;
 		}
 		return false;
 	}
 	
 	public Dimension toDimension(){
-		return new Dimension(mColumnNumber*2+1, mThreadNumber+1);
+		return new Dimension(numberOfColumns*2 + 1, numberOfThreads + 1);
 	}
 
 }

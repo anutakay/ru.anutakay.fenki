@@ -1,8 +1,6 @@
 package ru.anutakay.fenki.model;
 import java.util.ArrayList;
 
-
-
 public abstract class NodeStorage<T> {
 	
 	private ArrayList<ArrayList<T>> mNodes;
