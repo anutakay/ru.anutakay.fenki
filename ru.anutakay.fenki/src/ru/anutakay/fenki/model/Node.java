@@ -10,32 +10,36 @@ public class Node {
 
 	private Direction direction = Direction.NONE;
 	
-	private int mFirstColor = -1;
+	private int firstColor = -1;
 	
-	private int mSecondColor = -1;
+	private int secondColor = -1;
 	
 	private int enter = -1;
 	
 	private int exit = -1;
-
-	Node(final Direction d) {
-		setDirection(d);
+	
+	Node() {
+		this(Direction.NONE);
 	}
 
-	public void setDirection(final Direction d) {
-		direction = d;
-		enter =  getEnterFromDirection(d);
-		exit = getExitFromDirection(d);
+	Node(final Direction direction) {
+		setDirection(direction);
+	}
+
+	public void setDirection(final Direction direction) {
+		this.direction = direction;
+		enter =  getEnterFromDirection(direction);
+		exit = getExitFromDirection(direction);
 	}
 	
-	private int getEnterFromDirection(final Direction d) {
+	private int getEnterFromDirection(final Direction direction) {
 		
-		if(d == Direction.NONE || d == null) {
+		if(direction == Direction.NONE || direction == null) {
 			return -1;
 		}
 		
-		if(d == Direction.DIRECT_RIGHT ||
-				d == Direction.BACK_RIGHT) {
+		if(direction == Direction.DIRECT_RIGHT ||
+				direction == Direction.BACK_RIGHT) {
 			return Const.RIGHT;
 		} else {
 			return Const.LEFT;
@@ -43,24 +47,24 @@ public class Node {
 		
 	}
 	
-	private int getExitFromDirection(final Direction d) {
-		if(d == Direction.NONE || d == null) {
+	private int getExitFromDirection(final Direction direction) {
+		if(direction == Direction.NONE || direction == null) {
 			return -1;
 		}
-		if(d == Direction.DIRECT_RIGHT ||
-				d == Direction.BACK_LEFT) {
+		if(direction == Direction.DIRECT_RIGHT ||
+				direction == Direction.BACK_LEFT) {
 			return Const.LEFT;
 		} else {
 			return Const.RIGHT;
 		}
 	}
 
-	public void setFirstColor(final int color) {
-		mFirstColor = color;
+	public void setFirstColor(final int firstColor) {
+		this.firstColor = firstColor;
 	}
 	
-	public void setSecondColor(final int color) {
-		mSecondColor = color;
+	public void setSecondColor(final int secondColor) {
+		this.secondColor = secondColor;
 	}
 
 	public Direction getDirection() {
@@ -68,11 +72,11 @@ public class Node {
 	}
 
 	public int getFirstColor() {
-		return mFirstColor;
+		return firstColor;
 	}
 	
 	public int getSecondColor() {
-		return mSecondColor;
+		return secondColor;
 	}
 	
 	public int getExit() {
