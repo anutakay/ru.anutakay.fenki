@@ -36,7 +36,7 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 		if(isNode(it)){
 			int i = (it.getI()-1)/2;
 			int j = ((it.getJ())-2)/4;
-			int a = mSchema.node( i, j).getColor();
+			int a = mSchema.node( i, j).getFirstColor();
 			if(a == -1){
 				return Color.WHITE;
 			}
