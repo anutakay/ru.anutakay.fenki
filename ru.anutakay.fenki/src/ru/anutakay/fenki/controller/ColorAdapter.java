@@ -2,7 +2,6 @@ package ru.anutakay.fenki.controller;
 import java.awt.Color;
 
 import ru.anutakay.fenki.graph.Iterator2D;
-import ru.anutakay.fenki.model.Const;
 import ru.anutakay.fenki.model.Const.HDirection;
 import ru.anutakay.fenki.model.NodeStoreDimensions;
 import ru.anutakay.fenki.model.Schema;
