@@ -10,13 +10,13 @@ public class Node {
 
 	private Direction direction = Direction.NONE;
 	
-	private int firstColor = -1;
-	
-	private int secondColor = -1;
-	
 	private int enter = -1;
 	
 	private int exit = -1;
+	
+	private int firstColor = -1;
+	
+	private int secondColor = -1;
 	
 	Node() {
 		this(Direction.NONE);
@@ -27,14 +27,22 @@ public class Node {
 	}
 
 	public void setDirection(final Direction direction) {
-		this.direction = direction;
-		enter =  getEnterFromDirection(direction);
-		exit = getExitFromDirection(direction);
+		this.direction = getCorectDirection(direction);
+		enter =  getEnterFromDirection(this.direction);
+		exit = getExitFromDirection(this.direction);
+	}
+	
+	private Direction getCorectDirection(final Direction direction) {
+		if(direction == null) {
+			return Direction.NONE;
+		} else {
+			return direction;
+		}
 	}
 	
 	private int getEnterFromDirection(final Direction direction) {
 		
-		if(direction == Direction.NONE || direction == null) {
+		if(direction == Direction.NONE) {
 			return -1;
 		}
 		
@@ -48,7 +56,7 @@ public class Node {
 	}
 	
 	private int getExitFromDirection(final Direction direction) {
-		if(direction == Direction.NONE || direction == null) {
+		if(direction == Direction.NONE) {
 			return -1;
 		}
 		if(direction == Direction.DIRECT_RIGHT ||
