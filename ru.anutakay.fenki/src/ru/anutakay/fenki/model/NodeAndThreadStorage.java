@@ -39,7 +39,7 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 	
 	public Thread getPrevThreadForNode(NodeIndex ni, HDirection right)
 	{
-		return mThreadStorage.getNeighborThreadForNode(ni, right, 
+		return mThreadStorage.getNeighbor(ni, right, 
 				VDirection.PREV);
 	}
 		

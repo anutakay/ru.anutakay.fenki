@@ -14,20 +14,24 @@ public class ThreadStorage {
 
 	public ThreadStorage(final NodeStoreDimensions dimensions) {
 		mDimensions = dimensions;
-
+		threads = createArray();
+	}
+	
+	private ArrayList<ArrayList<Thread>> createArray(){
+		ArrayList<ArrayList<Thread>> array = new ArrayList<ArrayList<Thread>>();
 		ArrayList<Thread> n;
-		threads = new ArrayList<ArrayList<Thread>>();
 		for (int i = 0; i < mDimensions.getThreadNumber(); i++) {
 			n = new ArrayList<Thread>();
 			for (int j = 0; j < mDimensions.getColumnNumber() + 1; j++) {
 				if (j == 0) {
 					n.add(new Thread(i));
 				} else {
-					n.add(new Thread(-1));
+					n.add(new Thread());
 				}
 			}
-			threads.add(n);
+			array.add(n);
 		}
+		return array;
 	}
 
 	public Thread getThread(final ThreadIndex ti) {
@@ -38,36 +42,34 @@ public class ThreadStorage {
 		threads.get(ti.i).set(ti.j, thread);
 	}
 
-	
-
-	public Thread getNeighborThreadForNode(
-							final NodeIndex ni, 
-							final HDirection left_right,
-							final VDirection prev) {	
-		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, left_right, prev);
-		return getThread(ti);
+	public Thread getNeighbor(
+							final NodeIndex nodeIndex, 
+							final HDirection hDirection,
+							final VDirection vDirection) {	
+		ThreadIndex threadIndex = getNeighborThreadIndex(nodeIndex, hDirection, vDirection);
+		return getThread(threadIndex);
 	}
 
-	public void setNeighbor(final NodeIndex ni, 
-							final HDirection right, 
-							final VDirection prev_next,
-							final Thread value) {
-		ThreadIndex ti = neighborThreadIndexForNodeIndex(ni, right, prev_next);
-		setThread(ti, value);
+	public void setNeighbor(final NodeIndex nodeIndex, 
+							final HDirection hDirection, 
+							final VDirection vDirection,
+							final Thread thread) {
+		ThreadIndex threadIndex = getNeighborThreadIndex(nodeIndex, hDirection, vDirection);
+		setThread(threadIndex, thread);
 	}
 	
-	ThreadIndex neighborThreadIndexForNodeIndex(
-							final NodeIndex ni, 
-							final HDirection right, 
-							final VDirection prev) {
-		int i = ni.i;
-		int j = ni.j;
+	private ThreadIndex getNeighborThreadIndex(
+							final NodeIndex nodeIndex, 
+							final HDirection hDirection, 
+							final VDirection vDirection) {
+		int i = nodeIndex.i;
+		int j = nodeIndex.j;
 		int t = mDimensions.isShort(j, HDirection.LEFT) ? 1 : 0;
 		i = i * 2 + t;
-		if (prev == VDirection.NEXT) {
+		if (vDirection == VDirection.NEXT) {
 			j = j + 1;
 		}
-		if (right == HDirection.RIGHT) {
+		if (hDirection == HDirection.RIGHT) {
 			i = i + 1;
 		}
 		return new ThreadIndex(i, j);
