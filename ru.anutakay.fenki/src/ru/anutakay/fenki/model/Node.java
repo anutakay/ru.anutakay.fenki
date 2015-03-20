@@ -12,13 +12,13 @@ public class Node {
 
 	private Direction direction = Direction.NONE;
 	
-	private HDirection enter;
+	private HDirection begin;
 	
-	private HDirection exit;
+	private HDirection end;
 	
-	private ThreadFragment firstColor = new ThreadFragment(-1);
+	private int firstThreadID = -1;
 	
-	private ThreadFragment secondColor = new ThreadFragment(-1);
+	private int secondThreadID = -1;
 	
 	Node() {
 		this(Direction.NONE);
@@ -30,25 +30,25 @@ public class Node {
 
 	public void setDirection(final Direction direction) {
 		this.direction = getCorectDirection(direction);
-		enter =  getEnterFromDirection(this.direction);
-		exit = getExitFromDirection(this.direction);
+		this.begin =  getBeginFromDirection(this.direction);
+		this.end = getEndFromDirection(this.direction);
 	}
 	
 	private Direction getCorectDirection(final Direction direction) {
-		if(direction == null) {
+		if (direction == null) {
 			return Direction.NONE;
 		} else {
 			return direction;
 		}
 	}
 	
-	private HDirection getEnterFromDirection(final Direction direction) {
+	private HDirection getBeginFromDirection(final Direction direction) {
 		
-		if(direction == Direction.NONE) {
+		if (direction == Direction.NONE) {
 			return HDirection.NONE;
 		}
 		
-		if(direction == Direction.DIRECT_RIGHT ||
+		if (direction == Direction.DIRECT_RIGHT ||
 				direction == Direction.BACK_RIGHT) {
 			return HDirection.RIGHT;
 		} else {
@@ -57,11 +57,11 @@ public class Node {
 		
 	}
 	
-	private HDirection getExitFromDirection(final Direction direction) {
-		if(direction == Direction.NONE) {
+	private HDirection getEndFromDirection(final Direction direction) {
+		if (direction == Direction.NONE) {
 			return HDirection.NONE;
 		}
-		if(direction == Direction.DIRECT_RIGHT ||
+		if (direction == Direction.DIRECT_RIGHT ||
 				direction == Direction.BACK_LEFT) {
 			return HDirection.LEFT;
 		} else {
@@ -69,32 +69,34 @@ public class Node {
 		}
 	}
 
-	public void setFirstColor(final ThreadFragment rightColor) {
-		this.firstColor = rightColor;
+	public void setFirstThreadID(final int rightColor) {
+		this.firstThreadID = rightColor;
 	}
 	
-	public void setSecondColor(final ThreadFragment leftColor) {
-		this.secondColor = leftColor;
+	public void setSecondThreadID(final int leftColor) {
+		this.secondThreadID = leftColor;
 	}
 
 	public Direction getDirection() {
 		return direction;
 	}
 
-	public ThreadFragment getFirstColor() {
-		return firstColor;
+	public int getFirstThreadID() {
+		return firstThreadID;
 	}
 	
-	public ThreadFragment getSecondColor() {
-		return secondColor;
+	public int getSecondThreadID() {
+		return secondThreadID;
+	}	
+	
+	public HDirection getBegin() {
+		return begin;
 	}
 	
-	public HDirection getExit() {
-		return exit;
+	public HDirection getEnd() {
+		return end;
 	}
 	
-	public HDirection getEnter() {
-		return enter;
-	}
+
 
 }

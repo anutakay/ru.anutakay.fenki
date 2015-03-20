@@ -48,7 +48,7 @@ public class Schema
 		return mNodeStorage.getCorner(j, left_right);
 	}*/
 	
-	public ThreadFragment corner(int j, HDirection left_right){
+	public int corner(int j, HDirection left_right){
 		return mNodeStorage.getCorner(j, left_right);
 	}
 

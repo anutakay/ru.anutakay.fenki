@@ -28,7 +28,7 @@ public class NodesAndThreadFragmentsStorage extends NodeStorage<Node>
 		return mThreadStorage.getThread(ti);
 	}
 	
-	public ThreadFragment getCorner(int j, HDirection left_right){
+	public int getCorner(int j, HDirection left_right){
 		if (left_right == HDirection.LEFT) {
 			return getPrevThreadForNode(new NodeIndex(-1, j), HDirection.RIGHT);
 		} else {
@@ -37,54 +37,54 @@ public class NodesAndThreadFragmentsStorage extends NodeStorage<Node>
 		}
 	}
 	
-	public ThreadFragment getPrevThreadForNode(NodeIndex ni, HDirection right)
+	public int getPrevThreadForNode(NodeIndex ni, HDirection right)
 	{
 		return mThreadStorage.getNeighbor(ni, right, 
-				VDirection.PREV);
+				VDirection.PREV).getThreadID();
 	}
 		
-	public void setNextThreadForNode(NodeIndex ni, HDirection right, ThreadFragment value)
+	public void setNextThreadForNode(NodeIndex ni, HDirection right, int i)
 	{
 		mThreadStorage.setNeighbor(ni, right,
-				VDirection.NEXT, value);
+				VDirection.NEXT, i);
 	}
 		
 	public void build_node(NodeIndex ni) 
 	{
 		Node node = getNode(ni);
-		HDirection enter = node.getEnter();
-		HDirection exit = node.getExit();
-		ThreadFragment leftColor = getPrevThreadForNode(ni, HDirection.LEFT);
-		ThreadFragment rightColor = getPrevThreadForNode(ni, HDirection.RIGHT);
+		HDirection enter = node.getBegin();
+		HDirection exit = node.getEnd();
+		int leftColor = getPrevThreadForNode(ni, HDirection.LEFT);
+		int rightColor = getPrevThreadForNode(ni, HDirection.RIGHT);
 		if(enter == HDirection.NONE){
-			setNextThreadForNode(ni, HDirection.RIGHT, new ThreadFragment(-1));
-			setNextThreadForNode(ni, HDirection.LEFT, new ThreadFragment(-1));
+			setNextThreadForNode(ni, HDirection.RIGHT, -1);
+			setNextThreadForNode(ni, HDirection.LEFT, -1);
 			return;
 		}else if(enter == HDirection.RIGHT){
-			node.setFirstColor(rightColor);
-			node.setSecondColor(leftColor);
+			node.setFirstThreadID(rightColor);
+			node.setSecondThreadID(leftColor);
 		}else{
-			node.setFirstColor(leftColor);
-			node.setSecondColor(rightColor);
+			node.setFirstThreadID(leftColor);
+			node.setSecondThreadID(rightColor);
 		}
 		if(exit == HDirection.RIGHT){
-			setNextThreadForNode(ni, HDirection.RIGHT, node.getFirstColor());
-			setNextThreadForNode(ni, HDirection.LEFT, node.getSecondColor());
+			setNextThreadForNode(ni, HDirection.RIGHT, node.getFirstThreadID());
+			setNextThreadForNode(ni, HDirection.LEFT, node.getSecondThreadID());
 		}else{
-			setNextThreadForNode(ni, HDirection.RIGHT, node.getSecondColor());
-			setNextThreadForNode(ni, HDirection.LEFT, node.getFirstColor());
+			setNextThreadForNode(ni, HDirection.RIGHT, node.getSecondThreadID());
+			setNextThreadForNode(ni, HDirection.LEFT, node.getFirstThreadID());
 		}
 	}
 	
 	public void build_corner(int j, HDirection left_right) {
 		if (mDimensions.isShort(j, HDirection.LEFT) && left_right == HDirection.LEFT) {
 			NodeIndex index = new NodeIndex(-1, j);
-			ThreadFragment value = getPrevThreadForNode(index, HDirection.RIGHT);
+			int value = getPrevThreadForNode(index, HDirection.RIGHT);
 			setNextThreadForNode(index, HDirection.RIGHT, value);
 		}
 		if ((left_right == HDirection.RIGHT && mDimensions .isShort(j, HDirection.RIGHT))) {
 			NodeIndex index = new NodeIndex(mDimensions.numberOfNodeInColumn(j), j);
-			ThreadFragment value = getPrevThreadForNode(index, HDirection.LEFT);
+			int value = getPrevThreadForNode(index, HDirection.LEFT);
 			setNextThreadForNode(index, HDirection.LEFT, value);
 		}
 	}

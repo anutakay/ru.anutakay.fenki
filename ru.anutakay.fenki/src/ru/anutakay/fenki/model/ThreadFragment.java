@@ -12,7 +12,7 @@ public class ThreadFragment {
 		this.threadID = threadID;
 	}
 	
-	public int getIndex() {
+	public int getThreadID() {
 		return threadID;
 	}
 	
