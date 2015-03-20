@@ -5,21 +5,21 @@ import ru.anutakay.fenki.model.Const.HDirection;
 public class Node {
 	
 	public enum Direction { NONE, 
-							DIRECT_RIGHT, 
-							DIRECT_LEFT, 
-							BACK_RIGHT, 
-							BACK_LEFT }
+							RIGHT_DIRECT, 
+							LEFT_DIRECT, 
+							RIGHT_BACK, 
+							LEFT_BACK }
 
 	private Direction direction = Direction.NONE;
 	
-	private HDirection begin;
+	private HDirection begin = HDirection.NONE;
 	
-	private HDirection end;
+	private HDirection end = HDirection.NONE;
 	
-	private int firstThreadID = -1;
+	private int leftThreadID = -1;
 	
-	private int secondThreadID = -1;
-	
+	private int rightThreadID = -1;
+
 	Node() {
 		this(Direction.NONE);
 	}
@@ -28,6 +28,7 @@ public class Node {
 		setDirection(direction);
 	}
 
+	//Зависимость начала и конца от направления реализована реактивно
 	public void setDirection(final Direction direction) {
 		this.direction = getCorectDirection(direction);
 		this.begin =  getBeginFromDirection(this.direction);
@@ -48,8 +49,8 @@ public class Node {
 			return HDirection.NONE;
 		}
 		
-		if (direction == Direction.DIRECT_RIGHT ||
-				direction == Direction.BACK_RIGHT) {
+		if (direction == Direction.RIGHT_DIRECT ||
+				direction == Direction.RIGHT_BACK) {
 			return HDirection.RIGHT;
 		} else {
 			return HDirection.LEFT;
@@ -61,42 +62,81 @@ public class Node {
 		if (direction == Direction.NONE) {
 			return HDirection.NONE;
 		}
-		if (direction == Direction.DIRECT_RIGHT ||
-				direction == Direction.BACK_LEFT) {
+		if (direction == Direction.RIGHT_DIRECT ||
+				direction == Direction.LEFT_BACK) {
 			return HDirection.LEFT;
 		} else {
 			return HDirection.RIGHT;
 		}
 	}
-
-	public void setFirstThreadID(final int rightColor) {
-		this.firstThreadID = rightColor;
+	
+	public void setLeftTopThreadID(final int leftThreadID) {
+		this.leftThreadID = leftThreadID;
 	}
 	
-	public void setSecondThreadID(final int leftColor) {
-		this.secondThreadID = leftColor;
+	public void setRightTopThreadID(final int rightThreadID) {
+		this.rightThreadID = rightThreadID;
 	}
-
+	
 	public Direction getDirection() {
 		return direction;
 	}
 
 	public int getFirstThreadID() {
-		return firstThreadID;
+		if(this.getDirection() == Direction.NONE){
+			return -1;
+		}
+		if(this.getBegin() == HDirection.LEFT){
+			return getLeftTopThreadID();
+		} else {
+			return getRightTopThreadID();
+		}
 	}
 	
 	public int getSecondThreadID() {
-		return secondThreadID;
+		if(this.getDirection() == Direction.NONE){
+			return -1;
+		}
+		if(this.getBegin() != HDirection.LEFT){
+			return getLeftTopThreadID();
+		} else {
+			return getRightTopThreadID();
+		}
 	}	
 	
-	public HDirection getBegin() {
+	HDirection getBegin() {
 		return begin;
 	}
 	
-	public HDirection getEnd() {
+	HDirection getEnd() {
 		return end;
 	}
 	
-
-
+	public int getLeftTopThreadID() {
+		return leftThreadID;
+	}
+	
+	public int getRightTopThreadID() {
+		return rightThreadID;
+	}
+	
+	public int getLeftBottomThreadID() {
+		return getBottomThreadID(HDirection.LEFT);
+	}
+	
+	public int getRightBottomThreadID() {
+		return getBottomThreadID(HDirection.RIGHT);
+	}
+	
+	public int getBottomThreadID(HDirection hDirection){
+		if(this.getDirection() == Direction.NONE){
+			return -1;
+		}
+		
+		if (getEnd() == hDirection) {
+			return getFirstThreadID();
+		} else {
+			return getSecondThreadID();
+		}
+	}
 }
