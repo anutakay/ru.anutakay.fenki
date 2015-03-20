@@ -2,10 +2,9 @@ package ru.anutakay.fenki.model;
 
 public class ThreadFragment {
 
-	private int threadID;
+	private int threadID = -1;
 	
 	public ThreadFragment(){
-		this(-1);
 	}
 	
 	public ThreadFragment(int threadID) {

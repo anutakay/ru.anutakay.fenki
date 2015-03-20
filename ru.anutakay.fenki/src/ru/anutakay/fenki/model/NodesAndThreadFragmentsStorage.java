@@ -53,8 +53,8 @@ public class NodesAndThreadFragmentsStorage extends NodeStorage<Node>
 	{
 		Node node = getNode(ni);
 
-		node.setLeftTopThreadID(getPrevThreadForNode(ni, HDirection.LEFT));
-		node.setRightTopThreadID(getPrevThreadForNode(ni, HDirection.RIGHT));
+		node.setLeftThreadID(getPrevThreadForNode(ni, HDirection.LEFT));
+		node.setRightThreadID(getPrevThreadForNode(ni, HDirection.RIGHT));
 	
 		setNextThreadForNode(ni, HDirection.RIGHT, node.getBottomThreadID(HDirection.RIGHT));
 		setNextThreadForNode(ni, HDirection.LEFT, node.getBottomThreadID(HDirection.LEFT));

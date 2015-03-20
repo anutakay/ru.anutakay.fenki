@@ -1,9 +1,6 @@
 package ru.anutakay.fenki.model;
 
 import ru.anutakay.fenki.model.Const.HDirection;
-import ru.anutakay.fenki.service.Dimension;
-
-
 
 public class NodeStoreDimensions {
 
@@ -173,10 +170,6 @@ public class NodeStoreDimensions {
 			return true;
 		}
 		return false;
-	}
-	
-	public Dimension toDimension(){
-		return new Dimension(numberOfColumns*2 + 1, numberOfThreads + 1);
 	}
 
 }

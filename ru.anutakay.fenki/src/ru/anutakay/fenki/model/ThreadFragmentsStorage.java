@@ -34,12 +34,12 @@ public class ThreadFragmentsStorage {
 		return array;
 	}
 
-	public ThreadFragment getThread(final ThreadIndex ti) {
-		return threads.get(ti.i).get(ti.j);
+	public ThreadFragment getThread(final ThreadIndex threadIndex) {
+		return threads.get(threadIndex.i).get(threadIndex.j);
 	}
 
-	public void setThread(final ThreadIndex ti, final int i) {
-		threads.get(ti.i).set(ti.j, new ThreadFragment(i));
+	public void setThread(final ThreadIndex ti, final int threadID) {
+		threads.get(ti.i).set(ti.j, new ThreadFragment(threadID));
 	}
 
 	public ThreadFragment getNeighbor(
@@ -53,9 +53,9 @@ public class ThreadFragmentsStorage {
 	public void setNeighbor(final NodeIndex nodeIndex, 
 							final HDirection hDirection, 
 							final VDirection vDirection,
-							final int i) {
+							final int threadID) {
 		ThreadIndex threadIndex = getNeighborThreadIndex(nodeIndex, hDirection, vDirection);
-		setThread(threadIndex, i);
+		setThread(threadIndex, threadID);
 	}
 	
 	private ThreadIndex getNeighborThreadIndex(

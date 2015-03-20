@@ -31,8 +31,8 @@ public class Node {
 	//Зависимость начала и конца от направления реализована реактивно
 	public void setDirection(final Direction direction) {
 		this.direction = getCorectDirection(direction);
-		this.begin =  getBeginFromDirection(this.direction);
-		this.end = getEndFromDirection(this.direction);
+		this.begin =  getBeginByDirection(this.direction);
+		this.end = getEndByDirection(this.direction);
 	}
 	
 	private Direction getCorectDirection(final Direction direction) {
@@ -43,7 +43,7 @@ public class Node {
 		}
 	}
 	
-	private HDirection getBeginFromDirection(final Direction direction) {
+	private HDirection getBeginByDirection(final Direction direction) {
 		
 		if (direction == Direction.NONE) {
 			return HDirection.NONE;
@@ -58,7 +58,7 @@ public class Node {
 		
 	}
 	
-	private HDirection getEndFromDirection(final Direction direction) {
+	private HDirection getEndByDirection(final Direction direction) {
 		if (direction == Direction.NONE) {
 			return HDirection.NONE;
 		}
@@ -70,11 +70,11 @@ public class Node {
 		}
 	}
 	
-	public void setLeftTopThreadID(final int leftThreadID) {
+	public void setLeftThreadID(final int leftThreadID) {
 		this.leftThreadID = leftThreadID;
 	}
 	
-	public void setRightTopThreadID(final int rightThreadID) {
+	public void setRightThreadID(final int rightThreadID) {
 		this.rightThreadID = rightThreadID;
 	}
 	
@@ -87,9 +87,9 @@ public class Node {
 			return -1;
 		}
 		if(this.getBegin() == HDirection.LEFT){
-			return getLeftTopThreadID();
+			return getLeftThreadID();
 		} else {
-			return getRightTopThreadID();
+			return getRightThreadID();
 		}
 	}
 	
@@ -98,9 +98,9 @@ public class Node {
 			return -1;
 		}
 		if(this.getBegin() != HDirection.LEFT){
-			return getLeftTopThreadID();
+			return getLeftThreadID();
 		} else {
-			return getRightTopThreadID();
+			return getRightThreadID();
 		}
 	}	
 	
@@ -112,20 +112,12 @@ public class Node {
 		return end;
 	}
 	
-	public int getLeftTopThreadID() {
+	public int getLeftThreadID() {
 		return leftThreadID;
 	}
 	
-	public int getRightTopThreadID() {
+	public int getRightThreadID() {
 		return rightThreadID;
-	}
-	
-	public int getLeftBottomThreadID() {
-		return getBottomThreadID(HDirection.LEFT);
-	}
-	
-	public int getRightBottomThreadID() {
-		return getBottomThreadID(HDirection.RIGHT);
 	}
 	
 	public int getBottomThreadID(HDirection hDirection){
