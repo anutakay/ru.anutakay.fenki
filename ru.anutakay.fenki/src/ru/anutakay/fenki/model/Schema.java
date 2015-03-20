@@ -4,7 +4,7 @@ import ru.anutakay.fenki.model.Const.HDirection;
 
 public class Schema 
 {
-	private NodeAndThreadStorage mNodeStorage;
+	private NodesAndThreadFragmentsStorage mNodeStorage;
 	private NodeStoreDimensions mDimensions;
 
 	public Schema() 
@@ -15,7 +15,7 @@ public class Schema
 	public Schema(int thread_num, int column_num, boolean first) 
 	{
 		mDimensions = (new NodeStoreDimensions(thread_num, column_num, first));
-		mNodeStorage = new NodeAndThreadStorage(mDimensions);	
+		mNodeStorage = new NodesAndThreadFragmentsStorage(mDimensions);	
 	}
 
 	public void build() {
@@ -36,7 +36,7 @@ public class Schema
 		return mNodeStorage.getNode(new NodeIndex(j, i));
 	}
 	
-	public Thread thread(int i, int j) {
+	public ThreadFragment thread(int i, int j) {
 		return mNodeStorage.getThread(new ThreadIndex(i,j));
 	}
 	
@@ -48,7 +48,7 @@ public class Schema
 		return mNodeStorage.getCorner(j, left_right);
 	}*/
 	
-	public Thread corner(int j, HDirection left_right){
+	public ThreadFragment corner(int j, HDirection left_right){
 		return mNodeStorage.getCorner(j, left_right);
 	}
 

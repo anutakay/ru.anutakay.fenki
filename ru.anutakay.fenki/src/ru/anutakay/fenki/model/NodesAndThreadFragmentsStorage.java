@@ -5,15 +5,15 @@ import java.util.Random;
 import ru.anutakay.fenki.model.Const.HDirection;
 import ru.anutakay.fenki.model.Const.VDirection;
 
-public class NodeAndThreadStorage extends NodeStorage<Node> 
+public class NodesAndThreadFragmentsStorage extends NodeStorage<Node> 
 {
-	private ThreadStorage mThreadStorage;
+	private ThreadFragmentsStorage mThreadStorage;
 	Random r;
 		
-	public NodeAndThreadStorage(NodeStoreDimensions dimensions) 
+	public NodesAndThreadFragmentsStorage(NodeStoreDimensions dimensions) 
 	{
 		super(dimensions);
-		mThreadStorage = new ThreadStorage(mDimensions);
+		mThreadStorage = new ThreadFragmentsStorage(mDimensions);
 		
 	}
 
@@ -24,11 +24,11 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 		return new Node(Node.Direction.values()[Math.abs(r.nextInt())%4+1]);
 	}
 	
-	public Thread getThread(ThreadIndex ti) {
+	public ThreadFragment getThread(ThreadIndex ti) {
 		return mThreadStorage.getThread(ti);
 	}
 	
-	public Thread getCorner(int j, HDirection left_right){
+	public ThreadFragment getCorner(int j, HDirection left_right){
 		if (left_right == HDirection.LEFT) {
 			return getPrevThreadForNode(new NodeIndex(-1, j), HDirection.RIGHT);
 		} else {
@@ -37,13 +37,13 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 		}
 	}
 	
-	public Thread getPrevThreadForNode(NodeIndex ni, HDirection right)
+	public ThreadFragment getPrevThreadForNode(NodeIndex ni, HDirection right)
 	{
 		return mThreadStorage.getNeighbor(ni, right, 
 				VDirection.PREV);
 	}
 		
-	public void setNextThreadForNode(NodeIndex ni, HDirection right, Thread value)
+	public void setNextThreadForNode(NodeIndex ni, HDirection right, ThreadFragment value)
 	{
 		mThreadStorage.setNeighbor(ni, right,
 				VDirection.NEXT, value);
@@ -54,11 +54,11 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 		Node node = getNode(ni);
 		HDirection enter = node.getEnter();
 		HDirection exit = node.getExit();
-		Thread leftColor = getPrevThreadForNode(ni, HDirection.LEFT);
-		Thread rightColor = getPrevThreadForNode(ni, HDirection.RIGHT);
+		ThreadFragment leftColor = getPrevThreadForNode(ni, HDirection.LEFT);
+		ThreadFragment rightColor = getPrevThreadForNode(ni, HDirection.RIGHT);
 		if(enter == HDirection.NONE){
-			setNextThreadForNode(ni, HDirection.RIGHT, new Thread(-1));
-			setNextThreadForNode(ni, HDirection.LEFT, new Thread(-1));
+			setNextThreadForNode(ni, HDirection.RIGHT, new ThreadFragment(-1));
+			setNextThreadForNode(ni, HDirection.LEFT, new ThreadFragment(-1));
 			return;
 		}else if(enter == HDirection.RIGHT){
 			node.setFirstColor(rightColor);
@@ -79,12 +79,12 @@ public class NodeAndThreadStorage extends NodeStorage<Node>
 	public void build_corner(int j, HDirection left_right) {
 		if (mDimensions.isShort(j, HDirection.LEFT) && left_right == HDirection.LEFT) {
 			NodeIndex index = new NodeIndex(-1, j);
-			Thread value = getPrevThreadForNode(index, HDirection.RIGHT);
+			ThreadFragment value = getPrevThreadForNode(index, HDirection.RIGHT);
 			setNextThreadForNode(index, HDirection.RIGHT, value);
 		}
 		if ((left_right == HDirection.RIGHT && mDimensions .isShort(j, HDirection.RIGHT))) {
 			NodeIndex index = new NodeIndex(mDimensions.numberOfNodeInColumn(j), j);
-			Thread value = getPrevThreadForNode(index, HDirection.LEFT);
+			ThreadFragment value = getPrevThreadForNode(index, HDirection.LEFT);
 			setNextThreadForNode(index, HDirection.LEFT, value);
 		}
 	}
