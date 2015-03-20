@@ -1,35 +1,34 @@
 package ru.anutakay.fenki.model;
 import java.util.ArrayList;
 
-public abstract class NodeStorage<T> {
+public abstract class NodeStorage {
 	
-	private ArrayList<ArrayList<T>> mNodes;
-	protected NodeStoreDimensions mDimensions;
+	private ArrayList<ArrayList<Node>> nodes;
 	
-	public NodeStorage(NodeStoreDimensions dimensions){
+	protected NodeStoreDimensions dimensions;
+	
+	public NodeStorage(final NodeStoreDimensions dimensions){
 		
-		mDimensions = dimensions;
+		this.dimensions = dimensions;
 	
-		ArrayList<T> m;
-		mNodes = new ArrayList<ArrayList<T>>();
-		for(int j = 0; j < this.mDimensions.getColumnNumber()+1; j++){
-			m = new ArrayList<T>();
-			for(int i = 0; i < mDimensions.numberOfNodeInColumn(j); i++){
-				//рандомные узлы
-				m.add(createRandomObject(i,j));
+		ArrayList<Node> m;
+		nodes = new ArrayList<ArrayList<Node>>();
+		for(int j = 0; j < this.dimensions.getColumnNumber()+1; j++){
+			m = new ArrayList<Node>();
+			for(int i = 0; i < this.dimensions.numberOfNodeInColumn(j); i++){
+				m.add(new Node());
 			}
-		mNodes.add(m);
+		nodes.add(m);
 		}
 	}
 	
-	abstract protected T createRandomObject(int i, int j);
-	
-	public T getNode(NodeIndex ni){
-		return mNodes.get(ni.j).get(ni.i);
+	//сеттера нет, получаем узел, и заполняем как нужно
+	public Node getNode(final NodeIndex nodeIndex){
+		return nodes.get(nodeIndex.j).get(nodeIndex.i);
 	}
 	
 	public NodeStoreDimensions getDimensions(){
-		return mDimensions;
+		return this.dimensions;
 	}
 
 }
