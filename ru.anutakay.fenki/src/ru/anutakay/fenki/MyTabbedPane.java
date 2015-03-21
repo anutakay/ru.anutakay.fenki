@@ -9,9 +9,13 @@ import javax.swing.JTextPane;
 
 import ru.anutakay.fenki.controller.ColorAdapter;
 import ru.anutakay.fenki.graph.GridPanel;
+import ru.anutakay.fenki.model.Filler;
+import ru.anutakay.fenki.model.RandomFiller;
 import ru.anutakay.fenki.model.Schema;
 
 public class MyTabbedPane extends JTabbedPane {
+
+	private static final int NUM_OF_COLUMNS = 10;
 
 	/**
 	 * 
@@ -33,7 +37,9 @@ public class MyTabbedPane extends JTabbedPane {
 	private JPanel makePanel(){
 		int threads = Math.abs(new Random().nextInt())%20;
 		System.out.println(threads);
-		mSchema = new Schema(threads, 10, false);
+		mSchema = new Schema(threads, NUM_OF_COLUMNS, false);
+		Filler filler = new RandomFiller();
+		filler.fill(mSchema);
 		mSchema.build();
 		return new GridPanel(new ColorAdapter(mSchema));
 	}

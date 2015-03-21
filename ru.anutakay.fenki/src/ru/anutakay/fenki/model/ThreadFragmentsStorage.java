@@ -7,30 +7,33 @@ import ru.anutakay.fenki.model.Const.VDirection;
 
 public class ThreadFragmentsStorage {
 
-	private NodeStoreDimensions mDimensions;
+	private NodeStoreDimensions dimensions;
 	
 	private ArrayList<ArrayList<ThreadFragment>> threads;
 
 	public ThreadFragmentsStorage(final NodeStoreDimensions dimensions) {
-		mDimensions = dimensions;
+		this.dimensions = dimensions;
 		threads = createArray();
 	}
 	
 	private ArrayList<ArrayList<ThreadFragment>> createArray(){
 		ArrayList<ArrayList<ThreadFragment>> array = new ArrayList<ArrayList<ThreadFragment>>();
-		ArrayList<ThreadFragment> n;
-		for (int i = 0; i < mDimensions.getThreadNumber(); i++) {
-			n = new ArrayList<ThreadFragment>();
-			for (int j = 0; j < mDimensions.getColumnNumber() + 1; j++) {
-				if (j == 0) {
-					n.add(new ThreadFragment(i));
-				} else {
-					n.add(new ThreadFragment());
-				}
-			}
-			array.add(n);
+		for (int i = 0; i < dimensions.getThreadNumber(); i++) {
+			array.add(createThreadArray(i));
 		}
 		return array;
+	}
+
+	private ArrayList<ThreadFragment> createThreadArray(final int i) {
+		ArrayList<ThreadFragment> n = new ArrayList<ThreadFragment>();
+		for (int j = 0; j < dimensions.getColumnNumber() + 1; j++) {
+			if (j == 0) {
+				n.add(new ThreadFragment(i));
+			} else {
+				n.add(new ThreadFragment());
+			}
+		}
+		return n;	
 	}
 
 	public ThreadFragment getThread(final ThreadIndex threadIndex) {
@@ -41,36 +44,15 @@ public class ThreadFragmentsStorage {
 		threads.get(ti.i).set(ti.j, new ThreadFragment(threadID));
 	}
 
-	public ThreadFragment getNeighbor(
+	/*public ThreadFragment getNeighbor(
 							final NodeIndex nodeIndex, 
 							final HDirection hDirection,
 							final VDirection vDirection) {	
-		ThreadIndex threadIndex = getNeighborThreadIndex(nodeIndex, hDirection, vDirection);
+		ThreadIndex threadIndex = 
+				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
+															nodeIndex, 
+															hDirection, 
+															vDirection);
 		return getThread(threadIndex);
-	}
-
-	public void setNeighbor(final NodeIndex nodeIndex, 
-							final HDirection hDirection, 
-							final VDirection vDirection,
-							final int threadID) {
-		ThreadIndex threadIndex = getNeighborThreadIndex(nodeIndex, hDirection, vDirection);
-		setThread(threadIndex, threadID);
-	}
-	
-	private ThreadIndex getNeighborThreadIndex(
-							final NodeIndex nodeIndex, 
-							final HDirection hDirection, 
-							final VDirection vDirection) {
-		int i = nodeIndex.i;
-		int j = nodeIndex.j;
-		int t = FieldTemplate.isShortColumn(this.mDimensions, j, HDirection.LEFT) ? 1 : 0;
-		i = i * 2 + t;
-		if (vDirection == VDirection.NEXT) {
-			j = j + 1;
-		}
-		if (hDirection == HDirection.RIGHT) {
-			i = i + 1;
-		}
-		return new ThreadIndex(i, j);
-	}
+	}*/
 }
