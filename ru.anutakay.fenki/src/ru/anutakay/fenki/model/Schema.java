@@ -1,6 +1,6 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Const.HDirection;
+import ru.anutakay.fenki.model.Node.HDirection;
 
 public class Schema {
 	

@@ -2,8 +2,8 @@ package ru.anutakay.fenki.model;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.Const.HDirection;
-import ru.anutakay.fenki.model.Const.VDirection;
+import ru.anutakay.fenki.model.Node.HDirection;
+import ru.anutakay.fenki.model.Node.VDirection;
 
 public class NodesAndThreadFragmentsStorage
 {

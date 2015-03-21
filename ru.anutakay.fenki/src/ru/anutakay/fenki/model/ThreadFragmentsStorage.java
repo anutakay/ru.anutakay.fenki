@@ -2,9 +2,6 @@ package ru.anutakay.fenki.model;
 
 import java.util.ArrayList;
 
-import ru.anutakay.fenki.model.Const.HDirection;
-import ru.anutakay.fenki.model.Const.VDirection;
-
 public class ThreadFragmentsStorage {
 
 	private NodeStoreDimensions dimensions;
@@ -44,15 +41,4 @@ public class ThreadFragmentsStorage {
 		threads.get(ti.i).set(ti.j, new ThreadFragment(threadID));
 	}
 
-	/*public ThreadFragment getNeighbor(
-							final NodeIndex nodeIndex, 
-							final HDirection hDirection,
-							final VDirection vDirection) {	
-		ThreadIndex threadIndex = 
-				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
-															nodeIndex, 
-															hDirection, 
-															vDirection);
-		return getThread(threadIndex);
-	}*/
 }

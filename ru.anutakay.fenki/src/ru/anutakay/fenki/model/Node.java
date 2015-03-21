@@ -1,7 +1,5 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Const.HDirection;
-
 public class Node {
 	
 	private final static int NONE_THREAD = -1;
@@ -11,6 +9,10 @@ public class Node {
 							LEFT_DIRECT, 
 							RIGHT_BACK, 
 							LEFT_BACK }
+	
+	public enum HDirection { NONE, RIGHT, LEFT }
+	
+	public enum VDirection { NONE, PREV, NEXT }
 
 	private Direction direction = Direction.NONE;
 	
