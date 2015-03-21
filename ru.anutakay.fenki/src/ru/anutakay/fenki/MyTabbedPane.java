@@ -10,8 +10,8 @@ import javax.swing.JTextPane;
 import ru.anutakay.fenki.controller.ColorAdapter;
 import ru.anutakay.fenki.controller.Filler;
 import ru.anutakay.fenki.controller.RandomFiller;
-import ru.anutakay.fenki.graph.GridPanel;
 import ru.anutakay.fenki.model.Schema;
+import ru.anutakay.fenki.view.GridPanel;
 
 public class MyTabbedPane extends JTabbedPane {
 

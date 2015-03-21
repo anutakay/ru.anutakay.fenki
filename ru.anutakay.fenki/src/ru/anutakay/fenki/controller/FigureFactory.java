@@ -1,7 +1,7 @@
 package ru.anutakay.fenki.controller;
 
-import ru.anutakay.fenki.graph.Figure;
-import ru.anutakay.fenki.graph.Iterator;
+import ru.anutakay.fenki.view.Figure;
+import ru.anutakay.fenki.view.Iterator;
 
 public abstract class FigureFactory<T extends Iterator> {
 	

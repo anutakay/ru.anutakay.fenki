@@ -2,9 +2,9 @@ package ru.anutakay.fenki.controller;
 
 import java.awt.Color;
 
-import ru.anutakay.fenki.graph.Figure;
-import ru.anutakay.fenki.graph.Figure1;
-import ru.anutakay.fenki.graph.Iterator2D;
+import ru.anutakay.fenki.view.Figure;
+import ru.anutakay.fenki.view.Figure1;
+import ru.anutakay.fenki.view.Iterator2D;
 
 public class SchemaFigureFactory extends FigureFactory<Iterator2D> {
 	

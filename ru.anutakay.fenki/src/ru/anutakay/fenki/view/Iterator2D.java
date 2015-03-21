@@ -1,4 +1,4 @@
-package ru.anutakay.fenki.graph;
+package ru.anutakay.fenki.view;
 
 public abstract class Iterator2D extends Iterator 
 //Доделать счет с конца
