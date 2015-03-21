@@ -1,16 +1,14 @@
-package ru.anutakay.fenki.controller;
+package ru.anutakay.fenki.view;
 
 import java.awt.Point;
-
-import ru.anutakay.fenki.graph.Iterator2D;
 
 public class PointAdapter implements Adapter<Iterator2D, Point> {
 	
 	int a = 7;
 	Iterator2D mIterator;
 	
-	public PointAdapter(Iterator2D it){
-		mIterator = it;
+	public PointAdapter(Iterator2D iterator2d){
+		mIterator = iterator2d;
 	}
 	
 	@Override

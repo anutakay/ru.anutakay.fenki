@@ -1,7 +1,10 @@
-package ru.anutakay.fenki.model;
+package ru.anutakay.fenki.controller;
 
 import java.util.Random;
 
+import ru.anutakay.fenki.model.FieldTemplate;
+import ru.anutakay.fenki.model.Node;
+import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.Node.Direction;
 
 public class RandomFiller extends Filler implements IRandomizer<Direction> {

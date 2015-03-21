@@ -1,4 +1,4 @@
-package ru.anutakay.fenki.service;
+package ru.anutakay.fenki.model;
 
 public class Index {
 

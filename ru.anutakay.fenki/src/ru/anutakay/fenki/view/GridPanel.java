@@ -1,12 +1,9 @@
-package ru.anutakay.fenki.graph;
+package ru.anutakay.fenki.view;
 
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import ru.anutakay.fenki.controller.Adapter;
-import ru.anutakay.fenki.controller.FigureFactory;
-import ru.anutakay.fenki.controller.SchemaFigureFactory;
 
 @SuppressWarnings("serial")
 public class GridPanel extends JPanel {	
@@ -22,7 +19,7 @@ public class GridPanel extends JPanel {
 
 	FigureFactory<Iterator2D> mFigureFactory;
 	
-	private void setAdapter(Adapter<Iterator2D, ? super Object> adapter){
+	private void setAdapter(Adapter<? super Iterator2D, ? super Object> adapter){
 
 		mFigureFactory = new SchemaFigureFactory(adapter);
 		repaint();

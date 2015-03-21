@@ -1,12 +1,12 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Const.HDirection;
-import ru.anutakay.fenki.model.Const.VDirection;
+import ru.anutakay.fenki.model.Node.HDirection;
+import ru.anutakay.fenki.model.Node.VDirection;
 
 public class NodeThreadNeighborer {
 	
 	public static ThreadIndex getNeighborThreadIndex(
-			final NodeStoreDimensions dimensions,
+			final Dimensions dimensions,
 			final NodeIndex nodeIndex, 
 			final HDirection hDirection, 
 			final VDirection vDirection) {

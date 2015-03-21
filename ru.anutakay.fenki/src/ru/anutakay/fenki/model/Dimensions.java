@@ -1,6 +1,6 @@
 package ru.anutakay.fenki.model;
 
-public class NodeStoreDimensions {
+public class Dimensions {
 	
 	private static final int MIN_NUMBER_OF_COLUMN = 1;
 
@@ -12,7 +12,9 @@ public class NodeStoreDimensions {
 	
 	private int numberOfColumns;
 
-	public NodeStoreDimensions(final int numberOfThreads, final int numberOfColumns, final boolean firstCrossIsNode) {
+	public Dimensions(	final int numberOfThreads, 
+						final int numberOfColumns, 
+						final boolean firstCrossIsNode) {
 		this.numberOfThreads = numberOfThreads;
 		this.numberOfColumns = numberOfColumns;
 		this.firstCrossIsNode = firstCrossIsNode;

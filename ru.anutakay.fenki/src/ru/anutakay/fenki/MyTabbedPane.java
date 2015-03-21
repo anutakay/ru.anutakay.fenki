@@ -7,11 +7,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
 
-import ru.anutakay.fenki.controller.ColorAdapter;
-import ru.anutakay.fenki.graph.GridPanel;
-import ru.anutakay.fenki.model.Filler;
-import ru.anutakay.fenki.model.RandomFiller;
+import ru.anutakay.fenki.controller.Filler;
+import ru.anutakay.fenki.controller.RandomFiller;
+import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.Schema;
+import ru.anutakay.fenki.view.ColorAdapter;
+import ru.anutakay.fenki.view.GridPanel;
 
 public class MyTabbedPane extends JTabbedPane {
 
@@ -40,8 +41,9 @@ public class MyTabbedPane extends JTabbedPane {
 		mSchema = new Schema(threads, NUM_OF_COLUMNS, false);
 		Filler filler = new RandomFiller();
 		filler.fill(mSchema);
-		mSchema.build();
-		return new GridPanel(new ColorAdapter(mSchema));
+		SchemaController schemaController = new SchemaController(mSchema);
+		schemaController.buildSchema();
+		return new GridPanel(new ColorAdapter(schemaController));
 	}
 	
 	public Schema getSchema(){

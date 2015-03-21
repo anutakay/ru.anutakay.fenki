@@ -1,6 +1,5 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.service.Index;
 
 
 public class ThreadIndex extends Index {

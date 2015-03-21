@@ -1,7 +1,5 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Const.HDirection;
-
 public class Node {
 	
 	private final static int NONE_THREAD = -1;
@@ -11,6 +9,10 @@ public class Node {
 							LEFT_DIRECT, 
 							RIGHT_BACK, 
 							LEFT_BACK }
+	
+	public enum HDirection { NONE, RIGHT, LEFT }
+	
+	public enum VDirection { NONE, PREV, NEXT }
 
 	private Direction direction = Direction.NONE;
 	
@@ -85,10 +87,10 @@ public class Node {
 	}
 
 	public int getFirstThreadID() {
-		if(this.direction == Direction.NONE){
+		if (this.direction == Direction.NONE) {
 			return NONE_THREAD;
 		}
-		if(this.begin == HDirection.LEFT){
+		if (this.begin == HDirection.LEFT) {
 			return getLeftThreadID();
 		} else {
 			return getRightThreadID();
@@ -96,10 +98,10 @@ public class Node {
 	}
 	
 	public int getSecondThreadID() {
-		if(this.direction == Direction.NONE){
+		if(this.direction == Direction.NONE) {
 			return NONE_THREAD;
 		}
-		if(this.begin != HDirection.LEFT){
+		if(this.begin != HDirection.LEFT) {
 			return getLeftThreadID();
 		} else {
 			return getRightThreadID();
@@ -122,7 +124,7 @@ public class Node {
 		return this.rightThreadID;
 	}
 	
-	public int getBottomThreadID(HDirection hDirection){
+	public int getBottomThreadID(HDirection hDirection) {
 		if(this.getDirection() == Direction.NONE){
 			return NONE_THREAD;
 		}

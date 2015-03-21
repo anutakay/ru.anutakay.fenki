@@ -1,4 +1,4 @@
-package ru.anutakay.fenki.graph;
+package ru.anutakay.fenki.view;
 
 import java.awt.Graphics;
 import java.awt.Point;

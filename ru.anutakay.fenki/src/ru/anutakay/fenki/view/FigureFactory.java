@@ -1,9 +1,6 @@
-package ru.anutakay.fenki.controller;
+package ru.anutakay.fenki.view;
 
-import ru.anutakay.fenki.graph.Figure;
-import ru.anutakay.fenki.graph.Iterator;
-
-public abstract class FigureFactory<T extends Iterator> {
+public abstract class FigureFactory<T extends Iterator2D> {
 	
 	Adapter<T, ? super Object> mAdapter;
 	
