@@ -31,7 +31,7 @@ public class NodesAndThreadFragmentsStorage extends NodeStorage
 		if (hDirection == HDirection.LEFT) {
 			return getPrevThreadForNode(new NodeIndex(-1, j), HDirection.RIGHT);
 		} else {
-			int n = this.dimensions.numberOfNodeInColumn(j);
+			int n = FieldTemplate.numberOfNodeInColumn(this.dimensions, j);
 			return getPrevThreadForNode(new NodeIndex(n, j), HDirection.LEFT);
 		}
 	}
@@ -62,13 +62,13 @@ public class NodesAndThreadFragmentsStorage extends NodeStorage
 	}
 	
 	public void build_corner(final int j, final HDirection hDirection) {
-		if (this.dimensions.isShort(j, HDirection.LEFT) && hDirection == HDirection.LEFT) {
+		if (FieldTemplate.isShortColumn(this.dimensions, j, HDirection.LEFT) && hDirection == HDirection.LEFT) {
 			NodeIndex index = new NodeIndex(-1, j);
 			int value = getPrevThreadForNode(index, HDirection.RIGHT);
 			setNextThreadForNode(index, HDirection.RIGHT, value);
 		}
-		if ((hDirection == HDirection.RIGHT && this.dimensions .isShort(j, HDirection.RIGHT))) {
-			NodeIndex index = new NodeIndex(this.dimensions.numberOfNodeInColumn(j), j);
+		if ((hDirection == HDirection.RIGHT && FieldTemplate.isShortColumn(this.dimensions, j, HDirection.RIGHT))) {
+			NodeIndex index = new NodeIndex(FieldTemplate.numberOfNodeInColumn(this.dimensions, j), j);
 			int value = getPrevThreadForNode(index, HDirection.LEFT);
 			setNextThreadForNode(index, HDirection.LEFT, value);
 		}

@@ -15,7 +15,7 @@ public abstract class NodeStorage {
 		nodes = new ArrayList<ArrayList<Node>>();
 		for(int j = 0; j < this.dimensions.getColumnNumber()+1; j++){
 			m = new ArrayList<Node>();
-			for(int i = 0; i < this.dimensions.numberOfNodeInColumn(j); i++){
+			for(int i = 0; i < FieldTemplate.numberOfNodeInColumn(this.dimensions, j); i++){
 				m.add(new Node());
 			}
 		nodes.add(m);

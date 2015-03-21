@@ -4,6 +4,8 @@ import ru.anutakay.fenki.model.Const.HDirection;
 
 public class Node {
 	
+	private final static int NONE_THREAD = -1;
+	
 	public enum Direction { NONE, 
 							RIGHT_DIRECT, 
 							LEFT_DIRECT, 
@@ -16,9 +18,9 @@ public class Node {
 	
 	private HDirection end = HDirection.NONE;
 	
-	private int leftThreadID = -1;
+	private int leftThreadID = NONE_THREAD;
 	
-	private int rightThreadID = -1;
+	private int rightThreadID = NONE_THREAD;
 
 	Node() {
 		this(Direction.NONE);
@@ -79,14 +81,14 @@ public class Node {
 	}
 	
 	public Direction getDirection() {
-		return direction;
+		return this.direction;
 	}
 
 	public int getFirstThreadID() {
-		if(this.getDirection() == Direction.NONE){
-			return -1;
+		if(this.direction == Direction.NONE){
+			return NONE_THREAD;
 		}
-		if(this.getBegin() == HDirection.LEFT){
+		if(this.begin == HDirection.LEFT){
 			return getLeftThreadID();
 		} else {
 			return getRightThreadID();
@@ -94,10 +96,10 @@ public class Node {
 	}
 	
 	public int getSecondThreadID() {
-		if(this.getDirection() == Direction.NONE){
-			return -1;
+		if(this.direction == Direction.NONE){
+			return NONE_THREAD;
 		}
-		if(this.getBegin() != HDirection.LEFT){
+		if(this.begin != HDirection.LEFT){
 			return getLeftThreadID();
 		} else {
 			return getRightThreadID();
@@ -105,24 +107,24 @@ public class Node {
 	}	
 	
 	HDirection getBegin() {
-		return begin;
+		return this.begin;
 	}
 	
 	HDirection getEnd() {
-		return end;
+		return this.end;
 	}
 	
 	public int getLeftThreadID() {
-		return leftThreadID;
+		return this.leftThreadID;
 	}
 	
 	public int getRightThreadID() {
-		return rightThreadID;
+		return this.rightThreadID;
 	}
 	
 	public int getBottomThreadID(HDirection hDirection){
 		if(this.getDirection() == Direction.NONE){
-			return -1;
+			return NONE_THREAD;
 		}
 		
 		if (getEnd() == hDirection) {

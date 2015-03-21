@@ -1,25 +1,27 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Const.HDirection;
-
 public class NodeStoreDimensions {
+	
+	private static final int MIN_NUMBER_OF_COLUMN = 1;
 
-	private boolean first;
+	private static final int MIN_NUMBER_OF_THREAD = 2;
+
+	private boolean firstCrossIsNode;
 	
 	private int numberOfThreads;
 	
 	private int numberOfColumns;
 
-	public NodeStoreDimensions(final int numberOfThreads, final int numberOfColumns, final boolean first) {
+	public NodeStoreDimensions(final int numberOfThreads, final int numberOfColumns, final boolean firstCrossIsNode) {
 		this.numberOfThreads = numberOfThreads;
 		this.numberOfColumns = numberOfColumns;
-		this.first = first;
+		this.firstCrossIsNode = firstCrossIsNode;
 		
-		if (this.numberOfThreads < 2) {
-			this.numberOfThreads = 2;
+		if (this.numberOfThreads < MIN_NUMBER_OF_THREAD) {
+			this.numberOfThreads = MIN_NUMBER_OF_THREAD;
 		}
-		if (this.numberOfColumns < 1) {
-			this.numberOfColumns = 2;
+		if (this.numberOfColumns < MIN_NUMBER_OF_COLUMN) {
+			this.numberOfColumns = MIN_NUMBER_OF_COLUMN;
 		}
 		
 	}
@@ -32,25 +34,25 @@ public class NodeStoreDimensions {
 		return numberOfColumns;
 	}
 
-	public boolean getFirst() {
-		return first;
+	public boolean firstCrossIsNode() {
+		return firstCrossIsNode;
 	}
 
-	public int numberOfNodeInColumn(final int columnNumber) {
+	/*public int numberOfNodeInColumn(final int columnNumber) {
 		int j = columnNumber;
 		int i = numberOfThreads/ 2
-				- ((numberOfThreads % 2 == 0 && j % 2 == 1 && getFirst())
-						|| (numberOfThreads % 2 == 0 && j % 2 == 0 && !first) ? 1
+				- ((numberOfThreads % 2 == 0 && j % 2 == 1 && firstCrossIsNode())
+						|| (numberOfThreads % 2 == 0 && j % 2 == 0 && !firstCrossIsNode) ? 1
 						: 0);
 		//System.out.println("в " + j + " ряду " + i + " узлов ");
 		return i;
 	}
 	
-	public boolean isShort(final int columnNumber, final HDirection left2) {
+	public boolean isShortColumn(final int columnNumber, final HDirection hDirection) {
 		int j = columnNumber;
-		boolean left = (j % 2 == 1 && getFirst())
-				|| (j % 2 == 0 && !getFirst());
-		if (left2 == HDirection.LEFT) {
+		boolean left = (j % 2 == 1 && firstCrossIsNode())
+				|| (j % 2 == 0 && !firstCrossIsNode());
+		if (hDirection == HDirection.LEFT) {
 			return left;
 		} else {
 			return (left && getThreadNumber() % 2 == 0)
@@ -58,118 +60,19 @@ public class NodeStoreDimensions {
 		}
 	}
 	
-	public boolean leftCorner(final int columnNumber){
-		int j = columnNumber;
-		j = j/2;
-		boolean first = getFirst();
+	public boolean columnHasLeftCorner(final int columnNumber){
+		int j = columnNumber/2;
+		boolean first = firstCrossIsNode();
 		boolean t = (first && j%2 == 1) || (!first && j%2 == 0);
 		return t;
 	}
 	
-	public boolean rightCorner(final int columnNumber){
+	public boolean columnHasRightCorner(final int columnNumber){
 		int j = columnNumber;
-		if(getThreadNumber()%2 == 1){
-			return !leftCorner(j);
-		}else{
-			return leftCorner(j);
+		if (getThreadNumber()%2 == 1) {
+			return !columnHasLeftCorner(j);
+		} else {
+			return columnHasLeftCorner(j);
 		}
-	}
-	
-	boolean isValidIndex(final int i, final int j){
-		if(i < 0 || i >= getColumnNumber()*2 + 1){
-			return false;
-		}
-		if(j < -1 || j >= getThreadNumber()){
-			
-		}
-		if((j>-1)||(i%2 != 0)){
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean isThread(final int i, final int j){
-		if(!isValidIndex(i,j)){
-			return false;
-		}
-		if(i%2 == 1){
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean isNode(final int i, final int j){		
-		if(!isValidIndex(i, j)){
-			return false;
-		}
-		if(i%2 == 0){
-			return false;
-		}
-		if(j < 0 || j >= numberOfNodeInColumn(i/2)*2){
-			return false;
-		}
-		if(j%2 != (isShort(i/2, HDirection.LEFT) ? 1 : 0)){
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean isEmpty(final int i, final int j){		
-		if(!isValidIndex(i, j)){
-			return false;
-		}
-		if(isCorner(i, j)||isNode(i, j)||isThread(i, j)){
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean isCorner(final int i, final int j){
-		if(!isValidIndex(i,j)){
-			return false;
-		}
-		
-		if(i%2 == 0){
-			return false;
-		}
-		
-		if(isNode(i, j)){
-			return false;
-		}
-		
-		if(j == -1 && (isShort(i/2, HDirection.LEFT))){
-			return true;
-		}
-		
-
-		if(j%2 == 0 && j == numberOfNodeInColumn(i)*2 && (isShort(i/2, HDirection.RIGHT))){
-			if(isNode(i, j - 1) || j == 0){
-				return false;
-			}
-			return true;
-		}
-		if(j%2 == 1 && (j + 1 == numberOfNodeInColumn(i)*2 || j - 1 == numberOfNodeInColumn(i)*2) && (isShort(i/2, HDirection.RIGHT))){
-			if(isNode(i, j - 1) || j == 0){
-				return false;
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public boolean isEmptyCorner(final int i, final int j){
-		if(!isValidIndex(i, j)){
-			return false;
-		}
-		if(j == -1 && !(isShort(i/2, HDirection.LEFT))){
-			return true;
-		}
-		if(j == numberOfNodeInColumn(i)*2
-				&& i%2 == 1 && !(isShort(i/2, HDirection.RIGHT))){
-			return true;
-		}
-		return false;
-	}
-
+	}*/
 }

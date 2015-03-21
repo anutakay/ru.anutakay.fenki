@@ -2,54 +2,51 @@ package ru.anutakay.fenki.model;
 
 import ru.anutakay.fenki.model.Const.HDirection;
 
-public class Schema 
-{
-	private NodesAndThreadFragmentsStorage mNodeStorage;
-	private NodeStoreDimensions mDimensions;
+public class Schema {
+	
+	private static final int MIN_NUMBER_OF_COLUMN = 1;
+
+	private static final int MIN_NUMBER_OF_THREAD = 2;
+	
+	private NodesAndThreadFragmentsStorage nodesAndThreadFragments;
+	
+	private NodeStoreDimensions dimensions;
 
 	public Schema() 
 	{
-		this(2, 1, true);
+		this(MIN_NUMBER_OF_THREAD, MIN_NUMBER_OF_COLUMN, true);
 	}
 
-	public Schema(int thread_num, int column_num, boolean first) 
+	public Schema(final int numberOfThread, final int numberOfColumn, final boolean firstCrossIsNode) 
 	{
-		mDimensions = (new NodeStoreDimensions(thread_num, column_num, first));
-		mNodeStorage = new NodesAndThreadFragmentsStorage(mDimensions);	
+		dimensions = new NodeStoreDimensions(numberOfThread, numberOfColumn, firstCrossIsNode);
+		nodesAndThreadFragments = new NodesAndThreadFragmentsStorage(dimensions);	
 	}
 
 	public void build() {
-		for (int j = 0; j < mDimensions.getColumnNumber(); j++) {
-			mNodeStorage.build_corner(j, HDirection.LEFT);
-			for (int i = 0; i < mDimensions.numberOfNodeInColumn(j); i++) {
-				mNodeStorage.build_node(new NodeIndex(i, j));
+		for (int j = 0; j < dimensions.getColumnNumber(); j++) {
+			nodesAndThreadFragments.build_corner(j, HDirection.LEFT);
+			for (int i = 0; i < FieldTemplate.numberOfNodeInColumn(this.dimensions, j); i++) {
+				nodesAndThreadFragments.build_node(new NodeIndex(i, j));
 			}
-			mNodeStorage.build_corner(j, HDirection.RIGHT);
+			nodesAndThreadFragments.build_corner(j, HDirection.RIGHT);
 		}
 	}
 	
 	public NodeStoreDimensions getDimensions(){
-		return mDimensions;
+		return dimensions;
 	}
 	
-	public Node node(int i, int j) {
-		return mNodeStorage.getNode(new NodeIndex(j, i));
+	public Node getNode(final int i, final int j) {
+		return nodesAndThreadFragments.getNode(new NodeIndex(j, i));
 	}
 	
-	public ThreadFragment thread(int i, int j) {
-		return mNodeStorage.getThread(new ThreadIndex(i,j));
+	public ThreadFragment getThreadFragment(final int i, final int j) {
+		return nodesAndThreadFragments.getThread(new ThreadIndex(i, j));
 	}
 	
-	/*public int corner(int i, int j) {
-		int left_right = Const.RIGHT;
-		if(i == -1){
-			left_right = Const.LEFT;
-		}
-		return mNodeStorage.getCorner(j, left_right);
-	}*/
-	
-	public int corner(int j, HDirection left_right){
-		return mNodeStorage.getCorner(j, left_right);
+	public int getCorner(final int j, final HDirection hDirection){
+		return nodesAndThreadFragments.getCorner(j, hDirection);
 	}
 
 }

@@ -1,10 +1,9 @@
 package ru.anutakay.fenki.model;
+
 import java.util.ArrayList;
 
 import ru.anutakay.fenki.model.Const.HDirection;
 import ru.anutakay.fenki.model.Const.VDirection;
-
-
 
 public class ThreadFragmentsStorage {
 
@@ -64,7 +63,7 @@ public class ThreadFragmentsStorage {
 							final VDirection vDirection) {
 		int i = nodeIndex.i;
 		int j = nodeIndex.j;
-		int t = mDimensions.isShort(j, HDirection.LEFT) ? 1 : 0;
+		int t = FieldTemplate.isShortColumn(this.mDimensions, j, HDirection.LEFT) ? 1 : 0;
 		i = i * 2 + t;
 		if (vDirection == VDirection.NEXT) {
 			j = j + 1;

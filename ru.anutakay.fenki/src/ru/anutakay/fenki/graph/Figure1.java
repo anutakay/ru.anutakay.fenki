@@ -4,19 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
-public abstract class Figure1 extends Figure{
+public abstract class Figure1 extends Figure {
 	
 	int a;
 	public Color color;
 
-	public Figure1(Point point) {
+	public Figure1(final Point point) {
 		super(point);
 		a = getDiameter();		
 	}
 
 	@SuppressWarnings("static-access")
 	@Override
-	public void paintComponent(Graphics g){
+	public void paintComponent(final Graphics g){
 		if(center == null){
 			return;
 		}
