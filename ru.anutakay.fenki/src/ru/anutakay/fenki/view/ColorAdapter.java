@@ -4,13 +4,12 @@ import java.awt.Color;
 
 import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.ColorSchema;
-import ru.anutakay.fenki.model.Node.HDirection;
-import ru.anutakay.fenki.model.NodeIndex;
+import ru.anutakay.fenki.model.FieldIterator;
 import ru.anutakay.fenki.model.Dimensions;
 import ru.anutakay.fenki.model.Schema;
-import ru.anutakay.fenki.model.ThreadIndex;
 
-public class ColorAdapter implements Adapter<Iterator2D, Object> {
+@SuppressWarnings("rawtypes")
+public class ColorAdapter<T extends Iterator2D, C extends Color>  implements Adapter {
 	
 	private Dimensions dimensions;
 	
@@ -18,121 +17,35 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 	
 	public ColorAdapter(final SchemaController schemaController) {
 		schema = schemaController.getSchema();
-		dimensions = schema.getDimensions();	}
+		dimensions = schema.getDimensions();	
+	}	
 	
-	private ThreadIndex getThreadIndex(final Iterator2D it){
-		int i = it.getI()/2;
-		int j = it.getJ()/2;
-		return new ThreadIndex(j, i);
-	}
-	
-	private NodeIndex getNodeIndex(final Iterator2D it) {
-		int i = (it.getI()-1)/2;
-		int j = ((it.getJ())-2)/4;
-		return new NodeIndex( j, i);
-	}
-	
-	private CornerIndex getCornerIndex(final Iterator2D it) {
-		int i = (it.getI()-1)/2;
-		HDirection hDirection = HDirection.RIGHT;
-		if(it.getJ() == 0){
-			hDirection = HDirection.LEFT;
-		}
-		return new CornerIndex(i, hDirection);
-	}
-
-	@Override
-	public Color getObject(final Iterator2D it) {
+	public Color getObject(final Iterator2D it1) {
 		
-		if (isThread(it)) {
-			ThreadIndex threadIndex = getThreadIndex(it);
-			int a = schema.getThreadFragment(threadIndex).getThreadID();
+		FieldIterator it = (FieldIterator)it1;
+		
+		if (it.isThread()) {
+			int a = schema.getThreadFragment(it.getThreadIndex()).getThreadID();
 			return getColorForNum(a);	
 		}
 		
-		if (isNode(it)) {
-			NodeIndex nodeIndex = getNodeIndex(it);
-			int a = schema.getNode(nodeIndex).getFirstThreadID();
+		if (it.isNode()) {
+			int a = schema.getNode(it.getNodeIndex()).getFirstThreadID();
 			return getColorForNum(a);
 		}
 
-		if (isCorner(it)) {
-			CornerIndex cornerIndex = getCornerIndex(it);
+		if (it.isCorner()) {
+			CornerIndex cornerIndex = it.getCornerIndex();
 			int a = schema.getCorner(cornerIndex);
 			return getColorForNum(a);
 		}
+		
 		return null;
 	}
 
 	@Override
-	public Iterator2D getIterator() {
-		// TODO Auto-generated method stub
-		return new Iterator2D(){
-
-			@Override
-			public int getNumOfString() {
-				// TODO Auto-generated method stub
-				return 1+dimensions.getColumnNumber()*2;
-			}
-
-			@Override
-			public int getNumOfColumn() {
-				// TODO Auto-generated method stub
-				return 1+dimensions.getThreadNumber()*2;
-			}};
-	}
-	
-	private boolean isThread(Iterator2D it) {
-		if(it.getI()%2 == 0){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	private boolean isSemiNode(Iterator2D it) {
-		if(it.getI()%2 == 0){
-			return false;
-		}
-		int a = it.getJ()/2+1;
-		if(isShortLeft(it)){
-			a = a+1;
-		}
-		if(a%2 == 0){
-			return false;
-		}
-		return true;
-	}
-	
-	private boolean isNode(Iterator2D it) {
-		if(this.isSemiNode(it)&&!this.isCorner(it)) {
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean isShortLeft(Iterator2D it) {
-		int a = it.getI()/2;
-		if(it.getI()%2 == 0){
-			return false;
-		}
-		
-		if(dimensions.firstCrossIsNode()) {
-			a=a+1;
-		}
-		a = a%2;
-		if(a == 0 ){
-			return false;
-		}
-		return true;
-	}
-	
-	private boolean isCorner(Iterator2D it) {
-		if(isSemiNode(it)&&(it.getJ() == 0||it.getJ() == it.getNumOfColumn()-1)) {
-			return true;
-		}else{
-			return false;
-		}
+	public FieldIterator getIterator() {
+		return new FieldIterator(this.dimensions);
 	}
 	
 	private Color getColorForNum(int threadID) {

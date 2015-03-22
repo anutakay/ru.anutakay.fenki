@@ -7,7 +7,7 @@ public class CornerIndex {
 	public int i;
 	public HDirection hDirection;
 	
-	CornerIndex(final int i, final HDirection hDirection) {
+	public CornerIndex(final int i, final HDirection hDirection) {
 		this.i = i;
 		this.hDirection = hDirection;
 	}

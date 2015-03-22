@@ -19,7 +19,7 @@ public class GridPanel extends JPanel {
 
 	FigureFactory<Iterator2D> mFigureFactory;
 	
-	private void setAdapter(Adapter<Iterator2D, ? super Object> adapter){
+	private void setAdapter(Adapter<? super Iterator2D, ? super Object> adapter){
 
 		mFigureFactory = new SchemaFigureFactory(adapter);
 		repaint();

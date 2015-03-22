@@ -1,10 +1,9 @@
 package ru.anutakay.fenki.view;
 
+public interface Adapter<I extends Iterator2D, O extends Object> {
 
-public interface Adapter<I extends Iterator, O extends Object> {
-	
-	O getObject(I it);
 	I getIterator();
+	O getObject(I it);
 
 }
 

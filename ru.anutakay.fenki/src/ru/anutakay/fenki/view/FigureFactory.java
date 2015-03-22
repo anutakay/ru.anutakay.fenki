@@ -1,7 +1,6 @@
 package ru.anutakay.fenki.view;
 
-
-public abstract class FigureFactory<T extends Iterator> {
+public abstract class FigureFactory<T extends Iterator2D> {
 	
 	Adapter<T, ? super Object> mAdapter;
 	
