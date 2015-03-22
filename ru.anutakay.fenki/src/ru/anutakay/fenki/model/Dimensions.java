@@ -12,7 +12,9 @@ public class Dimensions {
 	
 	private int numberOfColumns;
 
-	public Dimensions(final int numberOfThreads, final int numberOfColumns, final boolean firstCrossIsNode) {
+	public Dimensions(	final int numberOfThreads, 
+						final int numberOfColumns, 
+						final boolean firstCrossIsNode) {
 		this.numberOfThreads = numberOfThreads;
 		this.numberOfColumns = numberOfColumns;
 		this.firstCrossIsNode = firstCrossIsNode;

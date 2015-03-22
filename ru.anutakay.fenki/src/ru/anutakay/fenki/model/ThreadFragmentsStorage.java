@@ -13,7 +13,7 @@ public class ThreadFragmentsStorage {
 		threads = createArray();
 	}
 	
-	private ArrayList<ArrayList<ThreadFragment>> createArray(){
+	private ArrayList<ArrayList<ThreadFragment>> createArray() {
 		ArrayList<ArrayList<ThreadFragment>> array = new ArrayList<ArrayList<ThreadFragment>>();
 		for (int i = 0; i < dimensions.getThreadNumber(); i++) {
 			array.add(createThreadArray(i));

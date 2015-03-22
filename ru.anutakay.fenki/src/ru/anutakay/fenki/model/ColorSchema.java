@@ -6,7 +6,7 @@ public class ColorSchema {
 	
 	Color[] colors = {new Color(180, 50 , 200), new Color(0, 200, 180)};
 	
-	public Color getColorByID(final int colorID){
+	public Color getColorByID(final int colorID) { 
 		if (checkID(colorID)) {
 			return colors[colorID];
 		} else {
@@ -14,7 +14,7 @@ public class ColorSchema {
 		}
 	}
 	
-	private boolean checkID(final int colorID){
+	private boolean checkID(final int colorID) {
 		if (colorID < 0||colorID >= colors.length) {
 			return false;
 		} else {

@@ -2,7 +2,6 @@ package ru.anutakay.fenki.view;
 
 import java.awt.Color;
 
-import ru.anutakay.fenki.controller.Adapter;
 
 public class SchemaFigureFactory extends FigureFactory<Iterator2D> {
 	

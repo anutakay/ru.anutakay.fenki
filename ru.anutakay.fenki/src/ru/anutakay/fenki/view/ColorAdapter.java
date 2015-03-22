@@ -2,7 +2,6 @@ package ru.anutakay.fenki.view;
 
 import java.awt.Color;
 
-import ru.anutakay.fenki.controller.Adapter;
 import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.ColorSchema;
 import ru.anutakay.fenki.model.Node.HDirection;
@@ -32,6 +31,15 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 		int j = ((it.getJ())-2)/4;
 		return new NodeIndex( j, i);
 	}
+	
+	private CornerIndex getCornerIndex(final Iterator2D it) {
+		int i = (it.getI()-1)/2;
+		HDirection hDirection = HDirection.RIGHT;
+		if(it.getJ() == 0){
+			hDirection = HDirection.LEFT;
+		}
+		return new CornerIndex(i, hDirection);
+	}
 
 	@Override
 	public Color getObject(final Iterator2D it) {
@@ -49,12 +57,8 @@ public class ColorAdapter implements Adapter<Iterator2D, Object> {
 		}
 
 		if (isCorner(it)) {
-			int i = (it.getI()-1)/2;
-			HDirection left_right = HDirection.RIGHT;
-			if(it.getJ()==0){
-				left_right = HDirection.LEFT;
-			}
-			int a = schema.getCorner(i, left_right);
+			CornerIndex cornerIndex = getCornerIndex(it);
+			int a = schema.getCorner(cornerIndex);
 			return getColorForNum(a);
 		}
 		return null;

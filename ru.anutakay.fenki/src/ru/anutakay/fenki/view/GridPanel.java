@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import ru.anutakay.fenki.controller.Adapter;
 
 @SuppressWarnings("serial")
 public class GridPanel extends JPanel {	

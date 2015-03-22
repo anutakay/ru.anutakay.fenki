@@ -1,6 +1,5 @@
-package ru.anutakay.fenki.controller;
+package ru.anutakay.fenki.view;
 
-import ru.anutakay.fenki.view.Iterator;
 
 public interface Adapter<I extends Iterator, O extends Object> {
 	

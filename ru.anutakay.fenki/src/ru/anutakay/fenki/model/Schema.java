@@ -8,7 +8,7 @@ public class Schema extends SimpleSchema {
 	
 	private String schemaName = "unnamed";
 	
-	private ColorGroupSchema colorsIDAdapter;
+	private ColorGroupSchema colorGroupSchema;
 
 	public Schema() {
 		this(MIN_NUMBER_OF_THREAD, MIN_NUMBER_OF_COLUMN, true);
@@ -18,33 +18,15 @@ public class Schema extends SimpleSchema {
 					final int numberOfColumn, 
 					final boolean firstCrossIsNode) {
 		super(new Dimensions(numberOfThread, numberOfColumn, firstCrossIsNode));	
-		colorsIDAdapter = new ColorGroupSchema();
-	}
-
-	
-	public Dimensions getDimensions(){
-		return dimensions;
+		colorGroupSchema = new ColorGroupSchema();
 	}	
-	
-	/*public SimpleSchema getStorage(){
-		return this;
-	}*/
-	
-	public Node getNode(final int i, final int j) {
-		return getNode(new NodeIndex(j, i));
-	}
-	
-	
-	public ThreadFragment getThreadFragment(final int i, final int j) {
-		return getThreadFragment(new ThreadIndex(i, j));
-	}
 	
 	public String getSchemaName() {
 		return schemaName;
 	}
 	
-	public ColorGroupSchema getColorsIDAdapter(){
-		return this.colorsIDAdapter;
+	public ColorGroupSchema getColorsIDAdapter() {
+		return this.colorGroupSchema;
 	}
 	
 

@@ -11,7 +11,6 @@ public class FieldTemplate {
 				- ((dimensions.getThreadNumber()%2 == 0 && j%2 == 1 && dimensions.firstCrossIsNode())
 						|| (dimensions.getThreadNumber()%2 == 0 && j%2 == 0 && !dimensions.firstCrossIsNode()) ? 1
 						: 0);
-		//System.out.println("в " + j + " ряду " + i + " узлов ");
 		return i;
 	}
 	
@@ -30,7 +29,7 @@ public class FieldTemplate {
 	}
 	
 	public static boolean columnHasLeftCorner(	final Dimensions dimensions, 
-												final int columnNumber){
+												final int columnNumber) {
 		int j = columnNumber/2;
 		boolean first = dimensions.firstCrossIsNode();
 		boolean t = (first && j%2 == 1) || (!first && j%2 == 0);
@@ -38,7 +37,7 @@ public class FieldTemplate {
 	}
 	
 	public static boolean columnHasRightCorner(	final Dimensions dimensions, 
-												final int columnNumber){
+												final int columnNumber) {
 		int j = columnNumber;
 		if (dimensions.getThreadNumber()%2 == 1) {
 			return !columnHasLeftCorner(dimensions, j);
