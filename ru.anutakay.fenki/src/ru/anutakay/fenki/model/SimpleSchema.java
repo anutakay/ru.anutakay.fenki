@@ -5,14 +5,14 @@ import java.util.Random;
 import ru.anutakay.fenki.model.Node.HDirection;
 import ru.anutakay.fenki.model.Node.VDirection;
 
-public class NodesAndThreadFragmentsStorage
+public class SimpleSchema
 {
-	protected NodeStoreDimensions dimensions;
+	protected Dimensions dimensions;
 	private NodeStorage nodeStorage;
 	private ThreadFragmentsStorage threadStorage;
 	Random r;
 		
-	public NodesAndThreadFragmentsStorage(final NodeStoreDimensions dimensions) 
+	public SimpleSchema(final Dimensions dimensions) 
 	{
 		this.dimensions = dimensions;
 		this.nodeStorage = new NodeStorage(this.dimensions);

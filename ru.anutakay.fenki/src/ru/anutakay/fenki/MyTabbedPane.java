@@ -7,11 +7,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
 
-import ru.anutakay.fenki.controller.ColorAdapter;
 import ru.anutakay.fenki.controller.Filler;
 import ru.anutakay.fenki.controller.RandomFiller;
 import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.Schema;
+import ru.anutakay.fenki.view.ColorAdapter;
 import ru.anutakay.fenki.view.GridPanel;
 
 public class MyTabbedPane extends JTabbedPane {

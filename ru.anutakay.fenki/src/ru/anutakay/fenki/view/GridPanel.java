@@ -5,8 +5,6 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import ru.anutakay.fenki.controller.Adapter;
-import ru.anutakay.fenki.controller.FigureFactory;
-import ru.anutakay.fenki.controller.SchemaFigureFactory;
 
 @SuppressWarnings("serial")
 public class GridPanel extends JPanel {	

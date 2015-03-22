@@ -1,8 +1,6 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Node.HDirection;
-
-public class Schema {
+public class Schema extends SimpleSchema {
 
 	private static final int MIN_NUMBER_OF_COLUMN = 1;
 
@@ -11,10 +9,6 @@ public class Schema {
 	private String schemaName = "unnamed";
 	
 	private ColorGroupSchema colorsIDAdapter;
-	
-	private NodesAndThreadFragmentsStorage storage;
-	
-	private NodeStoreDimensions dimensions;
 
 	public Schema() {
 		this(MIN_NUMBER_OF_THREAD, MIN_NUMBER_OF_COLUMN, true);
@@ -23,30 +17,26 @@ public class Schema {
 	public Schema(	final int numberOfThread, 
 					final int numberOfColumn, 
 					final boolean firstCrossIsNode) {
-		dimensions = new NodeStoreDimensions(numberOfThread, numberOfColumn, firstCrossIsNode);
-		storage = new NodesAndThreadFragmentsStorage(dimensions);	
+		super(new Dimensions(numberOfThread, numberOfColumn, firstCrossIsNode));	
 		colorsIDAdapter = new ColorGroupSchema();
 	}
 
 	
-	public NodeStoreDimensions getDimensions(){
+	public Dimensions getDimensions(){
 		return dimensions;
 	}	
 	
-	public NodesAndThreadFragmentsStorage getStorage(){
-		return this.storage;
-	}
+	/*public SimpleSchema getStorage(){
+		return this;
+	}*/
 	
 	public Node getNode(final int i, final int j) {
-		return storage.getNode(new NodeIndex(j, i));
+		return getNode(new NodeIndex(j, i));
 	}
+	
 	
 	public ThreadFragment getThreadFragment(final int i, final int j) {
-		return storage.getThreadFragment(new ThreadIndex(i, j));
-	}
-	
-	public int getCorner(final int j, final HDirection hDirection) {
-		return storage.getCorner(j, hDirection);
+		return getThreadFragment(new ThreadIndex(i, j));
 	}
 	
 	public String getSchemaName() {

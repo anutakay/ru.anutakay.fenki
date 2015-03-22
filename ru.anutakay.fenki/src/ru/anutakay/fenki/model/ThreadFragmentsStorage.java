@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class ThreadFragmentsStorage {
 
-	private NodeStoreDimensions dimensions;
+	private Dimensions dimensions;
 	
 	private ArrayList<ArrayList<ThreadFragment>> threads;
 
-	public ThreadFragmentsStorage(final NodeStoreDimensions dimensions) {
+	public ThreadFragmentsStorage(final Dimensions dimensions) {
 		this.dimensions = dimensions;
 		threads = createArray();
 	}

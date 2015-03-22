@@ -3,7 +3,6 @@ package ru.anutakay.fenki.controller;
 import java.util.Random;
 
 import ru.anutakay.fenki.model.FieldTemplate;
-import ru.anutakay.fenki.model.IRandomizer;
 import ru.anutakay.fenki.model.Node;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.Node.Direction;

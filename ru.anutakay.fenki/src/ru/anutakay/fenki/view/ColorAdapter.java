@@ -1,38 +1,50 @@
-package ru.anutakay.fenki.controller;
+package ru.anutakay.fenki.view;
+
 import java.awt.Color;
 
+import ru.anutakay.fenki.controller.Adapter;
+import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.ColorSchema;
 import ru.anutakay.fenki.model.Node.HDirection;
-import ru.anutakay.fenki.model.NodeStoreDimensions;
+import ru.anutakay.fenki.model.NodeIndex;
+import ru.anutakay.fenki.model.Dimensions;
 import ru.anutakay.fenki.model.Schema;
-import ru.anutakay.fenki.view.Iterator2D;
-
+import ru.anutakay.fenki.model.ThreadIndex;
 
 public class ColorAdapter implements Adapter<Iterator2D, Object> {
 	
-	private NodeStoreDimensions dimensions;
+	private Dimensions dimensions;
 	
 	private Schema schema;
 	
 	public ColorAdapter(final SchemaController schemaController) {
 		schema = schemaController.getSchema();
 		dimensions = schema.getDimensions();	}
+	
+	private ThreadIndex getThreadIndex(final Iterator2D it){
+		int i = it.getI()/2;
+		int j = it.getJ()/2;
+		return new ThreadIndex(j, i);
+	}
+	
+	private NodeIndex getNodeIndex(final Iterator2D it) {
+		int i = (it.getI()-1)/2;
+		int j = ((it.getJ())-2)/4;
+		return new NodeIndex( j, i);
+	}
 
 	@Override
 	public Color getObject(final Iterator2D it) {
 		
 		if (isThread(it)) {
-			int i = it.getI()/2;
-			int j = it.getJ()/2;
-			//System.out.println(j + " " + i + " " +mSchema.thread( j, i));
-			int a = schema.getThreadFragment( j, i).getThreadID();
+			ThreadIndex threadIndex = getThreadIndex(it);
+			int a = schema.getThreadFragment(threadIndex).getThreadID();
 			return getColorForNum(a);	
 		}
 		
 		if (isNode(it)) {
-			int i = (it.getI()-1)/2;
-			int j = ((it.getJ())-2)/4;
-			int a = schema.getNode( i, j).getFirstThreadID();
+			NodeIndex nodeIndex = getNodeIndex(it);
+			int a = schema.getNode(nodeIndex).getFirstThreadID();
 			return getColorForNum(a);
 		}
 

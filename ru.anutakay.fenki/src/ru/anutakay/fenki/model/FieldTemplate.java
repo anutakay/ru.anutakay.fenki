@@ -4,7 +4,7 @@ import ru.anutakay.fenki.model.Node.HDirection;
 
 public class FieldTemplate {
 	
-	public static int numberOfNodeInColumn(	final NodeStoreDimensions dimensions, 
+	public static int numberOfNodeInColumn(	final Dimensions dimensions, 
 											final int columnNumber) {
 		int j = columnNumber;
 		int i = dimensions.getThreadNumber()/2
@@ -15,7 +15,7 @@ public class FieldTemplate {
 		return i;
 	}
 	
-	public static boolean isShortColumn(final NodeStoreDimensions dimensions, 
+	public static boolean isShortColumn(final Dimensions dimensions, 
 										final int columnNumber, 
 										final HDirection hDirection) {
 		int j = columnNumber;
@@ -29,7 +29,7 @@ public class FieldTemplate {
 		}
 	}
 	
-	public static boolean columnHasLeftCorner(	final NodeStoreDimensions dimensions, 
+	public static boolean columnHasLeftCorner(	final Dimensions dimensions, 
 												final int columnNumber){
 		int j = columnNumber/2;
 		boolean first = dimensions.firstCrossIsNode();
@@ -37,7 +37,7 @@ public class FieldTemplate {
 		return t;
 	}
 	
-	public static boolean columnHasRightCorner(	final NodeStoreDimensions dimensions, 
+	public static boolean columnHasRightCorner(	final Dimensions dimensions, 
 												final int columnNumber){
 		int j = columnNumber;
 		if (dimensions.getThreadNumber()%2 == 1) {

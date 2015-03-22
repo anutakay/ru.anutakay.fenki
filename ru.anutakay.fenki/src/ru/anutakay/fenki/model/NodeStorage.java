@@ -5,9 +5,9 @@ public class NodeStorage {
 	
 	private ArrayList<ArrayList<Node>> nodes;
 	
-	protected NodeStoreDimensions dimensions;
+	protected Dimensions dimensions;
 	
-	public NodeStorage(final NodeStoreDimensions dimensions){
+	public NodeStorage(final Dimensions dimensions){
 		
 		this.dimensions = dimensions;
 	
@@ -27,7 +27,7 @@ public class NodeStorage {
 		return nodes.get(nodeIndex.j).get(nodeIndex.i);
 	}
 	
-	public NodeStoreDimensions getDimensions(){
+	public Dimensions getDimensions(){
 		return this.dimensions;
 	}
 
