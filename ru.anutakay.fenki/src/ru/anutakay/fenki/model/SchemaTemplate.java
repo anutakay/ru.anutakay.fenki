@@ -2,7 +2,7 @@ package ru.anutakay.fenki.model;
 
 import ru.anutakay.fenki.model.Node.HDirection;
 
-public class FieldTemplate {
+public class SchemaTemplate {
 	
 	public static int numberOfNodeInColumn(	final Dimensions dimensions, 
 											final int columnNumber) {

@@ -2,7 +2,7 @@ package ru.anutakay.fenki.controller;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.FieldTemplate;
+import ru.anutakay.fenki.model.SchemaTemplate;
 import ru.anutakay.fenki.model.Node;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.Node.Direction;
@@ -12,7 +12,7 @@ public class RandomFiller extends Filler implements IRandomizer<Direction> {
 	@Override
 	public void fill(Schema schema) {
 		for(int j = 0; j < schema.getDimensions().getColumnNumber()+1; j++){
-			for(int i = 0; i < FieldTemplate.numberOfNodeInColumn(schema.getDimensions(), j); i++){
+			for(int i = 0; i < SchemaTemplate.numberOfNodeInColumn(schema.getDimensions(), j); i++){
 				schema.getNode(j, i).setDirection(createRandomObject(j,i));
 			}
 		}

@@ -43,7 +43,7 @@ public class SimpleSchema
 		if (hDirection == HDirection.LEFT) {
 			return getPrevThreadForNode(new NodeIndex(-1, j), HDirection.RIGHT);
 		} else {
-			int n = FieldTemplate.numberOfNodeInColumn(this.dimensions, j);
+			int n = SchemaTemplate.numberOfNodeInColumn(this.dimensions, j);
 			return getPrevThreadForNode(new NodeIndex(n, j), HDirection.LEFT);
 		}
 	}
