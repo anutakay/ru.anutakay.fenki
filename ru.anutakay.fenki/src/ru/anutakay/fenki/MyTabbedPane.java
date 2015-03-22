@@ -43,7 +43,7 @@ public class MyTabbedPane extends JTabbedPane {
 		filler.fill(mSchema);
 		SchemaController schemaController = new SchemaController(mSchema);
 		schemaController.buildSchema();
-		return new GridPanel(new ColorAdapter(mSchema));
+		return new GridPanel(new ColorAdapter(schemaController));
 	}
 	
 	public Schema getSchema(){
