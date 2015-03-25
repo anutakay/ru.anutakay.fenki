@@ -1,6 +1,5 @@
 package ru.anutakay.fenki;
 
-import java.awt.Color;
 import java.util.Random;
 
 import javax.swing.JScrollPane;
@@ -48,8 +47,8 @@ public class TabbedSchemaPane extends JTabbedPane {
 	
 	@SuppressWarnings("unchecked")
 	private SchemaPane makeSchemaPanel(SchemaController schemaController){	
-		Adapter<? super Iterator2D, ? super Object> adapter = new ColorAdapter<FieldIterator, Color>(schemaController);
-		FigureFactory<Iterator2D> figureFactory = new SchemaFigureFactory<FieldIterator>(adapter);
+		Adapter<? super Iterator2D, ? super Object> adapter = new ColorAdapter<FieldIterator>(schemaController);
+		FigureFactory<Iterator2D> figureFactory = new SchemaFigureFactory<FieldIterator>(adapter, schemaController.getSchema().getColorGroupSchema());
 		return new SchemaPane(figureFactory);
 	}
 	

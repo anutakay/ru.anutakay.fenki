@@ -1,28 +1,26 @@
 package ru.anutakay.fenki.view;
 
-import java.awt.Color;
-
 import ru.anutakay.fenki.controller.SchemaController;
-import ru.anutakay.fenki.model.ColorSchema;
 import ru.anutakay.fenki.model.FieldIterator;
 import ru.anutakay.fenki.model.Dimensions;
 import ru.anutakay.fenki.model.Schema;
 
-@SuppressWarnings("rawtypes")
-public class ColorAdapter<T extends Iterator2D, C extends Color>  implements Adapter {
+@SuppressWarnings({ "rawtypes"})
+public class ColorAdapter<T extends Iterator2D>  implements Adapter {
 	
 	private Dimensions dimensions;
 	
-	private Schema schema;
+	private SchemaController schemaController;
 	
 	public ColorAdapter(final SchemaController schemaController) {
-		schema = schemaController.getSchema();
-		dimensions = schema.getDimensions();	
+		this.schemaController = schemaController;
+		dimensions = this.schemaController.getSchema().getDimensions();	
 	}	
 	
-	public Color getObject(final Iterator2D it1) {
+	public Integer getObject(final Iterator2D it1) {
 		
 		FieldIterator it = (FieldIterator)it1;
+		Schema schema = this.schemaController.getSchema();
 		
 		if (it.isThread()) {
 			int a = schema.getThreadFragment(it.getThreadIndex()).getThreadID();
@@ -48,14 +46,8 @@ public class ColorAdapter<T extends Iterator2D, C extends Color>  implements Ada
 		return new FieldIterator(this.dimensions);
 	}
 	
-	private Color getColorForNum(int threadID) {
-		int colorID = this.schema.getColorsIDAdapter().getColorID(threadID);
-		Color color = new ColorSchema().getColorByID(colorID);
-		if (color == null){
-			return Color.WHITE;
-		} else {
-			return color;
-		}
+	private Integer getColorForNum(int threadID) {
+		return Integer.valueOf(threadID);
 	}
 
 }

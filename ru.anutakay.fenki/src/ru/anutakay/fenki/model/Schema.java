@@ -25,7 +25,7 @@ public class Schema extends SimpleSchema {
 		return schemaName;
 	}
 	
-	public ColorGroupSchema getColorsIDAdapter() {
+	public ColorGroupSchema getColorGroupSchema() {
 		return this.colorGroupSchema;
 	}
 	
