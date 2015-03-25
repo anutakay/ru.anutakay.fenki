@@ -1,5 +1,6 @@
 package ru.anutakay.fenki;
 
+import java.awt.Color;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ import javax.swing.JTextPane;
 import ru.anutakay.fenki.controller.Filler;
 import ru.anutakay.fenki.controller.RandomFiller;
 import ru.anutakay.fenki.controller.SchemaController;
+import ru.anutakay.fenki.model.FieldIterator;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.view.ColorAdapter;
 import ru.anutakay.fenki.view.GridPanel;
@@ -35,6 +37,7 @@ public class MyTabbedPane extends JTabbedPane {
 		setTabPlacement(BOTTOM);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private JPanel makePanel(){
 		int threads = Math.abs(new Random().nextInt())%20;
 		System.out.println(threads);
@@ -43,7 +46,7 @@ public class MyTabbedPane extends JTabbedPane {
 		filler.fill(mSchema);
 		SchemaController schemaController = new SchemaController(mSchema);
 		schemaController.buildSchema();
-		return new GridPanel(new ColorAdapter(schemaController));
+		return new GridPanel(new ColorAdapter<FieldIterator, Color>(schemaController));
 	}
 	
 	public Schema getSchema(){
