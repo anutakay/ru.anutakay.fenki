@@ -112,7 +112,7 @@ public class HelloWorld extends JFrame implements ChangeListener {
 	}
 	
 	private void addNewTab(){
-		tabbedPane.addTab("", new MyTabbedPane());
+		tabbedPane.addTab("", new TabbedSchemaPane());
 		tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tab("Безымянный"));
 	}
 	
@@ -151,7 +151,7 @@ public class HelloWorld extends JFrame implements ChangeListener {
 				int ret = openFile.showDialog(null, "Открыть файл");
 				if (ret == JFileChooser.APPROVE_OPTION) {
 					File file = openFile.getSelectedFile();
-					 tabbedPane.addTab("", new MyTabbedPane( ));
+					 tabbedPane.addTab("", new TabbedSchemaPane( ));
 					 tabbedPane.setTabComponentAt(tabbedPane.getTabCount()-1,
 					 tab(file.getName()));
 				}
@@ -234,7 +234,7 @@ public class HelloWorld extends JFrame implements ChangeListener {
 			controlPanel.setCurrentModel(null);
 			return;
 		}
-		Schema currentSchema = ((MyTabbedPane)tabbedPane.getComponentAt(index)).getSchema();
+		Schema currentSchema = ((TabbedSchemaPane)tabbedPane.getComponentAt(index)).getSchema();
 		controlPanel.setCurrentModel(currentSchema);
 	}
 }
