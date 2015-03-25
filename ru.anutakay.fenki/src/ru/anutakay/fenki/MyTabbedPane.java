@@ -8,7 +8,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
 
-import ru.anutakay.fenki.controller.Filler;
 import ru.anutakay.fenki.controller.RandomFiller;
 import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.FieldIterator;
@@ -20,17 +19,13 @@ public class MyTabbedPane extends JTabbedPane {
 
 	private static final int NUM_OF_COLUMNS = 10;
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4336057985717689708L;
 	
-	Schema mSchema;
+	SchemaController schemaController;
 
 	public MyTabbedPane() {
 		super();
 		JPanel rp = makePanel();
-		//rp.init();
 		JScrollPane scrollPane = new JScrollPane(rp);
 		addTab("Схема", scrollPane);
 		addTab("Редактор", new JTextPane());
@@ -39,18 +34,23 @@ public class MyTabbedPane extends JTabbedPane {
 	
 	@SuppressWarnings("unchecked")
 	private JPanel makePanel(){
-		int threads = Math.abs(new Random().nextInt())%20;
-		System.out.println(threads);
-		mSchema = new Schema(threads, NUM_OF_COLUMNS, false);
-		Filler filler = new RandomFiller();
-		filler.fill(mSchema);
-		SchemaController schemaController = new SchemaController(mSchema);
-		schemaController.buildSchema();
-		return new GridPanel(new ColorAdapter<FieldIterator, Color>(schemaController));
+		return new GridPanel(new ColorAdapter<FieldIterator, Color>(getSchemaController()));
 	}
 	
-	public Schema getSchema(){
-		return mSchema;
+	public SchemaController getSchemaController() {
+		if(schemaController == null)  {
+			schemaController = createSchemaController();
+		}
+		return schemaController;
+	}
+	
+	private SchemaController createSchemaController() {
+		int threads = Math.abs(new Random().nextInt())%20;
+		Schema schema = new Schema(threads, NUM_OF_COLUMNS, false);
+		SchemaController controller = new SchemaController(schema);
+		controller.fillSchema(new RandomFiller());
+		controller.buildSchema();
+		return controller;
 	}
 
 }

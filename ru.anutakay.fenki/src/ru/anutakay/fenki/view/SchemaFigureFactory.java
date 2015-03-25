@@ -17,15 +17,7 @@ public class SchemaFigureFactory<T extends Iterator2D>  extends FigureFactory{
 	@Override
 	public Figure makeFigure(Iterator2D it) {
 		
-		Figure1 f
-		 = new Figure1( mPointAdapter.getObject(it)){
-
-			@Override
-			public int getDiameter() {
-				return 7; 
-			}
-			
-		};
+		Figure1 f = new Figure1( mPointAdapter.getObject(it));
 		f.color = (Color) mAdapter.getObject(it);
 		
 		return f;

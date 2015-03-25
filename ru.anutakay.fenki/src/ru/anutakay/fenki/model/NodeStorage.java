@@ -23,7 +23,6 @@ public class NodeStorage {
 		}
 	}
 	
-	//сеттера нет, получаем узел, и заполняем как нужно
 	public Node getNode(final NodeIndex nodeIndex) {
 		return nodes.get(nodeIndex.j).get(nodeIndex.i);
 	}

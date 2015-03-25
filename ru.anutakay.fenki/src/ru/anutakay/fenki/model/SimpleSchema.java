@@ -4,6 +4,7 @@ import java.util.Random;
 
 import ru.anutakay.fenki.model.Node.HDirection;
 import ru.anutakay.fenki.model.Node.VDirection;
+import ru.anutakay.fenki.model.ThreadFragment.Direction;
 import ru.anutakay.fenki.view.CornerIndex;
 
 public class SimpleSchema
@@ -69,6 +70,16 @@ public class SimpleSchema
 															nodeIndex, 
 															hDirection, 
 															VDirection.NEXT);
-		threadStorage.setThread(threadIndex, threadID);
+		threadStorage.getThread(threadIndex).setTopDirection(reverseDirection(hDirection));
+		threadStorage.getThread(threadIndex).setThreadID(threadID);
+	}
+	
+	private Direction reverseDirection(final HDirection hDirection) {
+		if (hDirection == HDirection.RIGHT) {
+			return Direction.LEFT;
+		} else if (hDirection == HDirection.LEFT) {
+			return Direction.RIGHT;
+		}
+		return Direction.NONE;
 	}
 }

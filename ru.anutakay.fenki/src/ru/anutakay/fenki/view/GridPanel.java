@@ -34,13 +34,11 @@ public class GridPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g){
 		for(Iterator2D it = mFigureFactory.getIterator().begin(); it != null; it = it.next() ){
-			Figure1 f =  (Figure1) mFigureFactory.makeFigure(it);
+			Figure f =  mFigureFactory.makeFigure(it);
 			if(f == null){
 				continue;
 			}
-			if(f.color != null){
-				f.paintComponent(g);
-			}
+			f.paintComponent(g);
 		}
 	}
 

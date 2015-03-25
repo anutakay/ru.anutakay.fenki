@@ -20,6 +20,10 @@ public class SchemaController {
 		return this.schema;
 	}
 	
+	public void fillSchema(final Filler filler){
+		filler.fill(schema);
+	}
+	
 	public void buildSchema() {
 		Dimensions dimensions = schema.getDimensions();
 		build(schema, dimensions);
