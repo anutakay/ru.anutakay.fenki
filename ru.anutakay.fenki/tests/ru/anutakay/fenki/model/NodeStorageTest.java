@@ -21,7 +21,33 @@ public class NodeStorageTest {
 		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBottomThreadID(Node.HDirection.LEFT));
 		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBottomThreadID(Node.HDirection.RIGHT));	
 		assertEquals(new Node(), nodeStorage.getNode(nodeIndex));		
-
+	}
+	
+	@Test
+	public void simpleSetDataNotEqualsTest() {
+		final Dimensions dimensions = new Dimensions();
+		final NodeStorage nodeStorage = new NodeStorage(dimensions);
+		final NodeIndex nodeIndex = new NodeIndex(0, 0);
+		final Node node = nodeStorage.getNode(nodeIndex);
+		node.setLeftThreadID(2);
+		node.setRightThreadID(3);	
+		assertFalse(new Node().equals(nodeStorage.getNode(nodeIndex)));
+	}
+	
+	@Test
+	public void simpleSetDataEqualsTest() {
+		final Dimensions dimensions = new Dimensions();
+		final NodeStorage nodeStorage = new NodeStorage(dimensions);
+		final NodeIndex nodeIndex = new NodeIndex(0, 0);
+		final Node node = nodeStorage.getNode(nodeIndex);
+		node.setLeftThreadID(2);
+		node.setRightThreadID(3);
+		node.setDirection(Node.Direction.LEFT_BACK);
+		final Node node2 = new Node();
+		node2.setLeftThreadID(2);
+		node2.setRightThreadID(3);
+		node2.setDirection(Node.Direction.LEFT_BACK);
+		assertTrue(node2.equals(nodeStorage.getNode(nodeIndex)));
 	}
 
 }
