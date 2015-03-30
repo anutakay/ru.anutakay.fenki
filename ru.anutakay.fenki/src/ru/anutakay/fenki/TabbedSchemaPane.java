@@ -10,13 +10,18 @@ import ru.anutakay.fenki.controller.RandomFiller;
 import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.ColorSchema;
 import ru.anutakay.fenki.model.FieldIterator;
+import ru.anutakay.fenki.model.GroupColorSchema;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.view.Adapter;
 import ru.anutakay.fenki.view.ColorAdapter;
 import ru.anutakay.fenki.view.FigureFactory;
+import ru.anutakay.fenki.view.IColorSchema;
+import ru.anutakay.fenki.view.IGroupColorSchema;
+import ru.anutakay.fenki.view.IThreadColorSchema;
 import ru.anutakay.fenki.view.SchemaPane;
 import ru.anutakay.fenki.view.Iterator2D;
 import ru.anutakay.fenki.view.SchemaFigureFactory;
+import ru.anutakay.fenki.view.ThreadColorSchema;
 
 public class TabbedSchemaPane extends JTabbedPane {
 
@@ -47,9 +52,18 @@ public class TabbedSchemaPane extends JTabbedPane {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private SchemaPane makeSchemaPanel(SchemaController schemaController){	
-		Adapter<? super Iterator2D, ? super Object> adapter = new ColorAdapter<FieldIterator>(schemaController);
-		FigureFactory<Iterator2D> figureFactory = new SchemaFigureFactory<FieldIterator>(adapter, schemaController.getSchema().getColorGroupSchema(), new ColorSchema());
+	private SchemaPane makeSchemaPanel(SchemaController schemaController) {	
+		
+		Adapter<? super Iterator2D, ? super Object> adapter 
+			= new ColorAdapter<FieldIterator>(schemaController);
+		
+		IThreadColorSchema threadColorSchema = this	.schemaController
+													.getSchema()
+													.getThreadColorSchema();
+		
+		FigureFactory<Iterator2D> figureFactory 
+			= new SchemaFigureFactory<FieldIterator>(adapter, threadColorSchema);
+		
 		return new SchemaPane(figureFactory);
 	}
 	
@@ -60,10 +74,17 @@ public class TabbedSchemaPane extends JTabbedPane {
 	private SchemaController createSchemaController() {
 		final int threads = Math.abs(new Random().nextInt())%20;
 		Schema schema = new Schema(threads, NUM_OF_COLUMNS, false);
+		schema.setThreadColorSchema(createThreadColorSchema());
 		SchemaController controller = new SchemaController(schema);
 		controller.fillSchema(new RandomFiller());
 		controller.buildSchema();
 		return controller;
+	}
+	
+	private IThreadColorSchema createThreadColorSchema() {
+		IColorSchema colorSchema = new ColorSchema();
+		IGroupColorSchema groupColorSchema = new GroupColorSchema();
+		return new ThreadColorSchema(groupColorSchema, colorSchema);
 	}
 	
 	public SchemaController getSchemaController() {

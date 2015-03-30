@@ -1,10 +1,11 @@
 package ru.anutakay.fenki.view;
 
+import java.awt.Color;
+
 @SuppressWarnings("rawtypes")
 public class SchemaFigureFactory<T extends Iterator2D>  extends FigureFactory {
 
 	private PointAdapter pointAdapter;
-	
 	
 	private IThreadColorSchema threadColorSchema;
 	
@@ -14,11 +15,10 @@ public class SchemaFigureFactory<T extends Iterator2D>  extends FigureFactory {
 		this.pointAdapter = new PointAdapter(adapter.getIterator());
 	}
 	
-	public SchemaFigureFactory(final Adapter<? super Iterator2D, ? super Object> adapter, 
-								final IGroupColorSchema groupColorSchema, 
-								final IColorSchema colorSchema) {
+	public SchemaFigureFactory(	final Adapter<? super Iterator2D, ? super Object> adapter, 
+								final IThreadColorSchema threadColorSchema) {
 		this(adapter);
-		this.threadColorSchema = new ThreadColorSchema(groupColorSchema, colorSchema);
+		this.threadColorSchema = threadColorSchema;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -33,7 +33,13 @@ public class SchemaFigureFactory<T extends Iterator2D>  extends FigureFactory {
 			return null;
 		}
 		
-		figure.setColor(threadColorSchema.getColorByThreadID(threadID));
+		Color color = Color.WHITE;
+		
+		if(threadColorSchema != null) {
+			color = threadColorSchema.getColorByThreadID(threadID);
+		}
+		
+		figure.setColor(color);
 		
 		return figure;
 	}

@@ -1,5 +1,7 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.view.IThreadColorSchema;
+
 public class Schema extends SimpleSchema {
 
 	private static final int MIN_NUMBER_OF_COLUMN = 1;
@@ -8,7 +10,7 @@ public class Schema extends SimpleSchema {
 	
 	private String schemaName = "unnamed";
 	
-	private ColorGroupSchema colorGroupSchema;
+	private IThreadColorSchema threadColorSchema;
 
 	public Schema() {
 		this(MIN_NUMBER_OF_THREAD, MIN_NUMBER_OF_COLUMN, true);
@@ -18,16 +20,18 @@ public class Schema extends SimpleSchema {
 					final int numberOfColumn, 
 					final boolean firstCrossIsNode) {
 		super(new Dimensions(numberOfThread, numberOfColumn, firstCrossIsNode));	
-		colorGroupSchema = new ColorGroupSchema();
 	}	
 	
 	public String getSchemaName() {
 		return schemaName;
 	}
 	
-	public ColorGroupSchema getColorGroupSchema() {
-		return this.colorGroupSchema;
+	public IThreadColorSchema getThreadColorSchema() {
+		return threadColorSchema;
 	}
-	
+
+	public void setThreadColorSchema(IThreadColorSchema threadColorSchema) {
+		this.threadColorSchema = threadColorSchema;
+	}
 
 }
