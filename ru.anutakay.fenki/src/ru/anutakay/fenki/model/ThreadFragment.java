@@ -2,9 +2,11 @@ package ru.anutakay.fenki.model;
 
 public class ThreadFragment {
 	
+	public static final int NONE_THREAD_ID = -1;
+
 	public enum Direction { NONE, RIGHT, LEFT }
 
-	private int threadID = -1;
+	private int threadID = NONE_THREAD_ID;
 	
 	private Direction topDirection = Direction.NONE;
 	

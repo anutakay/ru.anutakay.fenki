@@ -2,7 +2,7 @@ package ru.anutakay.fenki.model;
 
 public class Node {
 	
-	private final static int NONE_THREAD = -1;
+	private final static int NONE_THREAD = ThreadFragment.NONE_THREAD_ID;
 	
 	public enum Direction { NONE, 
 							RIGHT_DIRECT, 
@@ -135,4 +135,35 @@ public class Node {
 			return getSecondThreadID();
 		}
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((direction == null) ? 0 : direction.hashCode());
+		result = prime * result + leftThreadID;
+		result = prime * result + rightThreadID;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Node other = (Node) obj;
+		if (direction != other.direction)
+			return false;
+		if (leftThreadID != other.leftThreadID)
+			return false;
+		if (rightThreadID != other.rightThreadID)
+			return false;
+		return true;
+	}
+
+
 }
