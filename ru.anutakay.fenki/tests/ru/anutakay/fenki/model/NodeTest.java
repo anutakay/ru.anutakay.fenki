@@ -12,16 +12,22 @@ public class NodeTest {
 	public void constructorTest() {
 		Node node = new Node();
 		assertEquals(Node.Direction.NONE, node.getDirection());
-		assertEquals(HDirection.NONE, node.getBegin());
-		assertEquals(HDirection.NONE, node.getEnd());
+		assertEquals(Node.HDirection.NONE, node.getBegin());
+		assertEquals(Node.HDirection.NONE, node.getEnd());
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getFirstThreadID());
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getSecondThreadID());
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getLeftThreadID());
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getRightThreadID());
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getBottomThreadID(Node.HDirection.LEFT));
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getBottomThreadID(Node.HDirection.RIGHT));	
+		
 	}
 	
 	@Test
 	public void constructorNullTest() {
-		Node node = new Node(null);
-		assertEquals(Node.Direction.NONE, node.getDirection());
-		assertEquals(HDirection.NONE, node.getBegin());
-		assertEquals(HDirection.NONE, node.getEnd());
+		Node nullNode = new Node(null);
+		Node node = new Node();
+		assertEquals(node, nullNode);
 	}
 	
 	@Test
@@ -65,10 +71,10 @@ public class NodeTest {
 		Node node = new Node();
 		node.setLeftThreadID(0);
 		node.setRightThreadID(1);
-		assertEquals(-1, node.getBottomThreadID(HDirection.LEFT));
-		assertEquals(-1, node.getBottomThreadID(HDirection.RIGHT));
-		assertEquals(-1, node.getFirstThreadID());
-		assertEquals(-1, node.getSecondThreadID());
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getBottomThreadID(HDirection.LEFT));
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getBottomThreadID(HDirection.RIGHT));
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getFirstThreadID());
+		assertEquals(ThreadFragment.NONE_THREAD_ID, node.getSecondThreadID());
 	}
 	
 	@Test 
