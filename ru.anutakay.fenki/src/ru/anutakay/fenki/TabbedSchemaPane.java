@@ -8,6 +8,7 @@ import javax.swing.JTextPane;
 
 import ru.anutakay.fenki.controller.RandomFiller;
 import ru.anutakay.fenki.controller.SchemaController;
+import ru.anutakay.fenki.model.ColorSchema;
 import ru.anutakay.fenki.model.FieldIterator;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.view.Adapter;
@@ -48,7 +49,7 @@ public class TabbedSchemaPane extends JTabbedPane {
 	@SuppressWarnings("unchecked")
 	private SchemaPane makeSchemaPanel(SchemaController schemaController){	
 		Adapter<? super Iterator2D, ? super Object> adapter = new ColorAdapter<FieldIterator>(schemaController);
-		FigureFactory<Iterator2D> figureFactory = new SchemaFigureFactory<FieldIterator>(adapter, schemaController.getSchema().getColorGroupSchema());
+		FigureFactory<Iterator2D> figureFactory = new SchemaFigureFactory<FieldIterator>(adapter, schemaController.getSchema().getColorGroupSchema(), new ColorSchema());
 		return new SchemaPane(figureFactory);
 	}
 	

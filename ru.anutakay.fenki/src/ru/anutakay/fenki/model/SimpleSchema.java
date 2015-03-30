@@ -17,14 +17,14 @@ public class SimpleSchema
 	public SimpleSchema(final Dimensions dimensions) {
 		this.dimensions = dimensions;
 		this.nodeStorage = new NodeStorage(this.dimensions);
-		threadStorage = new ThreadFragmentsStorage(this.dimensions);
+		this.threadStorage = new ThreadFragmentsStorage(this.dimensions);
 	}
 	
 	public Dimensions getDimensions() {
 		return dimensions;
 	}
 	
-	public Node getNode(NodeIndex nodeIndex) {
+	public Node getNode(final NodeIndex nodeIndex) {
 		return nodeStorage.getNode(nodeIndex);
 	}
 	

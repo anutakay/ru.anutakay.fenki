@@ -2,10 +2,13 @@ package ru.anutakay.fenki.model;
 
 import java.awt.Color;
 
-public class ColorSchema {
+import ru.anutakay.fenki.view.IColorSchema;
+
+public class ColorSchema implements IColorSchema {
 	
 	Color[] colors = {new Color(180, 50 , 200), new Color(0, 200, 180)};
 	
+	@Override
 	public Color getColorByID(final int colorID) { 
 		if (checkID(colorID)) {
 			return colors[colorID];

@@ -9,7 +9,15 @@ public class Figure1 extends Figure {
 	private static final int DIAMETER = 7;
 	
 	int a;
-	public Color color;
+	private Color color;
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
 	public Figure1(final Point point) {
 		super(point);

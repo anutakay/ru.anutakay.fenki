@@ -1,52 +1,41 @@
 package ru.anutakay.fenki.view;
 
-import java.awt.Color;
-
-import ru.anutakay.fenki.model.ColorGroupSchema;
-import ru.anutakay.fenki.model.ColorSchema;
-
 @SuppressWarnings("rawtypes")
 public class SchemaFigureFactory<T extends Iterator2D>  extends FigureFactory {
+
+	private PointAdapter pointAdapter;
 	
-	PointAdapter mPointAdapter;
-	ColorGroupSchema colorGroupSchema;
+	
+	private IThreadColorSchema threadColorSchema;
 	
 	@SuppressWarnings("unchecked")
-	public SchemaFigureFactory(Adapter<? super Iterator2D, ? super Object> adapter){
+	public SchemaFigureFactory(final Adapter<? super Iterator2D, ? super Object> adapter) {
 		super(adapter);
-		mPointAdapter = new PointAdapter(adapter.getIterator());
+		this.pointAdapter = new PointAdapter(adapter.getIterator());
 	}
 	
-	public SchemaFigureFactory(Adapter<? super Iterator2D, ? super Object> adapter, ColorGroupSchema colorGroupSchema){
+	public SchemaFigureFactory(final Adapter<? super Iterator2D, ? super Object> adapter, 
+								final IGroupColorSchema groupColorSchema, 
+								final IColorSchema colorSchema) {
 		this(adapter);
-		this.colorGroupSchema = colorGroupSchema;
+		this.threadColorSchema = new ThreadColorSchema(groupColorSchema, colorSchema);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Figure makeFigure(Iterator2D it) {
+	public Figure makeFigure(final Iterator2D it) {
 		
-		Figure1 f = new Figure1( mPointAdapter.getObject(it));
+		final Figure1 figure = new Figure1( pointAdapter.getObject(it));
 		
-		Integer threadID = (Integer) mAdapter.getObject(it);
+		final Integer threadID = (Integer) mAdapter.getObject(it);
 		
 		if (threadID == null) {
 			return null;
 		}
 		
-		f.color = getColorByThreadID(threadID);
+		figure.setColor(threadColorSchema.getColorByThreadID(threadID));
 		
-		return f;
-	}
-	
-	private Color getColorByThreadID( int threadID){
-		Integer colorID = this.colorGroupSchema.getColorID(threadID);
-		Color color = new ColorSchema().getColorByID(colorID);
-		if (color == null){
-			return Color.WHITE;
-		} else {
-			return color;
-		}
+		return figure;
 	}
 
 }
