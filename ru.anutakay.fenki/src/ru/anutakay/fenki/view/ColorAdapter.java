@@ -2,13 +2,13 @@ package ru.anutakay.fenki.view;
 
 import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.FieldIterator;
-import ru.anutakay.fenki.model.Dimensions;
+import ru.anutakay.fenki.model.Size;
 import ru.anutakay.fenki.model.Schema;
 
 @SuppressWarnings({ "rawtypes"})
 public class ColorAdapter<T extends Iterator2D>  implements Adapter {
 	
-	private Dimensions dimensions;
+	private Size dimensions;
 	
 	private SchemaController schemaController;
 	

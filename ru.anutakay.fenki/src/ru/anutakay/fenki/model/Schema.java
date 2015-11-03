@@ -19,7 +19,7 @@ public class Schema extends SimpleSchema {
 	public Schema(	final int numberOfThread, 
 					final int numberOfColumn, 
 					final boolean firstCrossIsNode) {
-		super(new Dimensions(numberOfThread, numberOfColumn, firstCrossIsNode));	
+		super(new Size(numberOfThread, numberOfColumn, firstCrossIsNode));	
 	}	
 	
 	public String getSchemaName() {

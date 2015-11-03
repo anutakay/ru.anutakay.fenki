@@ -4,7 +4,7 @@ import ru.anutakay.fenki.model.Node.HDirection;
 
 public class SchemaTemplate {
 	
-	public static int numberOfNodeInColumn(	final Dimensions dimensions, 
+	public static int numberOfNodeInColumn(	final Size dimensions, 
 											final int columnNumber) {
 		int j = columnNumber;
 		int i = dimensions.getThreadNumber()/2
@@ -14,7 +14,7 @@ public class SchemaTemplate {
 		return i;
 	}
 	
-	public static boolean isShortColumn(final Dimensions dimensions, 
+	public static boolean isShortColumn(final Size dimensions, 
 										final int columnNumber, 
 										final HDirection hDirection) {
 		int j = columnNumber;
@@ -28,7 +28,7 @@ public class SchemaTemplate {
 		}
 	}
 	
-	public static boolean columnHasLeftCorner(	final Dimensions dimensions, 
+	public static boolean columnHasLeftCorner(	final Size dimensions, 
 												final int columnNumber) {
 		int j = columnNumber/2;
 		boolean first = dimensions.firstCrossIsNode();
@@ -36,7 +36,7 @@ public class SchemaTemplate {
 		return t;
 	}
 	
-	public static boolean columnHasRightCorner(	final Dimensions dimensions, 
+	public static boolean columnHasRightCorner(	final Size dimensions, 
 												final int columnNumber) {
 		int j = columnNumber;
 		if (dimensions.getThreadNumber()%2 == 1) {

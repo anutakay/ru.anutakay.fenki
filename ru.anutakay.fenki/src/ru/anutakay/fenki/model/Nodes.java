@@ -6,9 +6,9 @@ public class Nodes implements INodes {
 	
 	private ArrayList<ArrayList<Node>> nodes;
 	
-	protected Dimensions dimensions;
+	protected Size dimensions;
 	
-	public Nodes(final Dimensions dimensions) {
+	public Nodes(final Size dimensions) {
 		setDimensions(dimensions);
 		createStorage();
 	}
@@ -38,12 +38,12 @@ public class Nodes implements INodes {
 	}
 	
 	@Override
-	public Dimensions getDimensions() {
+	public Size getDimensions() {
 		return dimensions;
 	}
 
 	@Override
-	public void setDimensions(final Dimensions dimensions) {
+	public void setDimensions(final Size dimensions) {
 		this.dimensions = dimensions;
 	}
 

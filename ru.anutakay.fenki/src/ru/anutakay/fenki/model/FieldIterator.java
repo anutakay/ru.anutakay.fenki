@@ -6,9 +6,9 @@ import ru.anutakay.fenki.view.Iterator2D;
 
 public class FieldIterator extends Iterator2D {
 	
-	private Dimensions dimensions;
+	private Size dimensions;
 	
-	public FieldIterator(final Dimensions dimensions) {
+	public FieldIterator(final Size dimensions) {
 		this.dimensions = dimensions;
 	}
 

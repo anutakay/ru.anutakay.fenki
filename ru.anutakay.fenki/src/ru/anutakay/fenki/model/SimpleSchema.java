@@ -9,18 +9,18 @@ import ru.anutakay.fenki.view.CornerIndex;
 
 public class SimpleSchema
 {
-	protected Dimensions dimensions;
+	protected Size dimensions;
 	private Nodes nodeStorage;
 	private ThreadFragmentsStorage threadStorage;
 	Random r;
 		
-	public SimpleSchema(final Dimensions dimensions) {
+	public SimpleSchema(final Size dimensions) {
 		this.dimensions = dimensions;
 		this.nodeStorage = new Nodes(this.dimensions);
 		this.threadStorage = new ThreadFragmentsStorage(this.dimensions);
 	}
 	
-	public Dimensions getDimensions() {
+	public Size getDimensions() {
 		return dimensions;
 	}
 	

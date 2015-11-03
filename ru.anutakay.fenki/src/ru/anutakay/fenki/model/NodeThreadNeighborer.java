@@ -6,7 +6,7 @@ import ru.anutakay.fenki.model.Node.VDirection;
 public class NodeThreadNeighborer {
 	
 	public static ThreadIndex getNeighborThreadIndex(
-			final Dimensions dimensions,
+			final Size dimensions,
 			final NodeIndex nodeIndex, 
 			final HDirection hDirection, 
 			final VDirection vDirection) {

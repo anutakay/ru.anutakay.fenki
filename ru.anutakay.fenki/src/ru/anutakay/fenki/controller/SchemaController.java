@@ -3,7 +3,7 @@ package ru.anutakay.fenki.controller;
 import ru.anutakay.fenki.model.SchemaTemplate;
 import ru.anutakay.fenki.model.Node;
 import ru.anutakay.fenki.model.NodeIndex;
-import ru.anutakay.fenki.model.Dimensions;
+import ru.anutakay.fenki.model.Size;
 import ru.anutakay.fenki.model.SimpleSchema;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.Node.HDirection;
@@ -25,12 +25,12 @@ public class SchemaController {
 	}
 	
 	public void buildSchema() {
-		Dimensions dimensions = schema.getDimensions();
+		Size dimensions = schema.getDimensions();
 		build(schema, dimensions);
 	}
 	
 	private void build(	final SimpleSchema storage, 
-						final Dimensions dimensions) {
+						final Size dimensions) {
 		for (int j = 0; j < dimensions.getColumnNumber(); j++) {
 			build_corner(storage, dimensions, j, HDirection.LEFT);
 			for (int i = 0; i < SchemaTemplate.numberOfNodeInColumn(dimensions, j); i++) {
@@ -42,7 +42,7 @@ public class SchemaController {
 	
 	
 	private void build_node(final SimpleSchema storage, 
-							final Dimensions dimensions, 
+							final Size dimensions, 
 							final NodeIndex nodeIndex) {
 		Node node = storage.getNode(nodeIndex);
 
@@ -55,7 +55,7 @@ public class SchemaController {
 	}
 	
 	private void build_corner(	final SimpleSchema storage, 
-								final Dimensions dimensions, 
+								final Size dimensions, 
 								final int j, 
 								final HDirection hDirection) {
 		if (SchemaTemplate.isShortColumn(dimensions, j, HDirection.LEFT) && hDirection == HDirection.LEFT) {

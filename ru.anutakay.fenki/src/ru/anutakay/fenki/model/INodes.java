@@ -4,8 +4,8 @@ public interface INodes {
 	
 	public Node getNode(final NodeIndex nodeIndex);
 	
-	public Dimensions getDimensions();
+	public Size getDimensions();
 	
-	public void setDimensions(final Dimensions dimensions);
+	public void setDimensions(final Size dimensions);
 
 }
