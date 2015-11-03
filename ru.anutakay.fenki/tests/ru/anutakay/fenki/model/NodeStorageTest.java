@@ -9,7 +9,7 @@ public class NodeStorageTest {
 	@Test
 	public void constructorEmptyTest() {
 		final Dimensions dimensions = new Dimensions();
-		final NodeStorage nodeStorage = new NodeStorage(dimensions);
+		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
 		assertEquals(Node.Direction.NONE, nodeStorage.getNode(nodeIndex).getDirection());
 		assertEquals(Node.HDirection.NONE, nodeStorage.getNode(nodeIndex).getBegin());
@@ -26,7 +26,7 @@ public class NodeStorageTest {
 	@Test
 	public void simpleSetDataNotEqualsTest() {
 		final Dimensions dimensions = new Dimensions();
-		final NodeStorage nodeStorage = new NodeStorage(dimensions);
+		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
 		final Node node = nodeStorage.getNode(nodeIndex);
 		node.setLeftThreadID(2);
@@ -37,7 +37,7 @@ public class NodeStorageTest {
 	@Test
 	public void simpleSetDataEqualsTest() {
 		final Dimensions dimensions = new Dimensions();
-		final NodeStorage nodeStorage = new NodeStorage(dimensions);
+		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
 		final Node node = nodeStorage.getNode(nodeIndex);
 		node.setLeftThreadID(2);
