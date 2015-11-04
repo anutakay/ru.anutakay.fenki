@@ -1,6 +1,5 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Node.Horizontal;
 import ru.anutakay.fenki.view.CornerIndex;
 import ru.anutakay.fenki.view.Iterator2D;
 

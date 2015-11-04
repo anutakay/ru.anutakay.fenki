@@ -2,8 +2,6 @@ package ru.anutakay.fenki.model;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.Node.Horizontal;
-import ru.anutakay.fenki.model.Node.Vertical;
 import ru.anutakay.fenki.model.ThreadFragment.Direction;
 import ru.anutakay.fenki.view.CornerIndex;
 

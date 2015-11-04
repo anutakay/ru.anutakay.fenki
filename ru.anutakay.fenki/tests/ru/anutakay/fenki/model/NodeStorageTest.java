@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ru.anutakay.fenki.model.Node.Horizontal;
-
 public class NodeStorageTest {
 	
 	@Test
@@ -13,7 +11,7 @@ public class NodeStorageTest {
 		final Size dimensions = new Size();
 		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
-		assertEquals(NodeImpl.Direction.NONE, nodeStorage.getNode(nodeIndex).getDirection());
+		assertEquals(Direction.NONE, nodeStorage.getNode(nodeIndex).getDirection());
 		assertEquals(Horizontal.NONE, nodeStorage.getNode(nodeIndex).getBegin());
 		assertEquals(Horizontal.NONE, nodeStorage.getNode(nodeIndex).getEnd());
 		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getFirstThreadID());
@@ -44,11 +42,11 @@ public class NodeStorageTest {
 		final NodeImpl node = nodeStorage.getNode(nodeIndex);
 		node.setLeftThreadID(2);
 		node.setRightThreadID(3);
-		node.setDirection(NodeImpl.Direction.LEFT_BACK);
+		node.setDirection(Direction.LEFT_BACK);
 		final NodeImpl node2 = new NodeImpl();
 		node2.setLeftThreadID(2);
 		node2.setRightThreadID(3);
-		node2.setDirection(NodeImpl.Direction.LEFT_BACK);
+		node2.setDirection(Direction.LEFT_BACK);
 		assertTrue(node2.equals(nodeStorage.getNode(nodeIndex)));
 	}
 

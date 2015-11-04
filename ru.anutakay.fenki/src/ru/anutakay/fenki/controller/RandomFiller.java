@@ -2,10 +2,9 @@ package ru.anutakay.fenki.controller;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.NodeImpl;
 import ru.anutakay.fenki.model.SchemaTemplate;
 import ru.anutakay.fenki.model.Schema;
-import ru.anutakay.fenki.model.Node.Direction;
+import ru.anutakay.fenki.model.Direction;
 
 public class RandomFiller extends Filler implements IRandomizer<Direction> {
 
@@ -21,7 +20,7 @@ public class RandomFiller extends Filler implements IRandomizer<Direction> {
 	@Override
 	public Direction createRandomObject(int i, int j) {
 		Random r = new Random();
-		return NodeImpl.Direction.values()[Math.abs(r.nextInt())%4+1];
+		return Direction.values()[Math.abs(r.nextInt())%4+1];
 	}
 
 }

@@ -1,8 +1,5 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Node.Horizontal;
-import ru.anutakay.fenki.model.Node.Vertical;
-
 public class NodeThreadNeighborer {
 	
 	public static ThreadIndex getNeighborThreadIndex(

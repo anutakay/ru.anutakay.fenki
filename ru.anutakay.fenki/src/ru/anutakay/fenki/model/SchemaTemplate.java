@@ -1,7 +1,5 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Node.Horizontal;
-
 public class SchemaTemplate {
 	
 	public static int numberOfNodeInColumn(	final Size dimensions, 
