@@ -1,12 +1,20 @@
 package ru.anutakay.fenki.model;
 
-public class ThreadID {
+public class Thread {
     
-    public ThreadID(int id) {
+    private int id;
+    
+    public Thread(int id) {
         this.id = id;
     }
-
-    private int id;
+    
+    public static Thread empty() {
+        return new Thread(-1);
+    }
+    
+    public int getID() {
+        return id;
+    } 
 
     @Override
     public int hashCode() {
@@ -15,7 +23,7 @@ public class ThreadID {
         result = prime * result + id;
         return result;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -24,20 +32,9 @@ public class ThreadID {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ThreadID other = (ThreadID) obj;
+        Thread other = (Thread) obj;
         if (id != other.id)
             return false;
         return true;
-    }
-
-    public int getID() {
-        // TODO Auto-generated method stub
-        return id;
-    }
-
-    public static ThreadID emptyID() {
-        // TODO Auto-generated method stub
-        return new ThreadID(-1);
-    }
-    
+    }  
 }

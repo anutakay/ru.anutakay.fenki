@@ -14,11 +14,11 @@ public class SchemaTemplate {
 	
 	public static boolean isShortColumn(final Size dimensions, 
 										final int columnNumber, 
-										final Horizontal hDirection) {
+										final H hDirection) {
 		int j = columnNumber;
 		boolean left = (j%2 == 1 && dimensions.firstCrossIsNode())
 				|| (j%2 == 0 && !dimensions.firstCrossIsNode());
-		if (hDirection == Horizontal.LEFT) {
+		if (hDirection == H.LEFT) {
 			return left;
 		} else {
 			return (left && dimensions.getThreadNumber()%2 == 0)

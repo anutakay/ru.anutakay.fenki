@@ -37,46 +37,46 @@ public class SimpleSchema
 		return getThreadFragment(new ThreadIndex(i, j));
 	}
 	
-	public ThreadID getCorner(final int j, final Horizontal hDirection) {
-		if (hDirection == Horizontal.LEFT) {
-			return getPrevThreadForNode(new NodeIndex(-1, j), Horizontal.RIGHT);
+	public Thread getCorner(final int j, final H hDirection) {
+		if (hDirection == H.LEFT) {
+			return getPrevThreadForNode(new NodeIndex(-1, j), H.RIGHT);
 		} else {
 			int n = SchemaTemplate.numberOfNodeInColumn(this.dimensions, j);
-			return getPrevThreadForNode(new NodeIndex(n, j), Horizontal.LEFT);
+			return getPrevThreadForNode(new NodeIndex(n, j), H.LEFT);
 		}
 	}
 	
-	public ThreadID getCorner(final CornerIndex cornerIndex) {
+	public Thread getCorner(final CornerIndex cornerIndex) {
 		return getCorner(cornerIndex.i, cornerIndex.hDirection);
 	}
 	
-	public ThreadID getPrevThreadForNode(final NodeIndex nodeIndex, final Horizontal hDirection) {
+	public Thread getPrevThreadForNode(final NodeIndex nodeIndex, final H hDirection) {
 		ThreadIndex threadIndex = 
 				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
 															nodeIndex, 
 															hDirection, 
-															Vertical.PREV);
+															V.PREV);
 		ThreadFragment threadFragment =  getThreadFragment(threadIndex);
 		return threadFragment.getThreadID();
 	}
 		
 	public void setNextThreadForNode(final NodeIndex nodeIndex, 
-										final Horizontal hDirection, final ThreadID threadID) {
+										final H hDirection, final Thread threadID) {
 		ThreadIndex threadIndex = 
 				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
 															nodeIndex, 
 															hDirection, 
-															Vertical.NEXT);
+															V.NEXT);
 		threadStorage.getThread(threadIndex).setTopDirection(reverseDirection(hDirection));
 		threadStorage.getThread(threadIndex).setThreadID(threadID);
 	}
 	
-	private Horizontal reverseDirection(final Horizontal hDirection) {
-		if (hDirection == Horizontal.RIGHT) {
-			return Horizontal.LEFT;
-		} else if (hDirection == Horizontal.LEFT) {
-			return Horizontal.RIGHT;
+	private H reverseDirection(final H hDirection) {
+		if (hDirection == H.RIGHT) {
+			return H.LEFT;
+		} else if (hDirection == H.LEFT) {
+			return H.RIGHT;
 		}
-		return Horizontal.NONE;
+		return H.NONE;
 	}
 }

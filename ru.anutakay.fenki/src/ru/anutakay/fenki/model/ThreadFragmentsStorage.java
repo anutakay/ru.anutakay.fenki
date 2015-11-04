@@ -25,7 +25,7 @@ public class ThreadFragmentsStorage {
 		ArrayList<ThreadFragment> n = new ArrayList<ThreadFragment>();
 		for (int j = 0; j < dimensions.getColumnNumber() + 1; j++) {
 			if (j == 0) {
-				n.add(new ThreadFragment(new ThreadID(i), Horizontal.NONE));
+				n.add(new ThreadFragment(new Thread(i), H.NONE));
 			} else {
 				n.add(new ThreadFragment());
 			}

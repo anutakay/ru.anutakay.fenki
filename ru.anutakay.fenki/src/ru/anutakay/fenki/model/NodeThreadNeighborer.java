@@ -5,17 +5,17 @@ public class NodeThreadNeighborer {
 	public static ThreadIndex getNeighborThreadIndex(
 			final Size dimensions,
 			final NodeIndex nodeIndex, 
-			final Horizontal hDirection, 
-			final Vertical vDirection) {
+			final H hDirection, 
+			final V vDirection) {
 			
 		int i = nodeIndex.i;
 		int j = nodeIndex.j;
-		int t = SchemaTemplate.isShortColumn(dimensions, j, Horizontal.LEFT) ? 1 : 0;
+		int t = SchemaTemplate.isShortColumn(dimensions, j, H.LEFT) ? 1 : 0;
 		i = i*2 + t;
-		if (vDirection == Vertical.NEXT) {
+		if (vDirection == V.NEXT) {
 			j = j + 1;
 		}
-		if (hDirection == Horizontal.RIGHT) {
+		if (hDirection == H.RIGHT) {
 			i = i + 1;
 		}
 		return new ThreadIndex(i, j);

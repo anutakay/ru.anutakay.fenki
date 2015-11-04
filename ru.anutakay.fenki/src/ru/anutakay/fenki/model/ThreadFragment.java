@@ -4,31 +4,31 @@ public class ThreadFragment {
 	
 	//public static final ThreadID NONE_THREAD_ID = ThreadID.emptyID();
 
-	private ThreadID threadID = ThreadID.emptyID();
+	private Thread threadID = Thread.empty();
 	
-	private Horizontal topDirection = Horizontal.NONE;
+	private H topDirection = H.NONE;
 	
 	public ThreadFragment() {
 	}
 	
-	public ThreadFragment(final ThreadID threadID, final Horizontal topDirection) {
+	public ThreadFragment(final Thread threadID, final H topDirection) {
 		this.threadID = threadID;
 		this.topDirection = topDirection;
 	}
 	
-	public void setThreadID(final ThreadID threadID) {	
+	public void setThreadID(final Thread threadID) {	
 		this.threadID = threadID;
 	}
 	
-	public ThreadID getThreadID() {
+	public Thread getThreadID() {
 		return threadID;
 	}
 	
-	public void setTopDirection(final Horizontal topDirection) {
+	public void setTopDirection(final H topDirection) {
 		this.topDirection = topDirection;
 	}
 	
-	public Horizontal getTopDirection() {
+	public H getTopDirection() {
 		return this.topDirection;
 	}
 	

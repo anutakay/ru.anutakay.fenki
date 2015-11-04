@@ -1,5 +1,5 @@
 package ru.anutakay.fenki.model;
 
-public enum Vertical {
+public enum V {
     NONE, PREV, NEXT
 }

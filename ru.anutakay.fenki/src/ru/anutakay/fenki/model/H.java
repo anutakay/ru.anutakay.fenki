@@ -1,5 +1,5 @@
 package ru.anutakay.fenki.model;
 
-public enum Horizontal {
+public enum H {
     NONE, RIGHT, LEFT
 }

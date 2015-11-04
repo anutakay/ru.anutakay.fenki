@@ -35,9 +35,9 @@ public class FieldIterator extends Iterator2D {
 	
 	public CornerIndex getCornerIndex() {
 		int i = (this.getI()-1)/2;
-		Horizontal hDirection = Horizontal.RIGHT;
+		H hDirection = H.RIGHT;
 		if(this.getJ() == 0){
-			hDirection = Horizontal.LEFT;
+			hDirection = H.LEFT;
 		}
 		return new CornerIndex(i, hDirection);
 	}

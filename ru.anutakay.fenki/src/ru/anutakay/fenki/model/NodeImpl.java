@@ -1,136 +1,89 @@
 package ru.anutakay.fenki.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class NodeImpl implements Node {
 
-    private final static ThreadID NONE_THREAD = ThreadID.emptyID();
-
-    private Direction direction = Direction.NONE;
-
-    private Horizontal begin = Horizontal.NONE;
-
-    private Horizontal end = Horizontal.NONE;
-
-    private ThreadID leftThreadID = NONE_THREAD;
-
-    private ThreadID rightThreadID = NONE_THREAD;
+    private Arrow arrow = Arrow.NONE;
+    
+    private Map<H, Thread> threads;
 
     NodeImpl() {
-        this(Direction.NONE);
+        this(Arrow.NONE);
     }
 
-    NodeImpl(final Direction direction) {
-        setDirection(direction);
+    NodeImpl(final Arrow arrow) {
+        setArrow(arrow);
+        threads = new HashMap<H, Thread>();
+        threads.put(H.LEFT, Thread.empty());
+        threads.put(H.RIGHT, Thread.empty());
     }
 
-    // Зависимость начала и конца от направления реализована реактивно
-    public void setDirection(final Direction direction) {
-        this.direction = getCorrectDirection(direction);
-        begin = getBeginByDirection(this.direction);
-        end = getEndByDirection(this.direction);
+    @Override
+    public void setArrow(final Arrow arrow) {
+        this.arrow = getCorrectDirection(arrow);
     }
-
-    private Direction getCorrectDirection(final Direction direction) {
-        if (direction == null) {
-            return Direction.NONE;
+    
+    private Arrow getCorrectDirection(final Arrow arrow) {
+        if (arrow == null) {
+            return Arrow.NONE;
         } else {
-            return direction;
+            return arrow;
         }
-    }
-
-    private Horizontal getBeginByDirection(final Direction direction) {
-
-        if (direction == Direction.NONE) {
-            return Horizontal.NONE;
-        }
-
-        if (direction == Direction.RIGHT_DIRECT
-                || direction == Direction.RIGHT_BACK) {
-            return Horizontal.RIGHT;
-        } else {
-            return Horizontal.LEFT;
-        }
-
-    }
-
-    private Horizontal getEndByDirection(final Direction direction) {
-        if (direction == Direction.NONE) {
-            return Horizontal.NONE;
-        }
-        if (direction == Direction.RIGHT_DIRECT
-                || direction == Direction.LEFT_BACK) {
-            return Horizontal.LEFT;
-        } else {
-            return Horizontal.RIGHT;
-        }
-    }
-
-    @Override
-    public void setLeftThreadID(final ThreadID id) {
-        leftThreadID = id;
-    }
-
-    @Override
-    public void setRightThreadID(final ThreadID id) {
-        rightThreadID = id;
-    }
-
-    @Override
-    public Direction getDirection() {
-        return this.direction;
-    }
-
-    @Override
-    public ThreadID getFirstThreadID() {
-        if (this.direction == Direction.NONE) {
-            return NONE_THREAD;
-        }
-        return getBeginThreadID(begin);
-    }
-
-    @Override
-    public ThreadID getSecondThreadID() {
-        if (this.direction == Direction.NONE) {
-            return NONE_THREAD;
-        }
-        if (this.begin != Horizontal.LEFT) {
-            return getBeginThreadID(Horizontal.LEFT);
-        } else {
-            return getBeginThreadID(Horizontal.RIGHT);
-        }
-    }
-
-    @Override
-    public Horizontal getBegin() {
-        return this.begin;
-    }
-
-    @Override
-    public Horizontal getEnd() {
-        return this.end;
     }
     
     @Override
-    public ThreadID getBeginThreadID(Horizontal hDirection) {
-       switch (hDirection) {
-       case LEFT:
-           return leftThreadID;
-       case RIGHT:
-           return rightThreadID;
-       default: 
-           return NONE_THREAD;
-       }
+    public Arrow getArrow() {
+        return arrow;
+    }
+    
+    @Override
+    public void setBegin(Thread left, Thread right) {
+        threads.put(H.LEFT, left);
+        threads.put(H.RIGHT, right);
     }
 
     @Override
-    public ThreadID getEndThreadID(Horizontal hDirection) {
-        if (this.getDirection() == Direction.NONE) {
-            return NONE_THREAD;
+    public void setBegin(H h, Thread thread) {
+        threads.put(h, thread);
+    }
+
+    @Override
+    public Thread getFirst() {
+        if (this.arrow == Arrow.NONE) {
+            return Thread.empty();
+        }
+        return getBegin(getArrow().getBegin());
+    }
+
+    @Override
+    public Thread getSecond() {
+        if (this.arrow == Arrow.NONE) {
+            return Thread.empty();
+        }
+        if (getArrow().getBegin() != H.LEFT) {
+            return getBegin(H.LEFT);
+        } else {
+            return getBegin(H.RIGHT);
+        }
+    }
+
+    @Override
+    public Thread getBegin(H h) {
+        return threads.get(h);
+    }
+
+    @Override
+    public Thread getEnd(H hDirection) {
+        if (this.getArrow() == Arrow.NONE) {
+            return Thread.empty();
         }
 
-        if (getEnd() == hDirection) {
-            return getFirstThreadID();
+        if (getArrow().getEnd() == hDirection) {
+            return getFirst();
         } else {
-            return getSecondThreadID();
+            return getSecond();
         }
     }
 
@@ -138,14 +91,8 @@ public class NodeImpl implements Node {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((begin == null) ? 0 : begin.hashCode());
-        result = prime * result
-                + ((direction == null) ? 0 : direction.hashCode());
-        result = prime * result + ((end == null) ? 0 : end.hashCode());
-        result = prime * result
-                + ((leftThreadID == null) ? 0 : leftThreadID.hashCode());
-        result = prime * result
-                + ((rightThreadID == null) ? 0 : rightThreadID.hashCode());
+        result = prime * result + ((arrow == null) ? 0 : arrow.hashCode());
+        result = prime * result + ((threads == null) ? 0 : threads.hashCode());
         return result;
     }
 
@@ -158,22 +105,15 @@ public class NodeImpl implements Node {
         if (getClass() != obj.getClass())
             return false;
         NodeImpl other = (NodeImpl) obj;
-        if (begin != other.begin)
+        if (arrow != other.arrow)
             return false;
-        if (direction != other.direction)
-            return false;
-        if (end != other.end)
-            return false;
-        if (leftThreadID == null) {
-            if (other.leftThreadID != null)
+        if (threads == null) {
+            if (other.threads != null)
                 return false;
-        } else if (!leftThreadID.equals(other.leftThreadID))
-            return false;
-        if (rightThreadID == null) {
-            if (other.rightThreadID != null)
-                return false;
-        } else if (!rightThreadID.equals(other.rightThreadID))
+        } else if (!threads.equals(other.threads))
             return false;
         return true;
     }
+    
+    
 }
