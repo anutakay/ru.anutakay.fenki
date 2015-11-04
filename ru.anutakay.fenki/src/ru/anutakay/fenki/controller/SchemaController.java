@@ -6,7 +6,7 @@ import ru.anutakay.fenki.model.NodeIndex;
 import ru.anutakay.fenki.model.Size;
 import ru.anutakay.fenki.model.SimpleSchema;
 import ru.anutakay.fenki.model.Schema;
-import ru.anutakay.fenki.model.NodeImpl.Horizontal;
+import ru.anutakay.fenki.model.Node.Horizontal;
 
 public class SchemaController {
 	

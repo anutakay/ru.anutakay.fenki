@@ -1,7 +1,7 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.NodeImpl.Horizontal;
-import ru.anutakay.fenki.model.NodeImpl.Vertical;
+import ru.anutakay.fenki.model.Node.Horizontal;
+import ru.anutakay.fenki.model.Node.Vertical;
 
 public class NodeThreadNeighborer {
 	

@@ -5,7 +5,7 @@ import java.util.Random;
 import ru.anutakay.fenki.model.NodeImpl;
 import ru.anutakay.fenki.model.SchemaTemplate;
 import ru.anutakay.fenki.model.Schema;
-import ru.anutakay.fenki.model.NodeImpl.Direction;
+import ru.anutakay.fenki.model.Node.Direction;
 
 public class RandomFiller extends Filler implements IRandomizer<Direction> {
 

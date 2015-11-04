@@ -4,18 +4,6 @@ public class NodeImpl implements Node {
 
     private final static int NONE_THREAD = ThreadFragment.NONE_THREAD_ID;
 
-    public enum Direction {
-        NONE, RIGHT_DIRECT, LEFT_DIRECT, RIGHT_BACK, LEFT_BACK
-    }
-
-    public enum Horizontal {
-        NONE, RIGHT, LEFT
-    }
-
-    public enum Vertical {
-        NONE, PREV, NEXT
-    }
-
     private Direction direction = Direction.NONE;
 
     private Horizontal begin = Horizontal.NONE;
@@ -132,16 +120,6 @@ public class NodeImpl implements Node {
            return NONE_THREAD;
        }
     }
-
-   /* @Override
-    public int getBeginLeftThreadID() {
-        return this.leftThreadID;
-    }
-
-    @Override
-    public int getBeginRightThreadID() {
-        return this.rightThreadID;
-    }*/
 
     @Override
     public int getEndThreadID(Horizontal hDirection) {

@@ -1,6 +1,6 @@
 package ru.anutakay.fenki.view;
 
-import ru.anutakay.fenki.model.NodeImpl.Horizontal;
+import ru.anutakay.fenki.model.Node.Horizontal;
 
 public class CornerIndex {
 

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ru.anutakay.fenki.model.NodeImpl.Horizontal;
+import ru.anutakay.fenki.model.Node.Horizontal;
 
 public class NodeTest {
 

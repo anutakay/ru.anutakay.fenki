@@ -1,9 +1,18 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.NodeImpl.Direction;
-import ru.anutakay.fenki.model.NodeImpl.Horizontal;
-
 public interface Node {
+    
+    public enum Direction {
+        NONE, RIGHT_DIRECT, LEFT_DIRECT, RIGHT_BACK, LEFT_BACK
+    }
+
+    public enum Horizontal {
+        NONE, RIGHT, LEFT
+    }
+
+    public enum Vertical {
+        NONE, PREV, NEXT
+    }
 
     void setLeftThreadID(int leftThreadID);
 
