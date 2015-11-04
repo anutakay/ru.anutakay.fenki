@@ -1,6 +1,6 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Node.HDirection;
+import ru.anutakay.fenki.model.NodeImpl.Horizontal;
 import ru.anutakay.fenki.view.CornerIndex;
 import ru.anutakay.fenki.view.Iterator2D;
 
@@ -36,9 +36,9 @@ public class FieldIterator extends Iterator2D {
 	
 	public CornerIndex getCornerIndex() {
 		int i = (this.getI()-1)/2;
-		HDirection hDirection = HDirection.RIGHT;
+		Horizontal hDirection = Horizontal.RIGHT;
 		if(this.getJ() == 0){
-			hDirection = HDirection.LEFT;
+			hDirection = Horizontal.LEFT;
 		}
 		return new CornerIndex(i, hDirection);
 	}

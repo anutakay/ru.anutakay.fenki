@@ -2,8 +2,8 @@ package ru.anutakay.fenki.model;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.Node.HDirection;
-import ru.anutakay.fenki.model.Node.VDirection;
+import ru.anutakay.fenki.model.NodeImpl.Horizontal;
+import ru.anutakay.fenki.model.NodeImpl.Vertical;
 import ru.anutakay.fenki.model.ThreadFragment.Direction;
 import ru.anutakay.fenki.view.CornerIndex;
 
@@ -24,7 +24,7 @@ public class SimpleSchema
 		return dimensions;
 	}
 	
-	public Node getNode(final NodeIndex nodeIndex) {
+	public NodeImpl getNode(final NodeIndex nodeIndex) {
 		return nodeStorage.getNode(nodeIndex);
 	}
 	
@@ -32,7 +32,7 @@ public class SimpleSchema
 		return threadStorage.getThread(threadIndex);
 	}
 	
-	public Node getNode(final int i, final int j) {
+	public NodeImpl getNode(final int i, final int j) {
 		return getNode(new NodeIndex(j, i));
 	}	
 	
@@ -40,12 +40,12 @@ public class SimpleSchema
 		return getThreadFragment(new ThreadIndex(i, j));
 	}
 	
-	public int getCorner(final int j, final HDirection hDirection) {
-		if (hDirection == HDirection.LEFT) {
-			return getPrevThreadForNode(new NodeIndex(-1, j), HDirection.RIGHT);
+	public int getCorner(final int j, final Horizontal hDirection) {
+		if (hDirection == Horizontal.LEFT) {
+			return getPrevThreadForNode(new NodeIndex(-1, j), Horizontal.RIGHT);
 		} else {
 			int n = SchemaTemplate.numberOfNodeInColumn(this.dimensions, j);
-			return getPrevThreadForNode(new NodeIndex(n, j), HDirection.LEFT);
+			return getPrevThreadForNode(new NodeIndex(n, j), Horizontal.LEFT);
 		}
 	}
 	
@@ -53,31 +53,31 @@ public class SimpleSchema
 		return getCorner(cornerIndex.i, cornerIndex.hDirection);
 	}
 	
-	public int getPrevThreadForNode(final NodeIndex nodeIndex, final HDirection hDirection) {
+	public int getPrevThreadForNode(final NodeIndex nodeIndex, final Horizontal hDirection) {
 		ThreadIndex threadIndex = 
 				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
 															nodeIndex, 
 															hDirection, 
-															VDirection.PREV);
+															Vertical.PREV);
 		ThreadFragment threadFragment =  getThreadFragment(threadIndex);
 		return threadFragment.getThreadID();
 	}
 		
 	public void setNextThreadForNode(final NodeIndex nodeIndex, 
-										final HDirection hDirection, final int threadID) {
+										final Horizontal hDirection, final int threadID) {
 		ThreadIndex threadIndex = 
 				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
 															nodeIndex, 
 															hDirection, 
-															VDirection.NEXT);
+															Vertical.NEXT);
 		threadStorage.getThread(threadIndex).setTopDirection(reverseDirection(hDirection));
 		threadStorage.getThread(threadIndex).setThreadID(threadID);
 	}
 	
-	private Direction reverseDirection(final HDirection hDirection) {
-		if (hDirection == HDirection.RIGHT) {
+	private Direction reverseDirection(final Horizontal hDirection) {
+		if (hDirection == Horizontal.RIGHT) {
 			return Direction.LEFT;
-		} else if (hDirection == HDirection.LEFT) {
+		} else if (hDirection == Horizontal.LEFT) {
 			return Direction.RIGHT;
 		}
 		return Direction.NONE;

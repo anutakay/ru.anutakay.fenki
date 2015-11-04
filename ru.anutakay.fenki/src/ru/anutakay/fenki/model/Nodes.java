@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Nodes implements INodes {
 	
-	private ArrayList<ArrayList<Node>> nodes;
+	private ArrayList<ArrayList<NodeImpl>> nodes;
 	
 	protected Size dimensions;
 	
@@ -14,26 +14,26 @@ public class Nodes implements INodes {
 	}
 
 	private void createStorage() {
-		nodes = new ArrayList<ArrayList<Node>>();
+		nodes = new ArrayList<ArrayList<NodeImpl>>();
 		final int numberOfColumn = dimensions.getColumnNumber()+1;
 		for(int j = 0; j < numberOfColumn; j++) {
-			final ArrayList<Node> m = createColumn(j);
+			final ArrayList<NodeImpl> m = createColumn(j);
 			nodes.add(m);
 		}
 	}
 
-	private ArrayList<Node> createColumn(int j) {
-		final ArrayList<Node> m = new ArrayList<Node>();
+	private ArrayList<NodeImpl> createColumn(int j) {
+		final ArrayList<NodeImpl> m = new ArrayList<NodeImpl>();
 		final int numberOfNodeInColumn 
 		        = SchemaTemplate.numberOfNodeInColumn(dimensions, j);
 		for(int i = 0; i < numberOfNodeInColumn; i++) {
-			m.add(new Node());
+			m.add(new NodeImpl());
 		}
 		return m;
 	}
 	
 	@Override
-	public Node getNode(final NodeIndex nodeIndex) {
+	public NodeImpl getNode(final NodeIndex nodeIndex) {
 		return nodes.get(nodeIndex.j).get(nodeIndex.i);
 	}
 	

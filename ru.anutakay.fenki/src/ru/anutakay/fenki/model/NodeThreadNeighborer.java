@@ -1,24 +1,24 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Node.HDirection;
-import ru.anutakay.fenki.model.Node.VDirection;
+import ru.anutakay.fenki.model.NodeImpl.Horizontal;
+import ru.anutakay.fenki.model.NodeImpl.Vertical;
 
 public class NodeThreadNeighborer {
 	
 	public static ThreadIndex getNeighborThreadIndex(
 			final Size dimensions,
 			final NodeIndex nodeIndex, 
-			final HDirection hDirection, 
-			final VDirection vDirection) {
+			final Horizontal hDirection, 
+			final Vertical vDirection) {
 			
 		int i = nodeIndex.i;
 		int j = nodeIndex.j;
-		int t = SchemaTemplate.isShortColumn(dimensions, j, HDirection.LEFT) ? 1 : 0;
+		int t = SchemaTemplate.isShortColumn(dimensions, j, Horizontal.LEFT) ? 1 : 0;
 		i = i*2 + t;
-		if (vDirection == VDirection.NEXT) {
+		if (vDirection == Vertical.NEXT) {
 			j = j + 1;
 		}
-		if (hDirection == HDirection.RIGHT) {
+		if (hDirection == Horizontal.RIGHT) {
 			i = i + 1;
 		}
 		return new ThreadIndex(i, j);

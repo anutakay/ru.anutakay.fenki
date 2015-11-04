@@ -1,6 +1,6 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.Node.HDirection;
+import ru.anutakay.fenki.model.NodeImpl.Horizontal;
 
 public class SchemaTemplate {
 	
@@ -16,11 +16,11 @@ public class SchemaTemplate {
 	
 	public static boolean isShortColumn(final Size dimensions, 
 										final int columnNumber, 
-										final HDirection hDirection) {
+										final Horizontal hDirection) {
 		int j = columnNumber;
 		boolean left = (j%2 == 1 && dimensions.firstCrossIsNode())
 				|| (j%2 == 0 && !dimensions.firstCrossIsNode());
-		if (hDirection == HDirection.LEFT) {
+		if (hDirection == Horizontal.LEFT) {
 			return left;
 		} else {
 			return (left && dimensions.getThreadNumber()%2 == 0)

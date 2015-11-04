@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ru.anutakay.fenki.model.NodeImpl.Horizontal;
+
 public class NodeStorageTest {
 	
 	@Test
@@ -11,16 +13,16 @@ public class NodeStorageTest {
 		final Size dimensions = new Size();
 		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
-		assertEquals(Node.Direction.NONE, nodeStorage.getNode(nodeIndex).getDirection());
-		assertEquals(Node.HDirection.NONE, nodeStorage.getNode(nodeIndex).getBegin());
-		assertEquals(Node.HDirection.NONE, nodeStorage.getNode(nodeIndex).getEnd());
+		assertEquals(NodeImpl.Direction.NONE, nodeStorage.getNode(nodeIndex).getDirection());
+		assertEquals(Horizontal.NONE, nodeStorage.getNode(nodeIndex).getBegin());
+		assertEquals(Horizontal.NONE, nodeStorage.getNode(nodeIndex).getEnd());
 		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getFirstThreadID());
 		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getSecondThreadID());
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getLeftThreadID());
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getRightThreadID());
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBottomThreadID(Node.HDirection.LEFT));
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBottomThreadID(Node.HDirection.RIGHT));	
-		assertEquals(new Node(), nodeStorage.getNode(nodeIndex));		
+		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBeginThreadID(Horizontal.LEFT));
+		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBeginThreadID(Horizontal.RIGHT));
+		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getEndThreadID(Horizontal.LEFT));
+		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getEndThreadID(Horizontal.RIGHT));	
+		assertEquals(new NodeImpl(), nodeStorage.getNode(nodeIndex));		
 	}
 	
 	@Test
@@ -28,10 +30,10 @@ public class NodeStorageTest {
 		final Size dimensions = new Size();
 		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
-		final Node node = nodeStorage.getNode(nodeIndex);
+		final NodeImpl node = nodeStorage.getNode(nodeIndex);
 		node.setLeftThreadID(2);
 		node.setRightThreadID(3);	
-		assertFalse(new Node().equals(nodeStorage.getNode(nodeIndex)));
+		assertFalse(new NodeImpl().equals(nodeStorage.getNode(nodeIndex)));
 	}
 	
 	@Test
@@ -39,14 +41,14 @@ public class NodeStorageTest {
 		final Size dimensions = new Size();
 		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
-		final Node node = nodeStorage.getNode(nodeIndex);
+		final NodeImpl node = nodeStorage.getNode(nodeIndex);
 		node.setLeftThreadID(2);
 		node.setRightThreadID(3);
-		node.setDirection(Node.Direction.LEFT_BACK);
-		final Node node2 = new Node();
+		node.setDirection(NodeImpl.Direction.LEFT_BACK);
+		final NodeImpl node2 = new NodeImpl();
 		node2.setLeftThreadID(2);
 		node2.setRightThreadID(3);
-		node2.setDirection(Node.Direction.LEFT_BACK);
+		node2.setDirection(NodeImpl.Direction.LEFT_BACK);
 		assertTrue(node2.equals(nodeStorage.getNode(nodeIndex)));
 	}
 

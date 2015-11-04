@@ -1,13 +1,13 @@
 package ru.anutakay.fenki.view;
 
-import ru.anutakay.fenki.model.Node.HDirection;
+import ru.anutakay.fenki.model.NodeImpl.Horizontal;
 
 public class CornerIndex {
 
 	public int i;
-	public HDirection hDirection;
+	public Horizontal hDirection;
 	
-	public CornerIndex(final int i, final HDirection hDirection) {
+	public CornerIndex(final int i, final Horizontal hDirection) {
 		this.i = i;
 		this.hDirection = hDirection;
 	}
