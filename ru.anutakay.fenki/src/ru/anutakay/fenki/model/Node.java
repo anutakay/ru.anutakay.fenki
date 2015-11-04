@@ -2,22 +2,24 @@ package ru.anutakay.fenki.model;
 
 public interface Node {
 
-    void setLeftThreadID(int leftThreadID);
-
-    void setRightThreadID(int rightThreadID);
+    void setLeftThreadID(ThreadID id);
+    
+    void setRightThreadID(ThreadID id);
 
     Direction getDirection();
 
-    int getFirstThreadID();
+    ThreadID getFirstThreadID();
 
-    int getSecondThreadID();
+    ThreadID getSecondThreadID();
 
     Horizontal getBegin();
 
     Horizontal getEnd();
 
-    int getEndThreadID(Horizontal hDirection);
+    ThreadID getEndThreadID(Horizontal hDirection);
 
-    int getBeginThreadID(Horizontal hDirection);
+    ThreadID getBeginThreadID(Horizontal hDirection);
+
+   
 
 }

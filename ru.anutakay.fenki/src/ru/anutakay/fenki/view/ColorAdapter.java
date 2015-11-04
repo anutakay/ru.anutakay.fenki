@@ -4,6 +4,7 @@ import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.FieldIterator;
 import ru.anutakay.fenki.model.Size;
 import ru.anutakay.fenki.model.Schema;
+import ru.anutakay.fenki.model.ThreadID;
 
 @SuppressWarnings({ "rawtypes"})
 public class ColorAdapter<T extends Iterator2D>  implements Adapter {
@@ -23,18 +24,18 @@ public class ColorAdapter<T extends Iterator2D>  implements Adapter {
 		Schema schema = this.schemaController.getSchema();
 		
 		if (it.isThread()) {
-			int a = schema.getThreadFragment(it.getThreadIndex()).getThreadID();
+		    ThreadID a = schema.getThreadFragment(it.getThreadIndex()).getThreadID();
 			return getColorForNum(a);	
 		}
 		
 		if (it.isNode()) {
-			int a = schema.getNode(it.getNodeIndex()).getFirstThreadID();
+		    ThreadID a = schema.getNode(it.getNodeIndex()).getFirstThreadID();
 			return getColorForNum(a);
 		}
 
 		if (it.isCorner()) {
 			CornerIndex cornerIndex = it.getCornerIndex();
-			int a = schema.getCorner(cornerIndex);
+			ThreadID a = schema.getCorner(cornerIndex);
 			return getColorForNum(a);
 		}
 		
@@ -46,8 +47,8 @@ public class ColorAdapter<T extends Iterator2D>  implements Adapter {
 		return new FieldIterator(this.dimensions);
 	}
 	
-	private Integer getColorForNum(int threadID) {
-		return Integer.valueOf(threadID);
+	private Integer getColorForNum(ThreadID threadID) {
+		return Integer.valueOf(threadID.getID());
 	}
 
 }

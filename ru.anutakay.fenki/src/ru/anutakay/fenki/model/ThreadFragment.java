@@ -2,35 +2,33 @@ package ru.anutakay.fenki.model;
 
 public class ThreadFragment {
 	
-	public static final int NONE_THREAD_ID = -1;
+	//public static final ThreadID NONE_THREAD_ID = ThreadID.emptyID();
 
-	public enum Direction { NONE, RIGHT, LEFT }
-
-	private int threadID = NONE_THREAD_ID;
+	private ThreadID threadID = ThreadID.emptyID();
 	
-	private Direction topDirection = Direction.NONE;
+	private Horizontal topDirection = Horizontal.NONE;
 	
 	public ThreadFragment() {
 	}
 	
-	public ThreadFragment(final int threadID, final Direction topDirection) {
+	public ThreadFragment(final ThreadID threadID, final Horizontal topDirection) {
 		this.threadID = threadID;
 		this.topDirection = topDirection;
 	}
 	
-	public void setThreadID(final int threadID) {	
+	public void setThreadID(final ThreadID threadID) {	
 		this.threadID = threadID;
 	}
 	
-	public int getThreadID() {
+	public ThreadID getThreadID() {
 		return threadID;
 	}
 	
-	public void setTopDirection(final Direction topDirection) {
+	public void setTopDirection(final Horizontal topDirection) {
 		this.topDirection = topDirection;
 	}
 	
-	public Direction getTopDirection() {
+	public Horizontal getTopDirection() {
 		return this.topDirection;
 	}
 	

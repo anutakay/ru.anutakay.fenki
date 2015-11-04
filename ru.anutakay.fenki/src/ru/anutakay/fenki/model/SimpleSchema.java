@@ -2,7 +2,6 @@ package ru.anutakay.fenki.model;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.ThreadFragment.Direction;
 import ru.anutakay.fenki.view.CornerIndex;
 
 public class SimpleSchema
@@ -38,7 +37,7 @@ public class SimpleSchema
 		return getThreadFragment(new ThreadIndex(i, j));
 	}
 	
-	public int getCorner(final int j, final Horizontal hDirection) {
+	public ThreadID getCorner(final int j, final Horizontal hDirection) {
 		if (hDirection == Horizontal.LEFT) {
 			return getPrevThreadForNode(new NodeIndex(-1, j), Horizontal.RIGHT);
 		} else {
@@ -47,11 +46,11 @@ public class SimpleSchema
 		}
 	}
 	
-	public int getCorner(final CornerIndex cornerIndex) {
+	public ThreadID getCorner(final CornerIndex cornerIndex) {
 		return getCorner(cornerIndex.i, cornerIndex.hDirection);
 	}
 	
-	public int getPrevThreadForNode(final NodeIndex nodeIndex, final Horizontal hDirection) {
+	public ThreadID getPrevThreadForNode(final NodeIndex nodeIndex, final Horizontal hDirection) {
 		ThreadIndex threadIndex = 
 				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
 															nodeIndex, 
@@ -62,7 +61,7 @@ public class SimpleSchema
 	}
 		
 	public void setNextThreadForNode(final NodeIndex nodeIndex, 
-										final Horizontal hDirection, final int threadID) {
+										final Horizontal hDirection, final ThreadID threadID) {
 		ThreadIndex threadIndex = 
 				NodeThreadNeighborer.getNeighborThreadIndex(this.dimensions, 
 															nodeIndex, 
@@ -72,12 +71,12 @@ public class SimpleSchema
 		threadStorage.getThread(threadIndex).setThreadID(threadID);
 	}
 	
-	private Direction reverseDirection(final Horizontal hDirection) {
+	private Horizontal reverseDirection(final Horizontal hDirection) {
 		if (hDirection == Horizontal.RIGHT) {
-			return Direction.LEFT;
+			return Horizontal.LEFT;
 		} else if (hDirection == Horizontal.LEFT) {
-			return Direction.RIGHT;
+			return Horizontal.RIGHT;
 		}
-		return Direction.NONE;
+		return Horizontal.NONE;
 	}
 }

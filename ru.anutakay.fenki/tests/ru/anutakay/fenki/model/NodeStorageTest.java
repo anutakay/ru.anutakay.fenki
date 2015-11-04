@@ -14,12 +14,12 @@ public class NodeStorageTest {
 		assertEquals(Direction.NONE, nodeStorage.getNode(nodeIndex).getDirection());
 		assertEquals(Horizontal.NONE, nodeStorage.getNode(nodeIndex).getBegin());
 		assertEquals(Horizontal.NONE, nodeStorage.getNode(nodeIndex).getEnd());
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getFirstThreadID());
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getSecondThreadID());
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBeginThreadID(Horizontal.LEFT));
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getBeginThreadID(Horizontal.RIGHT));
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getEndThreadID(Horizontal.LEFT));
-		assertEquals(ThreadFragment.NONE_THREAD_ID, nodeStorage.getNode(nodeIndex).getEndThreadID(Horizontal.RIGHT));	
+		assertEquals(ThreadID.emptyID(), nodeStorage.getNode(nodeIndex).getFirstThreadID());
+		assertEquals(ThreadID.emptyID(), nodeStorage.getNode(nodeIndex).getSecondThreadID());
+		assertEquals(ThreadID.emptyID(), nodeStorage.getNode(nodeIndex).getBeginThreadID(Horizontal.LEFT));
+		assertEquals(ThreadID.emptyID(), nodeStorage.getNode(nodeIndex).getBeginThreadID(Horizontal.RIGHT));
+		assertEquals(ThreadID.emptyID(), nodeStorage.getNode(nodeIndex).getEndThreadID(Horizontal.LEFT));
+		assertEquals(ThreadID.emptyID(), nodeStorage.getNode(nodeIndex).getEndThreadID(Horizontal.RIGHT));	
 		assertEquals(new NodeImpl(), nodeStorage.getNode(nodeIndex));		
 	}
 	
@@ -29,8 +29,8 @@ public class NodeStorageTest {
 		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
 		final NodeImpl node = nodeStorage.getNode(nodeIndex);
-		node.setLeftThreadID(2);
-		node.setRightThreadID(3);	
+		node.setLeftThreadID(new ThreadID(2));
+		node.setRightThreadID(new ThreadID(3));	
 		assertFalse(new NodeImpl().equals(nodeStorage.getNode(nodeIndex)));
 	}
 	
@@ -40,12 +40,12 @@ public class NodeStorageTest {
 		final Nodes nodeStorage = new Nodes(dimensions);
 		final NodeIndex nodeIndex = new NodeIndex(0, 0);
 		final NodeImpl node = nodeStorage.getNode(nodeIndex);
-		node.setLeftThreadID(2);
-		node.setRightThreadID(3);
+		node.setLeftThreadID(new ThreadID(2));
+		node.setRightThreadID(new ThreadID(3));
 		node.setDirection(Direction.LEFT_BACK);
 		final NodeImpl node2 = new NodeImpl();
-		node2.setLeftThreadID(2);
-		node2.setRightThreadID(3);
+		node2.setLeftThreadID(new ThreadID(2));
+		node2.setRightThreadID(new ThreadID(3));
 		node2.setDirection(Direction.LEFT_BACK);
 		assertTrue(node2.equals(nodeStorage.getNode(nodeIndex)));
 	}

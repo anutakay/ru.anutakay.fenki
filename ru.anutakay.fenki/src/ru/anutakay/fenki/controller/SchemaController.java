@@ -7,6 +7,7 @@ import ru.anutakay.fenki.model.Size;
 import ru.anutakay.fenki.model.SimpleSchema;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.Horizontal;
+import ru.anutakay.fenki.model.ThreadID;
 
 public class SchemaController {
 	
@@ -60,12 +61,12 @@ public class SchemaController {
 								final Horizontal hDirection) {
 		if (SchemaTemplate.isShortColumn(dimensions, j, Horizontal.LEFT) && hDirection == Horizontal.LEFT) {
 			NodeIndex index = new NodeIndex(-1, j);
-			int value = storage.getPrevThreadForNode(index, Horizontal.RIGHT);
+			ThreadID value = storage.getPrevThreadForNode(index, Horizontal.RIGHT);
 			storage.setNextThreadForNode(index, Horizontal.RIGHT, value);
 		}
 		if ((hDirection == Horizontal.RIGHT && SchemaTemplate.isShortColumn(dimensions, j, Horizontal.RIGHT))) {
 			NodeIndex index = new NodeIndex(SchemaTemplate.numberOfNodeInColumn(dimensions, j), j);
-			int value = storage.getPrevThreadForNode(index, Horizontal.LEFT);
+			ThreadID value = storage.getPrevThreadForNode(index, Horizontal.LEFT);
 			storage.setNextThreadForNode(index, Horizontal.LEFT, value);
 		}
 	}

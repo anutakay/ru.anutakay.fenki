@@ -12,14 +12,13 @@ public class NodeTest {
         assertEquals(Direction.NONE, node.getDirection());
         assertEquals(Horizontal.NONE, node.getBegin());
         assertEquals(Horizontal.NONE, node.getEnd());
-        assertEquals(ThreadFragment.NONE_THREAD_ID, node.getFirstThreadID());
-        assertEquals(ThreadFragment.NONE_THREAD_ID, node.getSecondThreadID());
-        assertEquals(ThreadFragment.NONE_THREAD_ID, node.getBeginThreadID(Horizontal.LEFT));
-        assertEquals(ThreadFragment.NONE_THREAD_ID, node.getBeginThreadID(Horizontal.RIGHT));
-        assertEquals(ThreadFragment.NONE_THREAD_ID,
-                node.getEndThreadID(Horizontal.LEFT));
-        assertEquals(ThreadFragment.NONE_THREAD_ID,
-                node.getEndThreadID(Horizontal.RIGHT));
+        assertEquals(ThreadID.emptyID(), node.getFirstThreadID());
+        assertEquals(ThreadID.emptyID(), node.getSecondThreadID());
+        assertEquals(ThreadID.emptyID(), node.getBeginThreadID(Horizontal.LEFT));
+        assertEquals(ThreadID.emptyID(),
+                node.getBeginThreadID(Horizontal.RIGHT));
+        assertEquals(ThreadID.emptyID(), node.getEndThreadID(Horizontal.LEFT));
+        assertEquals(ThreadID.emptyID(), node.getEndThreadID(Horizontal.RIGHT));
 
     }
 
@@ -69,58 +68,56 @@ public class NodeTest {
     @Test
     public void threadIDTest() {
         NodeImpl node = new NodeImpl();
-        node.setLeftThreadID(0);
-        node.setRightThreadID(1);
-        assertEquals(ThreadFragment.NONE_THREAD_ID,
-                node.getEndThreadID(Horizontal.LEFT));
-        assertEquals(ThreadFragment.NONE_THREAD_ID,
-                node.getEndThreadID(Horizontal.RIGHT));
-        assertEquals(ThreadFragment.NONE_THREAD_ID, node.getFirstThreadID());
-        assertEquals(ThreadFragment.NONE_THREAD_ID, node.getSecondThreadID());
+        node.setLeftThreadID(new ThreadID(0));
+        node.setRightThreadID(new ThreadID(1));
+        assertEquals(ThreadID.emptyID(), node.getEndThreadID(Horizontal.LEFT));
+        assertEquals(ThreadID.emptyID(), node.getEndThreadID(Horizontal.RIGHT));
+        assertEquals(ThreadID.emptyID(), node.getFirstThreadID());
+        assertEquals(ThreadID.emptyID(), node.getSecondThreadID());
     }
 
     @Test
     public void threadIDRightDirectTest() {
         NodeImpl node = new NodeImpl(Direction.RIGHT_DIRECT);
-        node.setLeftThreadID(0);
-        node.setRightThreadID(1);
-        assertEquals(1, node.getEndThreadID(Horizontal.LEFT));
-        assertEquals(0, node.getEndThreadID(Horizontal.RIGHT));
-        assertEquals(1, node.getFirstThreadID());
-        assertEquals(0, node.getSecondThreadID());
+        node.setLeftThreadID(new ThreadID(0));
+        node.setRightThreadID(new ThreadID(1));
+        assertEquals(new ThreadID(1), node.getEndThreadID(Horizontal.LEFT));
+        assertEquals(new ThreadID(0), node.getEndThreadID(Horizontal.RIGHT));
+        assertEquals(new ThreadID(1), node.getFirstThreadID());
+        assertEquals(new ThreadID(0), node.getSecondThreadID());
     }
 
     @Test
     public void threadIDLeftDirectTest() {
         NodeImpl node = new NodeImpl(Direction.LEFT_DIRECT);
-        node.setLeftThreadID(0);
-        node.setRightThreadID(1);
-        assertEquals(1, node.getEndThreadID(Horizontal.LEFT));
-        assertEquals(0, node.getEndThreadID(Horizontal.RIGHT));
-        assertEquals(0, node.getFirstThreadID());
-        assertEquals(1, node.getSecondThreadID());
+        node.setLeftThreadID(new ThreadID(0));
+        node.setRightThreadID(new ThreadID(1));
+        assertEquals(new ThreadID(1), node.getEndThreadID(Horizontal.LEFT));
+        assertEquals(new ThreadID(0), node.getEndThreadID(Horizontal.RIGHT));
+        assertEquals(new ThreadID(0), node.getFirstThreadID());
+        assertEquals(new ThreadID(1), node.getSecondThreadID());
     }
 
     @Test
     public void threadIDRightBackTest() {
         NodeImpl node = new NodeImpl(Direction.RIGHT_BACK);
-        node.setLeftThreadID(0);
-        node.setRightThreadID(1);
-        assertEquals(0, node.getEndThreadID(Horizontal.LEFT));
-        assertEquals(1, node.getEndThreadID(Horizontal.RIGHT));
-        assertEquals(1, node.getFirstThreadID());
-        assertEquals(0, node.getSecondThreadID());
+        node.setLeftThreadID(new ThreadID(0));
+        node.setRightThreadID(new ThreadID(1));
+        assertEquals(new ThreadID(0), node.getEndThreadID(Horizontal.LEFT));
+        assertEquals(new ThreadID(1), node.getEndThreadID(Horizontal.RIGHT));
+        assertEquals(new ThreadID(1), node.getFirstThreadID());
+        assertEquals(new ThreadID(0), node.getSecondThreadID());
     }
 
     @Test
     public void threadIDLeftBackTest() {
         NodeImpl node = new NodeImpl(Direction.LEFT_BACK);
-        node.setLeftThreadID(0);
-        node.setRightThreadID(1);
-        assertEquals(0, node.getEndThreadID(Horizontal.LEFT));
-        assertEquals(1, node.getEndThreadID(Horizontal.RIGHT));
-        assertEquals(0, node.getFirstThreadID());
-        assertEquals(1, node.getSecondThreadID());
+        node.setLeftThreadID(new ThreadID(0));
+        node.setRightThreadID(new ThreadID(1));
+        assertEquals(new ThreadID(0), node.getEndThreadID(Horizontal.LEFT));
+        assertEquals(new ThreadID(1), node.getEndThreadID(Horizontal.RIGHT));
+        assertEquals(new ThreadID(0), node.getFirstThreadID());
+        assertEquals(new ThreadID(1), node.getSecondThreadID());
     }
 
 }

@@ -2,7 +2,7 @@ package ru.anutakay.fenki.model;
 
 public class NodeImpl implements Node {
 
-    private final static int NONE_THREAD = ThreadFragment.NONE_THREAD_ID;
+    private final static ThreadID NONE_THREAD = ThreadID.emptyID();
 
     private Direction direction = Direction.NONE;
 
@@ -10,9 +10,9 @@ public class NodeImpl implements Node {
 
     private Horizontal end = Horizontal.NONE;
 
-    private int leftThreadID = NONE_THREAD;
+    private ThreadID leftThreadID = NONE_THREAD;
 
-    private int rightThreadID = NONE_THREAD;
+    private ThreadID rightThreadID = NONE_THREAD;
 
     NodeImpl() {
         this(Direction.NONE);
@@ -25,8 +25,8 @@ public class NodeImpl implements Node {
     // Зависимость начала и конца от направления реализована реактивно
     public void setDirection(final Direction direction) {
         this.direction = getCorrectDirection(direction);
-        begin = getBeginByDirection(direction);
-        end = getEndByDirection(direction);
+        begin = getBeginByDirection(this.direction);
+        end = getEndByDirection(this.direction);
     }
 
     private Direction getCorrectDirection(final Direction direction) {
@@ -65,13 +65,13 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public void setLeftThreadID(final int leftThreadID) {
-        this.leftThreadID = leftThreadID;
+    public void setLeftThreadID(final ThreadID id) {
+        leftThreadID = id;
     }
 
     @Override
-    public void setRightThreadID(final int rightThreadID) {
-        this.rightThreadID = rightThreadID;
+    public void setRightThreadID(final ThreadID id) {
+        rightThreadID = id;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public int getFirstThreadID() {
+    public ThreadID getFirstThreadID() {
         if (this.direction == Direction.NONE) {
             return NONE_THREAD;
         }
@@ -88,7 +88,7 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public int getSecondThreadID() {
+    public ThreadID getSecondThreadID() {
         if (this.direction == Direction.NONE) {
             return NONE_THREAD;
         }
@@ -110,7 +110,7 @@ public class NodeImpl implements Node {
     }
     
     @Override
-    public int getBeginThreadID(Horizontal hDirection) {
+    public ThreadID getBeginThreadID(Horizontal hDirection) {
        switch (hDirection) {
        case LEFT:
            return leftThreadID;
@@ -122,7 +122,7 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public int getEndThreadID(Horizontal hDirection) {
+    public ThreadID getEndThreadID(Horizontal hDirection) {
         if (this.getDirection() == Direction.NONE) {
             return NONE_THREAD;
         }
@@ -138,10 +138,14 @@ public class NodeImpl implements Node {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((begin == null) ? 0 : begin.hashCode());
         result = prime * result
                 + ((direction == null) ? 0 : direction.hashCode());
-        result = prime * result + leftThreadID;
-        result = prime * result + rightThreadID;
+        result = prime * result + ((end == null) ? 0 : end.hashCode());
+        result = prime * result
+                + ((leftThreadID == null) ? 0 : leftThreadID.hashCode());
+        result = prime * result
+                + ((rightThreadID == null) ? 0 : rightThreadID.hashCode());
         return result;
     }
 
@@ -154,13 +158,22 @@ public class NodeImpl implements Node {
         if (getClass() != obj.getClass())
             return false;
         NodeImpl other = (NodeImpl) obj;
+        if (begin != other.begin)
+            return false;
         if (direction != other.direction)
             return false;
-        if (leftThreadID != other.leftThreadID)
+        if (end != other.end)
             return false;
-        if (rightThreadID != other.rightThreadID)
+        if (leftThreadID == null) {
+            if (other.leftThreadID != null)
+                return false;
+        } else if (!leftThreadID.equals(other.leftThreadID))
+            return false;
+        if (rightThreadID == null) {
+            if (other.rightThreadID != null)
+                return false;
+        } else if (!rightThreadID.equals(other.rightThreadID))
             return false;
         return true;
     }
-
 }
