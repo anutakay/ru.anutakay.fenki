@@ -1,12 +1,13 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.model.thread.Thread;
+import ru.anutakay.fenki.model.thread.ThreadFactory;
+
 public class ThreadFragment {
 
-    private Thread thread = Thread.empty();
+    private Thread thread = ThreadFactory.createEmptyThread();
 
-    private H top = H.NONE;
-
-    public ThreadFragment() {}
+    private H top;
 
     public ThreadFragment(final Thread thread, final H top) {
         this.thread = thread;

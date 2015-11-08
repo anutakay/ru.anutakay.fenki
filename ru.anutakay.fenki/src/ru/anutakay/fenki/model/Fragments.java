@@ -3,21 +3,21 @@ package ru.anutakay.fenki.model;
 import java.util.ArrayList;
 
 import ru.anutakay.fenki.model.size.Size;
+import ru.anutakay.fenki.model.thread.ThreadFactory;
 
-public class Threads {
+public class Fragments {
 
     private Size size;
 
     private ArrayList<ArrayList<ThreadFragment>> storage;
 
-    public Threads(final Size dimensions) {
-        this.size = dimensions;
-        storage = createArray();
+    public Fragments(final Size size) {
+        this.size = size;
+        storage = createStorage();
     }
 
-    private ArrayList<ArrayList<ThreadFragment>> createArray() {
-        ArrayList<ArrayList<ThreadFragment>> array 
-                = new ArrayList<ArrayList<ThreadFragment>>();
+    private ArrayList<ArrayList<ThreadFragment>> createStorage() {
+        ArrayList<ArrayList<ThreadFragment>> array = new ArrayList<>();
         for (int i = 0; i < size.threads(); i++) {
             array.add(createThreadArray(i));
         }
@@ -26,11 +26,12 @@ public class Threads {
 
     private ArrayList<ThreadFragment> createThreadArray(final int i) {
         ArrayList<ThreadFragment> n = new ArrayList<ThreadFragment>();
+        ThreadFactory factory = new ThreadFactory();
         for (int j = 0; j <= size.columns(); j++) {
             if (j == 0) {
-                n.add(new ThreadFragment(new Thread(i), H.NONE));
+                n.add(new ThreadFragment(factory.createThread(), H.NONE));
             } else {
-                n.add(new ThreadFragment());
+                n.add(new ThreadFragment(ThreadFactory.createEmptyThread(), H.NONE));
             }
         }
         return n;

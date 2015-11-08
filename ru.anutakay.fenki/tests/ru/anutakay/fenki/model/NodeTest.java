@@ -2,7 +2,11 @@ package ru.anutakay.fenki.model;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import ru.anutakay.fenki.model.thread.Thread;
+import ru.anutakay.fenki.model.thread.ThreadFactory;
 
 public class NodeTest {
 
@@ -13,7 +17,7 @@ public class NodeTest {
         nodeIsEmpty(node);
         assertEquals(Arrow.NONE, node.getArrow());
 
-        Thread empty = Thread.empty();
+        Thread empty = ThreadFactory.createEmptyThread();
 
         assertEquals(empty, node.getFirst());
         assertEquals(empty, node.getSecond());
@@ -56,43 +60,55 @@ public class NodeTest {
     @Test
     public void threadIDTest() {
         NodeImpl node = new NodeImpl();
-        node.setBegin(new Thread(0), new Thread(1));
+        ThreadFactory factory = new ThreadFactory();
+
+        node.setBegin(factory.createThread(), factory.createThread());
 
         nodeIsEmpty(node);
     }
 
     private void nodeIsEmpty(NodeImpl node) {
-        Thread empty = Thread.empty();
+        Thread empty = ThreadFactory.createEmptyThread();
         checkNode(node, empty, empty, empty, empty);
     }
+    
+    @Before
+    public void createThreads() {
+        ThreadFactory factory = new ThreadFactory();
+        first = factory.createThread();
+        second = factory.createThread();
+    }
+    
+    Thread first;
+    Thread second;
 
     @Test
     public void threadIDRightDirectTest() {
-        NodeImpl node = createNode(Arrow.RIGHT_DIRECT, 0, 1);
-        checkNode(node, 1, 0, 1, 0);
+        NodeImpl node = createNode(Arrow.RIGHT_DIRECT, second, first);
+        checkNode(node, first, second, first, second);
     }
 
     @Test
     public void threadIDLeftDirectTest() {
-        NodeImpl node = createNode(Arrow.LEFT_DIRECT, 0, 1);
-        checkNode(node, 1, 0, 0, 1);
+        NodeImpl node = createNode(Arrow.LEFT_DIRECT, second, first);
+        checkNode(node, first, second, second, first);
     }
 
     @Test
     public void threadIDRightBackTest() {
-        NodeImpl node = createNode(Arrow.RIGHT_BACK, 0, 1);
-        checkNode(node, 0, 1, 1, 0);
+        NodeImpl node = createNode(Arrow.RIGHT_BACK, second, first);
+        checkNode(node, second, first, first, second);
     }
 
     @Test
     public void threadIDLeftBackTest() {
-        NodeImpl node = createNode(Arrow.LEFT_BACK, 0, 1);
-        checkNode(node, 0, 1, 0, 1);
+        NodeImpl node = createNode(Arrow.LEFT_BACK, second, first);
+        checkNode(node, second, first, second, first);
     }
     
-    private NodeImpl createNode(Arrow d, int left, int right) {
+    private NodeImpl createNode(Arrow d, Thread left, Thread right) {
         NodeImpl node = new NodeImpl(d);
-        node.setBegin(new Thread(left), new Thread(right));
+        node.setBegin(left, right);
         return node;
     }
 
@@ -102,12 +118,6 @@ public class NodeTest {
         assertEquals(right, node.getEnd(H.RIGHT));
         assertEquals(first, node.getFirst());
         assertEquals(second, node.getSecond());
-    }
-
-    private void checkNode(Node node, int left, int right,
-            int first, int second) {
-        checkNode(node, new Thread(left), new Thread(right), new Thread(
-                first), new Thread(second));
     }
 
 }

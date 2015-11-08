@@ -1,5 +1,7 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.model.thread.Thread;
+
 public interface Node {
 
     void setArrow(Arrow arrow);

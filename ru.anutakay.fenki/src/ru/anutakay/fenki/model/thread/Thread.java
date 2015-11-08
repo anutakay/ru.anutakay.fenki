@@ -1,15 +1,11 @@
-package ru.anutakay.fenki.model;
+package ru.anutakay.fenki.model.thread;
 
 public class Thread {
     
     private int id;
     
-    public Thread(int id) {
+    Thread(int id) {
         this.id = id;
-    }
-    
-    public static Thread empty() {
-        return new Thread(-1);
     }
     
     public int getID() {

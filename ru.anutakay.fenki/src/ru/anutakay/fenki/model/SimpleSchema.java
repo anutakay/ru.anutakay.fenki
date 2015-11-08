@@ -3,19 +3,20 @@ package ru.anutakay.fenki.model;
 import java.util.Random;
 
 import ru.anutakay.fenki.model.size.Size;
+import ru.anutakay.fenki.model.thread.Thread;
 import ru.anutakay.fenki.view.CornerIndex;
 
 public class SimpleSchema {
     protected Size size;
     private NodesImpl nodes;
-    private Threads threads;
+    private Fragments threads;
     Random r;
 
     public SimpleSchema(final Size size) {
         NodeFactory factory = new NodeFactory();
         this.size = size;
         this.nodes = new NodesImpl(size, factory);
-        this.threads = new Threads(size);
+        this.threads = new Fragments(size);
     }
 
     public Size getSize() {

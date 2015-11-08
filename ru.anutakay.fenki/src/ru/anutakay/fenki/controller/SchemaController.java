@@ -5,9 +5,9 @@ import ru.anutakay.fenki.model.NodeIndex;
 import ru.anutakay.fenki.model.SimpleSchema;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.H;
-import ru.anutakay.fenki.model.Thread;
 import ru.anutakay.fenki.model.size.ColumnTemplate;
 import ru.anutakay.fenki.model.size.Size;
+import ru.anutakay.fenki.model.thread.Thread;
 
 public class SchemaController {
 

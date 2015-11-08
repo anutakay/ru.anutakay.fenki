@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ru.anutakay.fenki.model.size.Size;
+import ru.anutakay.fenki.model.thread.ThreadFactory;
 
 public class NodesTest {
     
@@ -40,7 +41,8 @@ public class NodesTest {
     @Test
     public void saveDataTest() {      
         final Node node = nodes.getNode(i);
-        node.setBegin(new Thread(2), new Thread(3));
+        ThreadFactory factory = new ThreadFactory();
+        node.setBegin(factory.createThread(), factory.createThread());
         node.setArrow(Arrow.LEFT_BACK);
         
         final Node node2 = nodes.getNode(i);

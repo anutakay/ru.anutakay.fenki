@@ -3,8 +3,8 @@ package ru.anutakay.fenki.view;
 import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.FieldIterator;
 import ru.anutakay.fenki.model.Schema;
-import ru.anutakay.fenki.model.Thread;
 import ru.anutakay.fenki.model.size.Size;
+import ru.anutakay.fenki.model.thread.Thread;
 
 @SuppressWarnings({ "rawtypes" })
 public class ColorAdapter<T extends Iterator2D> implements Adapter {
