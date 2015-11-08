@@ -11,8 +11,8 @@ public class RandomFiller extends Filler implements IRandomizer<Arrow> {
 
 	@Override
 	public void fill(Schema schema) {
-		Size size = schema.getDimensions();
-        for(int j = 0; j < size.columns()+1; j++) {
+		Size size = schema.getSize();
+        for (int j = 0; j < size.columns()+1; j++) {
             ColumnTemplate column = size.columnTemplate(j);
 			for(int i = 0; i < column.lenght(); i++){
 				schema.getNode(j, i).setArrow(createRandomObject(j,i));

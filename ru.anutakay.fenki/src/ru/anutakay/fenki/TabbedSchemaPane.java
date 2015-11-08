@@ -25,74 +25,74 @@ import ru.anutakay.fenki.view.ThreadColorSchema;
 
 public class TabbedSchemaPane extends JTabbedPane {
 
-	private static final String EDITOR_STRING = "Редактор";
+    private static final String EDITOR_STRING = "Редактор";
 
-	private static final String SCHEMA_STRING = "Схема";
+    private static final String SCHEMA_STRING = "Схема";
 
-	private static final int NUM_OF_COLUMNS = 10;
+    private static final int NUM_OF_COLUMNS = 10;
 
-	private static final long serialVersionUID = -4336057985717689708L;
-	
-	SchemaController schemaController;
+    private static final long serialVersionUID = -4336057985717689708L;
 
-	public TabbedSchemaPane() {
-		super();
-		schemaController = createSchemaController();
-		createUI();
-	}
-	
-	private void createUI(){
-		
-		final JScrollPane scrollPane = new JScrollPane(makeSchemaPanel(this.schemaController));
-		
-		addTab(SCHEMA_STRING, scrollPane);
-		addTab(EDITOR_STRING, getEditorPane(this.schemaController));
-		
-		setTabPlacement(BOTTOM);
-	}
-	
-	@SuppressWarnings("unchecked")
-	private SchemaPane makeSchemaPanel(SchemaController schemaController) {	
-		
-		Adapter<? super Iterator2D, ? super Object> adapter 
-			= new ColorAdapter<FieldIterator>(schemaController);
-		
-		IThreadColorSchema threadColorSchema = this	.schemaController
-													.getSchema()
-													.getThreadColorSchema();
-		
-		FigureFactory<Iterator2D> figureFactory 
-			= new SchemaFigureFactory<FieldIterator>(adapter, threadColorSchema);
-		
-		return new SchemaPane(figureFactory);
-	}
-	
-	private JTextPane getEditorPane(SchemaController schemaController) {
-		 return new JTextPane();
-	}
-	
-	private SchemaController createSchemaController() {
-		final int threads = Math.abs(new Random().nextInt())%20;
-		Schema schema = new Schema(threads, NUM_OF_COLUMNS, false);
-		schema.setThreadColorSchema(createThreadColorSchema());
-		SchemaController controller = new SchemaController(schema);
-		controller.fillSchema(new RandomFiller());
-		controller.buildSchema();
-		return controller;
-	}
-	
-	private IThreadColorSchema createThreadColorSchema() {
-		IColorSchema colorSchema = new ColorSchema();
-		IGroupColorSchema groupColorSchema = new GroupColorSchema();
-		return new ThreadColorSchema(groupColorSchema, colorSchema);
-	}
-	
-	public SchemaController getSchemaController() {
-		return schemaController;
-	}
+    SchemaController schemaController;
 
-	public Schema getSchema() {
-		return getSchemaController().getSchema();
-	}
+    public TabbedSchemaPane() {
+        super();
+        schemaController = createSchemaController();
+        createUI();
+    }
+
+    private void createUI() {
+
+        final JScrollPane scrollPane = new JScrollPane(
+                makeSchemaPanel(this.schemaController));
+
+        addTab(SCHEMA_STRING, scrollPane);
+        addTab(EDITOR_STRING, getEditorPane(this.schemaController));
+
+        setTabPlacement(BOTTOM);
+    }
+
+    @SuppressWarnings("unchecked")
+    private SchemaPane makeSchemaPanel(SchemaController schemaController) {
+
+        Adapter<? super Iterator2D, ? super Object> adapter = new ColorAdapter<FieldIterator>(
+                schemaController);
+
+        IThreadColorSchema threadColorSchema = this.schemaController
+                .getSchema().getThreadColorSchema();
+
+        FigureFactory<Iterator2D> figureFactory = new SchemaFigureFactory<FieldIterator>(
+                adapter, threadColorSchema);
+
+        return new SchemaPane(figureFactory);
+    }
+
+    private JTextPane getEditorPane(SchemaController schemaController) {
+        return new JTextPane();
+    }
+
+    private SchemaController createSchemaController() {
+        final int threads = Math.abs(new Random().nextInt()) % 20;
+        Schema schema = new Schema(threads, NUM_OF_COLUMNS, false);
+        schema.setThreadColorSchema(createThreadColorSchema());
+        SchemaController controller = new SchemaController(schema);
+        controller.fillSchema(new RandomFiller());
+        controller.buildSchema();
+        return controller;
+    }
+
+    private IThreadColorSchema createThreadColorSchema() {
+        IColorSchema colorSchema = new ColorSchema();
+        IGroupColorSchema groupColorSchema = new GroupColorSchema();
+        return new ThreadColorSchema(groupColorSchema, colorSchema);
+    }
+
+    public SchemaController getSchemaController() {
+        return schemaController;
+    }
+
+    public Schema getSchema() {
+        return getSchemaController().getSchema();
+    }
 
 }

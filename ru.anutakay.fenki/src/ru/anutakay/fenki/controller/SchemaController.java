@@ -26,7 +26,7 @@ public class SchemaController {
     }
 
     public void buildSchema() {
-        Size dimensions = schema.getDimensions();
+        Size dimensions = schema.getSize();
         build(schema, dimensions);
     }
 
@@ -57,19 +57,16 @@ public class SchemaController {
         return storage.getPrevThreadForNode(ni, h);
     }
 
-    private void build_corner(final SimpleSchema storage,
-            final Size size, final int j, final H hDirection) {
+    private void build_corner(final SimpleSchema storage, final Size size,
+            final int j, final H hDirection) {
         ColumnTemplate column = size.columnTemplate(j);
-        if (column.isShort(H.LEFT)
-                && hDirection == H.LEFT) {
+        if (column.isShort(H.LEFT) && hDirection == H.LEFT) {
             NodeIndex index = new NodeIndex(-1, j);
             Thread value = storage.getPrevThreadForNode(index, H.RIGHT);
             storage.setNextThreadForNode(index, H.RIGHT, value);
         }
-        if ((hDirection == H.RIGHT && column
-                .isShort(H.RIGHT))) {
-            NodeIndex index = new NodeIndex(
-                    column.lenght(), j);
+        if ((hDirection == H.RIGHT && column.isShort(H.RIGHT))) {
+            NodeIndex index = new NodeIndex(column.lenght(), j);
             Thread value = storage.getPrevThreadForNode(index, H.LEFT);
             storage.setNextThreadForNode(index, H.LEFT, value);
         }

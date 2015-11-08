@@ -22,7 +22,7 @@ public class NodeImpl implements Node {
 
     @Override
     public void setArrow(final Arrow arrow) {
-        if(arrow == null) {
+        if (arrow == null) {
             throw new NullPointerException();
         }
         this.arrow = getCorrectDirection(arrow);
