@@ -14,15 +14,19 @@ public class NodeTest {
         assertEquals(Arrow.NONE, node.getArrow());
 
         Thread empty = Thread.empty();
+
+        assertEquals(empty, node.getFirst());
+        assertEquals(empty, node.getSecond());
         assertEquals(empty, node.getBegin(H.LEFT));
         assertEquals(empty, node.getBegin(H.RIGHT));
+        assertEquals(empty, node.getEnd(H.LEFT));
+        assertEquals(empty, node.getEnd(H.RIGHT));  
+
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void constructorNullTest() {
-        Node nullNode = new NodeImpl(null);
-        Node node = new NodeImpl();
-        assertEquals(node, nullNode);
+       new NodeImpl(null);
     }
 
     @Test
@@ -85,7 +89,7 @@ public class NodeTest {
         NodeImpl node = createNode(Arrow.LEFT_BACK, 0, 1);
         checkNode(node, 0, 1, 0, 1);
     }
-    //TODO - заменить инты та нити
+    
     private NodeImpl createNode(Arrow d, int left, int right) {
         NodeImpl node = new NodeImpl(d);
         node.setBegin(new Thread(left), new Thread(right));

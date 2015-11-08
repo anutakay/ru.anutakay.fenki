@@ -6,7 +6,7 @@ import java.util.Map;
 public class NodeImpl implements Node {
 
     private Arrow arrow = Arrow.NONE;
-    
+
     private Map<H, Thread> threads;
 
     NodeImpl() {
@@ -22,9 +22,12 @@ public class NodeImpl implements Node {
 
     @Override
     public void setArrow(final Arrow arrow) {
+        if(arrow == null) {
+            throw new NullPointerException();
+        }
         this.arrow = getCorrectDirection(arrow);
     }
-    
+
     private Arrow getCorrectDirection(final Arrow arrow) {
         if (arrow == null) {
             return Arrow.NONE;
@@ -32,12 +35,12 @@ public class NodeImpl implements Node {
             return arrow;
         }
     }
-    
+
     @Override
     public Arrow getArrow() {
         return arrow;
     }
-    
+
     @Override
     public void setBegin(Thread left, Thread right) {
         threads.put(H.LEFT, left);
@@ -114,6 +117,5 @@ public class NodeImpl implements Node {
             return false;
         return true;
     }
-    
-    
+
 }
