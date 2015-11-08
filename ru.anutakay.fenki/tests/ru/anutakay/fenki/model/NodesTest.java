@@ -8,13 +8,13 @@ import org.junit.Test;
 public class NodesTest {
     
     Size size = new Size();
-    Nodes nodes = new Nodes(size);
+    NodesImpl nodes = new NodesImpl(size);
     NodeIndex i = new NodeIndex(0, 0);
     
     @Before
     public void createNodes() {
         size = new Size();
-        nodes = new Nodes(size);
+        nodes = new NodesImpl(size);
         i = new NodeIndex(0, 0);
     }
 

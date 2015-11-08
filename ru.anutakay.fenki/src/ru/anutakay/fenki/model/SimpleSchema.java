@@ -7,13 +7,13 @@ import ru.anutakay.fenki.view.CornerIndex;
 public class SimpleSchema
 {
 	protected Size dimensions;
-	private Nodes nodeStorage;
+	private NodesImpl nodeStorage;
 	private ThreadFragmentsStorage threadStorage;
 	Random r;
 		
 	public SimpleSchema(final Size dimensions) {
 		this.dimensions = dimensions;
-		this.nodeStorage = new Nodes(this.dimensions);
+		this.nodeStorage = new NodesImpl(this.dimensions);
 		this.threadStorage = new ThreadFragmentsStorage(this.dimensions);
 	}
 	
@@ -21,7 +21,7 @@ public class SimpleSchema
 		return dimensions;
 	}
 	
-	public NodeImpl getNode(final NodeIndex nodeIndex) {
+	public Node getNode(final NodeIndex nodeIndex) {
 		return nodeStorage.getNode(nodeIndex);
 	}
 	
@@ -29,7 +29,7 @@ public class SimpleSchema
 		return threadStorage.getThread(threadIndex);
 	}
 	
-	public NodeImpl getNode(final int i, final int j) {
+	public Node getNode(final int i, final int j) {
 		return getNode(new NodeIndex(j, i));
 	}	
 	

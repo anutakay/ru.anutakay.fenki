@@ -1,7 +1,7 @@
 package ru.anutakay.fenki.controller;
 
+import ru.anutakay.fenki.model.Node;
 import ru.anutakay.fenki.model.SchemaTemplate;
-import ru.anutakay.fenki.model.NodeImpl;
 import ru.anutakay.fenki.model.NodeIndex;
 import ru.anutakay.fenki.model.Size;
 import ru.anutakay.fenki.model.SimpleSchema;
@@ -43,7 +43,7 @@ public class SchemaController {
 
     private void build_node(final SimpleSchema storage, final Size dimensions,
             final NodeIndex nodeIndex) {
-        NodeImpl node = storage.getNode(nodeIndex);
+        Node node = storage.getNode(nodeIndex);
 
         node.setBegin(getPrev(storage, nodeIndex, H.LEFT),
                 getPrev(storage, nodeIndex, H.RIGHT));
