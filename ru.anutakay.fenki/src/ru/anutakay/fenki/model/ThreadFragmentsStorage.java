@@ -2,6 +2,8 @@ package ru.anutakay.fenki.model;
 
 import java.util.ArrayList;
 
+import ru.anutakay.fenki.model.size.Size;
+
 public class ThreadFragmentsStorage {
 
 	private Size dimensions;

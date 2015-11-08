@@ -1,13 +1,13 @@
 package ru.anutakay.fenki.controller;
 
 import ru.anutakay.fenki.model.Node;
-import ru.anutakay.fenki.model.ColumnTemplate;
 import ru.anutakay.fenki.model.NodeIndex;
-import ru.anutakay.fenki.model.Size;
 import ru.anutakay.fenki.model.SimpleSchema;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.H;
 import ru.anutakay.fenki.model.Thread;
+import ru.anutakay.fenki.model.size.ColumnTemplate;
+import ru.anutakay.fenki.model.size.Size;
 
 public class SchemaController {
 
@@ -30,13 +30,14 @@ public class SchemaController {
         build(schema, dimensions);
     }
 
-    private void build(final SimpleSchema storage, final Size dimensions) {
-        for (int j = 0; j < dimensions.columns(); j++) {
-            build_corner(storage, dimensions, j, H.LEFT);
-            for (int i = 0; i < new ColumnTemplate(j, dimensions).lenght(); i++) {
-                build_node(storage, dimensions, new NodeIndex(i, j));
+    private void build(final SimpleSchema storage, final Size size) {
+        for (int j = 0; j < size.columns(); j++) {
+            build_corner(storage, size, j, H.LEFT);
+            ColumnTemplate column = size.columnTemplate(j);
+            for (int i = 0; i < column.lenght(); i++) {
+                build_node(storage, size, new NodeIndex(i, j));
             }
-            build_corner(storage, dimensions, j, H.RIGHT);
+            build_corner(storage, size, j, H.RIGHT);
         }
     }
 
@@ -57,17 +58,18 @@ public class SchemaController {
     }
 
     private void build_corner(final SimpleSchema storage,
-            final Size dimensions, final int j, final H hDirection) {
-        if (new ColumnTemplate(j, dimensions).isShort(H.LEFT)
+            final Size size, final int j, final H hDirection) {
+        ColumnTemplate column = size.columnTemplate(j);
+        if (column.isShort(H.LEFT)
                 && hDirection == H.LEFT) {
             NodeIndex index = new NodeIndex(-1, j);
             Thread value = storage.getPrevThreadForNode(index, H.RIGHT);
             storage.setNextThreadForNode(index, H.RIGHT, value);
         }
-        if ((hDirection == H.RIGHT && new ColumnTemplate(j, dimensions)
+        if ((hDirection == H.RIGHT && column
                 .isShort(H.RIGHT))) {
             NodeIndex index = new NodeIndex(
-                    new ColumnTemplate(j, dimensions).lenght(), j);
+                    column.lenght(), j);
             Thread value = storage.getPrevThreadForNode(index, H.LEFT);
             storage.setNextThreadForNode(index, H.LEFT, value);
         }

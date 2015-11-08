@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import ru.anutakay.fenki.model.size.Size;
+
 public class SizeTest {
 
     @Test

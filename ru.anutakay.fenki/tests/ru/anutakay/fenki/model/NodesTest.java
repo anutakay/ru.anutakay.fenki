@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import ru.anutakay.fenki.model.size.Size;
+
 public class NodesTest {
     
     Size size;

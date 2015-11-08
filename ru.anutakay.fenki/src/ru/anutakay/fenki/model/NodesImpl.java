@@ -2,6 +2,9 @@ package ru.anutakay.fenki.model;
 
 import java.util.ArrayList;
 
+import ru.anutakay.fenki.model.size.ColumnTemplate;
+import ru.anutakay.fenki.model.size.Size;
+
 public class NodesImpl implements Nodes {
 
     private ArrayList<ArrayList<Node>> storage;
@@ -27,8 +30,9 @@ public class NodesImpl implements Nodes {
 
     private ArrayList<Node> createColumn(int j) {
         final ArrayList<Node> m = new ArrayList<Node>();
-        final int columnLenght = new ColumnTemplate(j, size).lenght();
-        for (int i = 0; i < columnLenght; i++) {
+        ColumnTemplate column = size.columnTemplate(j);
+        final int lenght = column.lenght();
+        for (int i = 0; i < lenght; i++) {
             m.add(createEmptyNode());
         }
         return m;

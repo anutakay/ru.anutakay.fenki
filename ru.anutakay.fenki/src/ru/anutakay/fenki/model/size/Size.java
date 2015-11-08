@@ -1,4 +1,5 @@
-package ru.anutakay.fenki.model;
+package ru.anutakay.fenki.model.size;
+
 
 public class Size {
 
@@ -47,6 +48,10 @@ public class Size {
 
     public boolean first() {
         return first;
+    }
+    
+    public ColumnTemplate columnTemplate(int columnNumber) {
+        return new ColumnTemplate(columnNumber, this);
     }
 
     @Override

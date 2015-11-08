@@ -1,16 +1,20 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.model.size.ColumnTemplate;
+import ru.anutakay.fenki.model.size.Size;
+
 public class NodeThreadNeighborer {
 	
 	public static ThreadIndex getNeighborThreadIndex(
-			final Size dimensions,
+			final Size size,
 			final NodeIndex nodeIndex, 
 			final H hDirection, 
 			final V vDirection) {
 			
 		int i = nodeIndex.i;
 		int j = nodeIndex.j;
-		int t = new ColumnTemplate(j, dimensions).isShort(H.LEFT) ? 1 : 0;
+		ColumnTemplate column = size.columnTemplate(j);
+		int t = column.isShort(H.LEFT) ? 1 : 0;
 		i = i*2 + t;
 		if (vDirection == V.NEXT) {
 			j = j + 1;

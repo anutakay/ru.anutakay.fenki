@@ -1,5 +1,6 @@
 package ru.anutakay.fenki.model;
 
+import ru.anutakay.fenki.model.size.Size;
 import ru.anutakay.fenki.view.IThreadColorSchema;
 
 public class Schema extends SimpleSchema {

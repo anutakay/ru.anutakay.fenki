@@ -1,4 +1,6 @@
-package ru.anutakay.fenki.model;
+package ru.anutakay.fenki.model.size;
+
+import ru.anutakay.fenki.model.H;
 
 public class ColumnTemplate {
 
@@ -6,25 +8,26 @@ public class ColumnTemplate {
 
     Size size;
 
-    public ColumnTemplate(final int column, final Size size) {
+    ColumnTemplate(final int column, final Size size) {
         this.column = column;
         this.size = size;
     }
 
     public int lenght() {
         final int j = column;
-        final int i = size.threads()
+        final int threads = size.threads();
+        final boolean first = size.first();
+        final int i = threads
                 / 2
-                - ((size.threads() % 2 == 0 && j % 2 == 1 && size.first())
-                        || (size.threads() % 2 == 0 && j % 2 == 0 && !size
-                                .first()) ? 1 : 0);
+                - ((threads % 2 == 0 && j % 2 == 1 && first)
+                        || (threads % 2 == 0 && j % 2 == 0 && !first) ? 1 : 0);
         return i;
     }
 
     public boolean isShort(final H horizontal) {
-        int j = column;
-        boolean left = (j % 2 == 1 && size.first())
-                || (j % 2 == 0 && !size.first());
+        final int j = column;
+        boolean first = size.first();
+        final boolean left = (j % 2 == 1 && first) || (j % 2 == 0 && !first);
         if (horizontal == H.LEFT) {
             return left;
         } else {
