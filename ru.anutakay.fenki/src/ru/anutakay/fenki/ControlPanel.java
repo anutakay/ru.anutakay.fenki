@@ -52,13 +52,13 @@ public class ControlPanel extends JPanel {
 	public void setCurrentModel(Schema schema){
 		model = schema;
 		if(model != null && model.getDimensions() != null){
-			scp1.setNum(model.getDimensions().getThreadNumber());
+			scp1.setNum(model.getDimensions().threads());
 		}else{
 			scp1.setNum(0);
 		}
 		
 		if(model != null && model.getDimensions() != null){
-			scp2.setNum(model.getDimensions().getColumnNumber());
+			scp2.setNum(model.getDimensions().columns());
 		}else{
 			scp2.setNum(0);
 		}

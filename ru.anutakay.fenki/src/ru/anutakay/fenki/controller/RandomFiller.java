@@ -2,7 +2,7 @@ package ru.anutakay.fenki.controller;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.SchemaTemplate;
+import ru.anutakay.fenki.model.ColumnTemplate;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.Arrow;
 
@@ -10,8 +10,8 @@ public class RandomFiller extends Filler implements IRandomizer<Arrow> {
 
 	@Override
 	public void fill(Schema schema) {
-		for(int j = 0; j < schema.getDimensions().getColumnNumber()+1; j++){
-			for(int i = 0; i < SchemaTemplate.numberOfNodeInColumn(schema.getDimensions(), j); i++){
+		for(int j = 0; j < schema.getDimensions().columns()+1; j++){
+			for(int i = 0; i < new ColumnTemplate(j, schema.getDimensions()).lenght(); i++){
 				schema.getNode(j, i).setArrow(createRandomObject(j,i));
 			}
 		}

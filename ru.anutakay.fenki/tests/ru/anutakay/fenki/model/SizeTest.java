@@ -26,9 +26,9 @@ public class SizeTest {
 
     private void testSizeEquals(final Size size, int thread, int column,
             boolean first) {
-        int actualThreadNum = size.getThreadNumber();
-        int actualColumnNum = size.getColumnNumber();
-        boolean actualFirstNode = size.firstCrossIsNode();
+        int actualThreadNum = size.threads();
+        int actualColumnNum = size.columns();
+        boolean actualFirstNode = size.first();
 
         assertEquals(thread, actualThreadNum);
         assertEquals(column, actualColumnNum);

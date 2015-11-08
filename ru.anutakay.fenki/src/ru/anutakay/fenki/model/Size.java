@@ -6,57 +6,56 @@ public class Size {
 
     private static final int MIN_NUM_OF_THREAD = 2;
 
-    private boolean firstIsNode = true;
+    private boolean first = true;
 
-    private int numOfThreads;
+    private int threads;
 
-    private int numOfColumns;
+    private int columns;
 
     public Size() {
         this(MIN_NUM_OF_THREAD, MIN_NUM_OF_COLUMN);
     }
 
-    public Size(final int numberOfThreads, final int numberOfColumns,
-            final boolean firstCrossIsNode) {
-        this(numberOfThreads, numberOfColumns);
-        this.firstIsNode = firstCrossIsNode;
+    public Size(final int threads, final int columns, final boolean first) {
+        this(threads, columns);
+        this.first = first;
     }
 
-    public Size(final int numberOfThreads, final int numberOfColumns) {
-        this.numOfThreads = numberOfThreads;
-        this.numOfColumns = numberOfColumns;
+    public Size(final int threads, final int columns) {
+        this.threads = threads;
+        this.columns = columns;
 
         checkNums();
     }
 
     private void checkNums() {
-        if (numOfThreads < MIN_NUM_OF_THREAD) {
-            numOfThreads = MIN_NUM_OF_THREAD;
+        if (threads < MIN_NUM_OF_THREAD) {
+            threads = MIN_NUM_OF_THREAD;
         }
-        if (numOfColumns < MIN_NUM_OF_COLUMN) {
-            numOfColumns = MIN_NUM_OF_COLUMN;
+        if (columns < MIN_NUM_OF_COLUMN) {
+            columns = MIN_NUM_OF_COLUMN;
         }
     }
 
-    public int getThreadNumber() {
-        return numOfThreads;
+    public int threads() {
+        return threads;
     }
 
-    public int getColumnNumber() {
-        return numOfColumns;
+    public int columns() {
+        return columns;
     }
 
-    public boolean firstCrossIsNode() {
-        return firstIsNode;
+    public boolean first() {
+        return first;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (firstIsNode ? 1231 : 1237);
-        result = prime * result + numOfColumns;
-        result = prime * result + numOfThreads;
+        result = prime * result + (first ? 1231 : 1237);
+        result = prime * result + columns;
+        result = prime * result + threads;
         return result;
     }
 
@@ -69,11 +68,11 @@ public class Size {
         if (getClass() != obj.getClass())
             return false;
         Size other = (Size) obj;
-        if (firstIsNode != other.firstIsNode)
+        if (first != other.first)
             return false;
-        if (numOfColumns != other.numOfColumns)
+        if (columns != other.columns)
             return false;
-        if (numOfThreads != other.numOfThreads)
+        if (threads != other.threads)
             return false;
         return true;
     }

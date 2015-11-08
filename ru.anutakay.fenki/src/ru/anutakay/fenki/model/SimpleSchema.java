@@ -12,8 +12,9 @@ public class SimpleSchema
 	Random r;
 		
 	public SimpleSchema(final Size dimensions) {
+	    NodeFactory factory = new NodeFactory();
 		this.dimensions = dimensions;
-		this.nodeStorage = new NodesImpl(this.dimensions);
+		this.nodeStorage = new NodesImpl(this.dimensions, factory);
 		this.threadStorage = new ThreadFragmentsStorage(this.dimensions);
 	}
 	
@@ -41,7 +42,7 @@ public class SimpleSchema
 		if (hDirection == H.LEFT) {
 			return getPrevThreadForNode(new NodeIndex(-1, j), H.RIGHT);
 		} else {
-			int n = SchemaTemplate.numberOfNodeInColumn(this.dimensions, j);
+			int n = new ColumnTemplate(j, this.dimensions).lenght( );
 			return getPrevThreadForNode(new NodeIndex(n, j), H.LEFT);
 		}
 	}

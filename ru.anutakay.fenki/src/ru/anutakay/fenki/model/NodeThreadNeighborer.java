@@ -10,7 +10,7 @@ public class NodeThreadNeighborer {
 			
 		int i = nodeIndex.i;
 		int j = nodeIndex.j;
-		int t = SchemaTemplate.isShortColumn(dimensions, j, H.LEFT) ? 1 : 0;
+		int t = new ColumnTemplate(j, dimensions).isShort(H.LEFT) ? 1 : 0;
 		i = i*2 + t;
 		if (vDirection == V.NEXT) {
 			j = j + 1;

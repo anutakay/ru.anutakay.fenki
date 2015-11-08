@@ -13,12 +13,12 @@ public class FieldIterator extends Iterator2D {
 
 	@Override
 	public int getNumOfString() {
-		return 1 + dimensions.getColumnNumber()*2;
+		return 1 + dimensions.columns()*2;
 	}
 
 	@Override
 	public int getNumOfColumn() {
-		return 1 + dimensions.getThreadNumber()*2;
+		return 1 + dimensions.threads()*2;
 	}
 	
 	public ThreadIndex getThreadIndex(){
@@ -77,7 +77,7 @@ public class FieldIterator extends Iterator2D {
 			return false;
 		}
 		
-		if(dimensions.firstCrossIsNode()) {
+		if(dimensions.first()) {
 			a=a+1;
 		}
 		a = a%2;

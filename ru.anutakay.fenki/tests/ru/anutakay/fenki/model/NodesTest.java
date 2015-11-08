@@ -7,14 +7,15 @@ import org.junit.Test;
 
 public class NodesTest {
     
-    Size size = new Size();
-    NodesImpl nodes = new NodesImpl(size);
-    NodeIndex i = new NodeIndex(0, 0);
+    Size size;
+    NodesImpl nodes;
+    NodeIndex i;
     
     @Before
     public void createNodes() {
+        NodeFactory factory = new NodeFactory();
         size = new Size();
-        nodes = new NodesImpl(size);
+        nodes = new NodesImpl(size, factory);
         i = new NodeIndex(0, 0);
     }
 
