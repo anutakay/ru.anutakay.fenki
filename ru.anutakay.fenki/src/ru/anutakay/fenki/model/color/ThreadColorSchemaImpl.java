@@ -1,9 +1,8 @@
-package ru.anutakay.fenki.view;
+package ru.anutakay.fenki.model.color;
 
 import java.awt.Color;
 
-import ru.anutakay.fenki.model.color.ColorSchema;
-import ru.anutakay.fenki.model.color.GroupColorSchema;
+import ru.anutakay.fenki.model.thread.Thread;
 
 public class ThreadColorSchemaImpl implements ThreadColorSchema {
 
@@ -20,8 +19,8 @@ public class ThreadColorSchemaImpl implements ThreadColorSchema {
     }
 
     @Override
-    public Color getColorByThreadID(final int threadID) {
-        final Integer colorID = this.groupColorSchema.getColorID(threadID);
+    public Color getColorByThreadID(final Thread threadID) {
+        final ColorID colorID = this.groupColorSchema.getColorID(threadID);
         final Color color = this.colorSchema.getColorByID(colorID);
         if (color == null) {
             return EMPTY_COLOR;

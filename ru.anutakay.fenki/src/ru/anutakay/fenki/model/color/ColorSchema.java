@@ -4,6 +4,6 @@ import java.awt.Color;
 
 public interface ColorSchema {
 
-    Color getColorByID(final int colorID);
+    Color getColorByID(final ColorID colorID);
 
 }

@@ -15,13 +15,13 @@ import ru.anutakay.fenki.model.color.ColorSchema;
 import ru.anutakay.fenki.model.color.ColorSchemaImpl;
 import ru.anutakay.fenki.model.color.GroupColorSchema;
 import ru.anutakay.fenki.model.color.GroupColorSchemaImpl;
+import ru.anutakay.fenki.model.color.ThreadColorSchema;
+import ru.anutakay.fenki.model.color.ThreadColorSchemaImpl;
 import ru.anutakay.fenki.view.Adapter;
 import ru.anutakay.fenki.view.FigureFactory;
-import ru.anutakay.fenki.view.ThreadColorSchema;
 import ru.anutakay.fenki.view.SchemaPane;
 import ru.anutakay.fenki.view.Iterator2D;
 import ru.anutakay.fenki.view.SchemaFigureFactory;
-import ru.anutakay.fenki.view.ThreadColorSchemaImpl;
 
 public class TabbedSchemaPane extends JTabbedPane {
 
