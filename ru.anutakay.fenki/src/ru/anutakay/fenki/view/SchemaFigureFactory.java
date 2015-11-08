@@ -7,7 +7,7 @@ public class SchemaFigureFactory<T extends Iterator2D> extends FigureFactory {
 
     private PointAdapter pointAdapter;
 
-    private IThreadColorSchema threadColorSchema;
+    private ThreadColorSchema threadColorSchema;
 
     @SuppressWarnings("unchecked")
     public SchemaFigureFactory(
@@ -18,7 +18,7 @@ public class SchemaFigureFactory<T extends Iterator2D> extends FigureFactory {
 
     public SchemaFigureFactory(
             final Adapter<? super Iterator2D, ? super Object> adapter,
-            final IThreadColorSchema threadColorSchema) {
+            final ThreadColorSchema threadColorSchema) {
         this(adapter);
         this.threadColorSchema = threadColorSchema;
     }

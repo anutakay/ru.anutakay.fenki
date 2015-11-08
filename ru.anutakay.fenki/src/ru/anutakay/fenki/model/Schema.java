@@ -1,7 +1,7 @@
 package ru.anutakay.fenki.model;
 
 import ru.anutakay.fenki.model.size.Size;
-import ru.anutakay.fenki.view.IThreadColorSchema;
+import ru.anutakay.fenki.view.ThreadColorSchema;
 
 public class Schema extends SimpleSchema {
 
@@ -11,7 +11,7 @@ public class Schema extends SimpleSchema {
 
     private String schemaName = "unnamed";
 
-    private IThreadColorSchema threadColorSchema;
+    private ThreadColorSchema threadColorSchema;
 
     public Schema() {
         this(MIN_NUMBER_OF_THREAD, MIN_NUMBER_OF_COLUMN, true);
@@ -26,11 +26,11 @@ public class Schema extends SimpleSchema {
         return schemaName;
     }
 
-    public IThreadColorSchema getThreadColorSchema() {
+    public ThreadColorSchema getThreadColorSchema() {
         return threadColorSchema;
     }
 
-    public void setThreadColorSchema(IThreadColorSchema threadColorSchema) {
+    public void setThreadColorSchema(ThreadColorSchema threadColorSchema) {
         this.threadColorSchema = threadColorSchema;
     }
 

@@ -1,10 +1,8 @@
-package ru.anutakay.fenki.model;
+package ru.anutakay.fenki.model.color;
 
 import java.awt.Color;
 
-import ru.anutakay.fenki.view.IColorSchema;
-
-public class ColorSchema implements IColorSchema {
+public class ColorSchemaImpl implements ColorSchema {
 
     Color[] colors = { new Color(180, 50, 200), new Color(0, 200, 180) };
 

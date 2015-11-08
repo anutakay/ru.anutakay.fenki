@@ -81,12 +81,12 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public Thread getEnd(H hDirection) {
+    public Thread getEnd(H h) {
         if (this.getArrow() == Arrow.NONE) {
             return ThreadFactory.createEmptyThread();
         }
 
-        if (getArrow().getEnd() == hDirection) {
+        if (getArrow().getEnd() == h) {
             return getFirst();
         } else {
             return getSecond();

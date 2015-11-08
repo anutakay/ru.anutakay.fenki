@@ -1,8 +1,8 @@
-package ru.anutakay.fenki.view;
+package ru.anutakay.fenki.model.color;
 
 import java.awt.Color;
 
-public interface IColorSchema {
+public interface ColorSchema {
 
     Color getColorByID(final int colorID);
 
