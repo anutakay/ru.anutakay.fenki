@@ -10,6 +10,8 @@ public class Fragments {
     private Size size;
 
     private ArrayList<ArrayList<ThreadFragment>> storage;
+    
+    private ThreadFactory factory = new ThreadFactory();
 
     public Fragments(final Size size) {
         this.size = size;
@@ -26,7 +28,7 @@ public class Fragments {
 
     private ArrayList<ThreadFragment> createThreadArray(final int i) {
         ArrayList<ThreadFragment> n = new ArrayList<ThreadFragment>();
-        ThreadFactory factory = new ThreadFactory();
+        
         for (int j = 0; j <= size.columns(); j++) {
             if (j == 0) {
                 n.add(new ThreadFragment(factory.createThread(), H.NONE));
