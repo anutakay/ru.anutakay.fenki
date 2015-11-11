@@ -27,9 +27,7 @@ public class ColorAdapter<T extends Iterator2D> implements Adapter {
         Schema schema = this.schemaController.getSchema();
 
         if (it.isThread()) {
-            Thread a = schema.getThreadFragment(it.getThreadIndex())
-                    .getThread();
-            //return getColorForNum(a);
+            Thread a = schema.getThread(it.getThreadIndex());
             return a;
         }
 

@@ -27,7 +27,7 @@ public class SimpleSchema {
         return nodes.getNode(nodeIndex);
     }
 
-    public ThreadFragment getThreadFragment(final ThreadIndex threadIndex) {
+    public Thread getThread(final ThreadIndex threadIndex) {
         return threads.getThread(threadIndex);
     }
 
@@ -35,8 +35,8 @@ public class SimpleSchema {
         return getNode(new NodeIndex(j, i));
     }
 
-    public ThreadFragment getThreadFragment(final int i, final int j) {
-        return getThreadFragment(new ThreadIndex(i, j));
+    public Thread getThread(final int i, final int j) {
+        return getThread(new ThreadIndex(i, j));
     }
 
     public Thread getCorner(final int j, final H hDirection) {
@@ -56,24 +56,14 @@ public class SimpleSchema {
             final H hDirection) {
         ThreadIndex threadIndex = NodeThreadNeighborer.getNeighborThreadIndex(
                 this.size, nodeIndex, hDirection, V.PREV);
-        ThreadFragment threadFragment = getThreadFragment(threadIndex);
-        return threadFragment.getThread();
+        Thread threadFragment = getThread(threadIndex);
+        return threadFragment;
     }
 
     public void setNextThreadForNode(final NodeIndex nodeIndex,
             final H hDirection, final Thread threadID) {
         ThreadIndex threadIndex = NodeThreadNeighborer.getNeighborThreadIndex(
                 this.size, nodeIndex, hDirection, V.NEXT);
-        threads.getThread(threadIndex).setTop(reverseDirection(hDirection));
-        threads.getThread(threadIndex).setThread(threadID);
-    }
-
-    private H reverseDirection(final H hDirection) {
-        if (hDirection == H.RIGHT) {
-            return H.LEFT;
-        } else if (hDirection == H.LEFT) {
-            return H.RIGHT;
-        }
-        return H.NONE;
+        threads.setThread(threadIndex, threadID);
     }
 }

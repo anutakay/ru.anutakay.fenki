@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import ru.anutakay.fenki.model.size.Size;
 import ru.anutakay.fenki.model.thread.ThreadFactory;
+import ru.anutakay.fenki.model.thread.Thread;
 
 public class Fragments {
 
     private Size size;
 
-    private ArrayList<ArrayList<ThreadFragment>> storage;
+    private ArrayList<ArrayList<Thread>> storage;
     
     private ThreadFactory factory = new ThreadFactory();
 
@@ -18,29 +19,33 @@ public class Fragments {
         storage = createStorage();
     }
 
-    private ArrayList<ArrayList<ThreadFragment>> createStorage() {
-        ArrayList<ArrayList<ThreadFragment>> array = new ArrayList<>();
+    private ArrayList<ArrayList<Thread>> createStorage() {
+        ArrayList<ArrayList<Thread>> array = new ArrayList<>();
         for (int i = 0; i < size.threads(); i++) {
             array.add(createThreadArray(i));
         }
         return array;
     }
 
-    private ArrayList<ThreadFragment> createThreadArray(final int i) {
-        ArrayList<ThreadFragment> n = new ArrayList<ThreadFragment>();
+    private ArrayList<Thread> createThreadArray(final int i) {
+        ArrayList<Thread> n = new ArrayList<Thread>();
         
         for (int j = 0; j <= size.columns(); j++) {
             if (j == 0) {
-                n.add(new ThreadFragment(factory.createThread(), H.NONE));
+                n.add(factory.createThread());
             } else {
-                n.add(new ThreadFragment(ThreadFactory.createEmptyThread(), H.NONE));
+                n.add(ThreadFactory.createEmptyThread());
             }
         }
         return n;
     }
 
-    public ThreadFragment getThread(final ThreadIndex index) {
+    public Thread getThread(final ThreadIndex index) {
         return storage.get(index.i).get(index.j);
+    }
+    
+    public void setThread(final ThreadIndex index, final Thread thread) {
+        storage.get(index.i).set(index.j, thread);
     }
 
 }
