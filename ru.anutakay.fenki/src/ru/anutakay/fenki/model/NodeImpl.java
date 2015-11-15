@@ -3,8 +3,6 @@ package ru.anutakay.fenki.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import ru.anutakay.fenki.model.thread.ThreadPool;
-
 public class NodeImpl implements Node {
 
     private Arrow arrow = Arrow.NONE;

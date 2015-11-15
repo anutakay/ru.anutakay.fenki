@@ -3,7 +3,6 @@ package ru.anutakay.fenki.model;
 import java.util.ArrayList;
 
 import ru.anutakay.fenki.model.size.Size;
-import ru.anutakay.fenki.model.thread.ThreadPool;
 
 public class Threads {
 

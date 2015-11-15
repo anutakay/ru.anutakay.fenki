@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import ru.anutakay.fenki.model.thread.ThreadPool;
-
 public class NodeTest {
 
     @Test

@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import ru.anutakay.fenki.model.size.Size;
-import ru.anutakay.fenki.model.thread.ThreadPool;
 
 public class FragmentsTest {
     

@@ -1,4 +1,4 @@
-package ru.anutakay.fenki.model.thread;
+package ru.anutakay.fenki.model;
 
 import java.util.HashSet;
 import java.util.Random;
