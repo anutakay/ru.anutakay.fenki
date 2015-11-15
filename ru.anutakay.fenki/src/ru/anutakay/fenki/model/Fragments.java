@@ -3,7 +3,7 @@ package ru.anutakay.fenki.model;
 import java.util.ArrayList;
 
 import ru.anutakay.fenki.model.size.Size;
-import ru.anutakay.fenki.model.thread.ThreadFactory;
+import ru.anutakay.fenki.model.thread.ThreadPool;
 import ru.anutakay.fenki.model.thread.Thread;
 
 public class Fragments {
@@ -12,7 +12,7 @@ public class Fragments {
 
     private ArrayList<ArrayList<Thread>> storage;
     
-    private ThreadFactory factory = new ThreadFactory();
+    private ThreadPool pool = new ThreadPool();
 
     public Fragments(final Size size) {
         this.size = size;
@@ -32,9 +32,9 @@ public class Fragments {
         
         for (int j = 0; j <= size.columns(); j++) {
             if (j == 0) {
-                n.add(factory.createThread());
+                n.add(pool.createThread());
             } else {
-                n.add(ThreadFactory.createEmptyThread());
+                n.add(ThreadPool.createEmptyThread());
             }
         }
         return n;
@@ -45,6 +45,9 @@ public class Fragments {
     }
     
     public void setThread(final ThreadIndex index, final Thread thread) {
+        if(!pool.contains(thread)) {
+            throw new MismatchedThreadException();
+        }
         storage.get(index.i).set(index.j, thread);
     }
 

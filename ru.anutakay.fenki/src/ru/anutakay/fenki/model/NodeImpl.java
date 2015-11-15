@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ru.anutakay.fenki.model.thread.Thread;
-import ru.anutakay.fenki.model.thread.ThreadFactory;
+import ru.anutakay.fenki.model.thread.ThreadPool;
 
 public class NodeImpl implements Node {
 
@@ -19,8 +19,8 @@ public class NodeImpl implements Node {
     NodeImpl(final Arrow arrow) {
         setArrow(arrow);
         threads = new HashMap<H, Thread>();
-        threads.put(H.LEFT, ThreadFactory.createEmptyThread());
-        threads.put(H.RIGHT, ThreadFactory.createEmptyThread());
+        threads.put(H.LEFT, ThreadPool.createEmptyThread());
+        threads.put(H.RIGHT, ThreadPool.createEmptyThread());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class NodeImpl implements Node {
     @Override
     public Thread getFirst() {
         if (this.arrow == Arrow.NONE) {
-            return ThreadFactory.createEmptyThread();
+            return ThreadPool.createEmptyThread();
         }
         return getBegin(getArrow().getBegin());
     }
@@ -66,7 +66,7 @@ public class NodeImpl implements Node {
     @Override
     public Thread getSecond() {
         if (this.arrow == Arrow.NONE) {
-            return ThreadFactory.createEmptyThread();
+            return ThreadPool.createEmptyThread();
         }
         if (getArrow().getBegin() != H.LEFT) {
             return getBegin(H.LEFT);
@@ -83,7 +83,7 @@ public class NodeImpl implements Node {
     @Override
     public Thread getEnd(H h) {
         if (this.getArrow() == Arrow.NONE) {
-            return ThreadFactory.createEmptyThread();
+            return ThreadPool.createEmptyThread();
         }
 
         if (getArrow().getEnd() == h) {

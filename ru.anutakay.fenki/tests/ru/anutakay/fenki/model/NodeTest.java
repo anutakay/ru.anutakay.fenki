@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ru.anutakay.fenki.model.thread.Thread;
-import ru.anutakay.fenki.model.thread.ThreadFactory;
+import ru.anutakay.fenki.model.thread.ThreadPool;
 
 public class NodeTest {
 
@@ -17,7 +17,7 @@ public class NodeTest {
         nodeIsEmpty(node);
         assertEquals(Arrow.NONE, node.getArrow());
 
-        Thread empty = ThreadFactory.createEmptyThread();
+        Thread empty = ThreadPool.createEmptyThread();
 
         assertEquals(empty, node.getFirst());
         assertEquals(empty, node.getSecond());
@@ -60,7 +60,7 @@ public class NodeTest {
     @Test
     public void threadIDTest() {
         NodeImpl node = new NodeImpl();
-        ThreadFactory factory = new ThreadFactory();
+        ThreadPool factory = new ThreadPool();
 
         node.setBegin(factory.createThread(), factory.createThread());
 
@@ -68,13 +68,13 @@ public class NodeTest {
     }
 
     private void nodeIsEmpty(NodeImpl node) {
-        Thread empty = ThreadFactory.createEmptyThread();
+        Thread empty = ThreadPool.createEmptyThread();
         checkNode(node, empty, empty, empty, empty);
     }
     
     @Before
     public void createThreads() {
-        ThreadFactory factory = new ThreadFactory();
+        ThreadPool factory = new ThreadPool();
         first = factory.createThread();
         second = factory.createThread();
     }
