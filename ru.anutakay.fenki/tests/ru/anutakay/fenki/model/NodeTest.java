@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import ru.anutakay.fenki.model.thread.Thread;
 import ru.anutakay.fenki.model.thread.ThreadPool;
 
 public class NodeTest {
@@ -17,7 +16,7 @@ public class NodeTest {
         nodeIsEmpty(node);
         assertEquals(Arrow.NONE, node.getArrow());
 
-        Thread empty = ThreadPool.createEmptyThread();
+        Integer empty = ThreadPool.createEmptyThread();
 
         assertEquals(empty, node.getFirst());
         assertEquals(empty, node.getSecond());
@@ -68,7 +67,7 @@ public class NodeTest {
     }
 
     private void nodeIsEmpty(NodeImpl node) {
-        Thread empty = ThreadPool.createEmptyThread();
+        Integer empty = ThreadPool.createEmptyThread();
         checkNode(node, empty, empty, empty, empty);
     }
     
@@ -79,8 +78,8 @@ public class NodeTest {
         second = factory.createThread();
     }
     
-    Thread first;
-    Thread second;
+    Integer first;
+    Integer second;
 
     @Test
     public void threadIDRightDirectTest() {
@@ -106,14 +105,14 @@ public class NodeTest {
         checkNode(node, second, first, second, first);
     }
     
-    private NodeImpl createNode(Arrow d, Thread left, Thread right) {
+    private NodeImpl createNode(Arrow d, Integer left, Integer right) {
         NodeImpl node = new NodeImpl(d);
         node.setBegin(left, right);
         return node;
     }
 
-    private void checkNode(Node node, Thread left, Thread right,
-            Thread first, Thread second) {
+    private void checkNode(Node node, Integer left, Integer right,
+            Integer first, Integer second) {
         assertEquals(left, node.getEnd(H.LEFT));
         assertEquals(right, node.getEnd(H.RIGHT));
         assertEquals(first, node.getFirst());

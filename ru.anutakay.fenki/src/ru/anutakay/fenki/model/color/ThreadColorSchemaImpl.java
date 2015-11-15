@@ -2,8 +2,6 @@ package ru.anutakay.fenki.model.color;
 
 import java.awt.Color;
 
-import ru.anutakay.fenki.model.thread.Thread;
-
 public class ThreadColorSchemaImpl implements ThreadColorSchema {
 
     private static final Color EMPTY_COLOR = Color.WHITE;
@@ -19,7 +17,7 @@ public class ThreadColorSchemaImpl implements ThreadColorSchema {
     }
 
     @Override
-    public Color getColorByThreadID(final Thread threadID) {
+    public Color getColorByThreadID(final Integer threadID) {
         final ColorID colorID = this.groupColorSchema.getColorID(threadID);
         final Color color = this.colorSchema.getColorByID(colorID);
         if (color == null) {

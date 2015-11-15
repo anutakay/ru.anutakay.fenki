@@ -9,23 +9,23 @@ public class ThreadPool {
     
     Random r = new Random();
     
-    Set<Thread> threads = new HashSet<Thread>();
+    Set<Integer> threads = new HashSet<Integer>();
     
-    public static Thread createEmptyThread() {
-        return new Thread(-1);
+    public static Integer createEmptyThread() {
+        return -1;
     }
     
-    public Thread createThread() {
+    public Integer createThread() {
         int i;
-        Thread result = null;
+        Integer result = null;
         do {
             i = r.nextInt();
-            result = new Thread(i);
+            result = new Integer(i);
         } while(!threads.add(result));
         return result;
     }
     
-    public boolean contains(Thread thread) {
+    public boolean contains(Integer thread) {
         return threads.contains(thread);
     }
 

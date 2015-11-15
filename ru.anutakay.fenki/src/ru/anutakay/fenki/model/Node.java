@@ -1,22 +1,20 @@
 package ru.anutakay.fenki.model;
 
-import ru.anutakay.fenki.model.thread.Thread;
-
 public interface Node {
 
     void setArrow(Arrow arrow);
 
     Arrow getArrow();
 
-    void setBegin(H horizontal, Thread id);
+    void setBegin(H horizontal, Integer id);
 
-    void setBegin(Thread left, Thread right);
+    Integer getBegin(H horizontal);
 
-    Thread getBegin(H horizontal);
+    Integer getEnd(H horizontal);
 
-    Thread getEnd(H horizontal);
+    Integer getFirst();
 
-    Thread getFirst();
+    Integer getSecond();
 
-    Thread getSecond();
+    void setBegin(Integer left, Integer right);
 }

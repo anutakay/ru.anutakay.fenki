@@ -4,7 +4,6 @@ import ru.anutakay.fenki.controller.SchemaController;
 import ru.anutakay.fenki.model.FieldIterator;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.size.Size;
-import ru.anutakay.fenki.model.thread.Thread;
 import ru.anutakay.fenki.view.Adapter;
 import ru.anutakay.fenki.view.CornerIndex;
 import ru.anutakay.fenki.view.Iterator2D;
@@ -21,24 +20,24 @@ public class ColorAdapter<T extends Iterator2D> implements Adapter {
         size = this.schemaController.getSchema().getSize();
     }
 
-    public Thread getObject(final Iterator2D it1) {
+    public Integer getObject(final Iterator2D it1) {
 
         FieldIterator it = (FieldIterator) it1;
         Schema schema = this.schemaController.getSchema();
 
         if (it.isThread()) {
-            Thread a = schema.getThread(it.getThreadIndex());
+            Integer a = schema.getThread(it.getThreadIndex());
             return a;
         }
 
         if (it.isNode()) {
-            Thread a = schema.getNode(it.getNodeIndex()).getFirst();
+            Integer a = schema.getNode(it.getNodeIndex()).getFirst();
             return a;
         }
 
         if (it.isCorner()) {
             CornerIndex cornerIndex = it.getCornerIndex();
-            Thread a = schema.getCorner(cornerIndex);
+            Integer a = schema.getCorner(cornerIndex);
             return a;
         }
 

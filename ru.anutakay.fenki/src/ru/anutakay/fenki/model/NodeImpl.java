@@ -3,14 +3,13 @@ package ru.anutakay.fenki.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import ru.anutakay.fenki.model.thread.Thread;
 import ru.anutakay.fenki.model.thread.ThreadPool;
 
 public class NodeImpl implements Node {
 
     private Arrow arrow = Arrow.NONE;
 
-    private Map<H, Thread> threads;
+    private Map<H, Integer> threads;
 
     NodeImpl() {
         this(Arrow.NONE);
@@ -18,7 +17,7 @@ public class NodeImpl implements Node {
 
     NodeImpl(final Arrow arrow) {
         setArrow(arrow);
-        threads = new HashMap<H, Thread>();
+        threads = new HashMap<H, Integer>();
         threads.put(H.LEFT, ThreadPool.createEmptyThread());
         threads.put(H.RIGHT, ThreadPool.createEmptyThread());
     }
@@ -45,18 +44,18 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public void setBegin(Thread left, Thread right) {
+    public void setBegin(Integer left, Integer right) {
         threads.put(H.LEFT, left);
         threads.put(H.RIGHT, right);
     }
 
     @Override
-    public void setBegin(H h, Thread thread) {
+    public void setBegin(H h, Integer thread) {
         threads.put(h, thread);
     }
 
     @Override
-    public Thread getFirst() {
+    public Integer getFirst() {
         if (this.arrow == Arrow.NONE) {
             return ThreadPool.createEmptyThread();
         }
@@ -64,7 +63,7 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public Thread getSecond() {
+    public Integer getSecond() {
         if (this.arrow == Arrow.NONE) {
             return ThreadPool.createEmptyThread();
         }
@@ -76,12 +75,12 @@ public class NodeImpl implements Node {
     }
 
     @Override
-    public Thread getBegin(H h) {
+    public Integer getBegin(H h) {
         return threads.get(h);
     }
 
     @Override
-    public Thread getEnd(H h) {
+    public Integer getEnd(H h) {
         if (this.getArrow() == Arrow.NONE) {
             return ThreadPool.createEmptyThread();
         }

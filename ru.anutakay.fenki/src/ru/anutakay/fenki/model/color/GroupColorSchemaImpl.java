@@ -1,7 +1,5 @@
 package ru.anutakay.fenki.model.color;
 
-import ru.anutakay.fenki.model.thread.Thread;
-
 public class GroupColorSchemaImpl implements GroupColorSchema {
     
     public class GroupId {
@@ -12,8 +10,8 @@ public class GroupColorSchemaImpl implements GroupColorSchema {
     }
 
     @Override
-    public ColorID getColorID(final Thread threadID) {
-        Integer a = new Integer((threadID.getId()) % 3);
+    public ColorID getColorID(final Integer threadID) {
+        Integer a = threadID % 3; 
         return new ColorID(a);
     }
 
