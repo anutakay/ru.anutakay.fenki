@@ -1,6 +1,7 @@
 package ru.anutakay.fenki.model.size;
 
 import ru.anutakay.fenki.model.H;
+import ru.anutakay.fenki.model.NodeIndex;
 
 public class ColumnTemplate {
 
@@ -24,7 +25,7 @@ public class ColumnTemplate {
         return i;
     }
 
-    public boolean isShort(final H horizontal) {
+    public boolean hasCorner(final H horizontal) {
         final int j = column;
         boolean first = size.first();
         final boolean left = (j % 2 == 1 && first) || (j % 2 == 0 && !first);
@@ -36,29 +37,14 @@ public class ColumnTemplate {
         }
     }
 
-    private boolean hasLeftCorner() {
-        int j = column / 2;
-        boolean first = size.first();
-        boolean t = (first && j % 2 == 1) || (!first && j % 2 == 0);
-        return t;
-    }
-
-    private boolean hasRightCorner() {
-        if (size.threads() % 2 == 1) {
-            return !hasLeftCorner();
-        } else {
-            return hasLeftCorner();
-        }
-    }
-
-    public boolean hasCorner(H horizontal) {
-        switch (horizontal) {
+    public NodeIndex getCornerIndex(H h) {
+        switch (h) {
         case LEFT:
-            return hasLeftCorner();
+            return new NodeIndex(-1, column);
         case RIGHT:
-            return hasRightCorner();
+            return new NodeIndex(lenght(), column);
         default:
-            return false;
+            return null;
         }
     }
 }

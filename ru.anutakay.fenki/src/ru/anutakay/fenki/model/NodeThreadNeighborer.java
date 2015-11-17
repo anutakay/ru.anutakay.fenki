@@ -11,7 +11,7 @@ public class NodeThreadNeighborer {
         int i = nodeIndex.i;
         int j = nodeIndex.j;
         ColumnTemplate column = size.columnTemplate(j);
-        int t = column.isShort(H.LEFT) ? 1 : 0;
+        int t = column.hasCorner(H.LEFT) ? 1 : 0;
         i = i * 2 + t;
         if (vDirection == V.NEXT) {
             j = j + 1;
