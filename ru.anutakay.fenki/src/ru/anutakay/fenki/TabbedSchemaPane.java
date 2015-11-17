@@ -34,6 +34,8 @@ public class TabbedSchemaPane extends JTabbedPane {
     private static final long serialVersionUID = -4336057985717689708L;
 
     SchemaController schemaController;
+    
+    private ThreadColorSchema threadColorSchema;
 
     public TabbedSchemaPane() {
         super();
@@ -58,9 +60,6 @@ public class TabbedSchemaPane extends JTabbedPane {
         Adapter<? super Iterator2D, ? super Object> adapter = new ColorAdapter<FieldIterator>(
                 schemaController);
 
-        ThreadColorSchema threadColorSchema = this.schemaController
-                .getSchema().getThreadColorSchema();
-
         FigureFactory<Iterator2D> figureFactory = new SchemaFigureFactory<FieldIterator>(
                 adapter, threadColorSchema);
 
@@ -74,10 +73,10 @@ public class TabbedSchemaPane extends JTabbedPane {
     private SchemaController createSchemaController() {
         final int threads = Math.abs(new Random().nextInt()) % 20;
         Schema schema = new Schema(threads, NUM_OF_COLUMNS, false);
-        schema.setThreadColorSchema(createThreadColorSchema());
+        threadColorSchema = createThreadColorSchema();
         SchemaController controller = new SchemaController(schema);
-        controller.fillSchema(new RandomFiller());
-        controller.buildSchema();
+        controller.fill(new RandomFiller());
+        controller.build();
         return controller;
     }
 

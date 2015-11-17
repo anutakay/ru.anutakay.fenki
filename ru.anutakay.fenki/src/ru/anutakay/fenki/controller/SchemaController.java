@@ -2,7 +2,6 @@ package ru.anutakay.fenki.controller;
 
 import ru.anutakay.fenki.model.Node;
 import ru.anutakay.fenki.model.NodeIndex;
-import ru.anutakay.fenki.model.SimpleSchema;
 import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.H;
 import ru.anutakay.fenki.model.size.ColumnTemplate;
@@ -20,27 +19,31 @@ public class SchemaController {
         return this.schema;
     }
 
-    public void fillSchema(final Filler filler) {
+    public void fill(final Filler filler) {
         filler.fill(schema);
     }
 
-    public void buildSchema() {
-        Size dimensions = schema.getSize();
-        build(schema, dimensions);
+    public void build() {
+        buildAll(schema);
     }
 
-    private void build(final SimpleSchema storage, final Size size) {
+    private void buildAll(final Schema storage) {
+        final Size size = schema.getSize();
         for (int j = 0; j < size.columns(); j++) {
             build_corner(storage, size, j, H.LEFT);
-            ColumnTemplate column = size.columnTemplate(j);
-            for (int i = 0; i < column.lenght(); i++) {
-                build_node(storage, size, new NodeIndex(i, j));
-            }
+            build_nodes(storage, size, j);
             build_corner(storage, size, j, H.RIGHT);
         }
     }
 
-    private void build_node(final SimpleSchema storage, final Size dimensions,
+    private void build_nodes(final Schema storage, final Size size, int j) {
+        ColumnTemplate column = size.columnTemplate(j);
+        for (int i = 0; i < column.lenght(); i++) {
+            build_node(storage, size, new NodeIndex(i, j));
+        }
+    }
+
+    private void build_node(final Schema storage, final Size dimensions,
             final NodeIndex nodeIndex) {
         Node node = storage.getNode(nodeIndex);
 
@@ -52,11 +55,11 @@ public class SchemaController {
 
     }
 
-    private Integer getPrev(SimpleSchema storage, NodeIndex ni, H h) {
+    private Integer getPrev(Schema storage, NodeIndex ni, H h) {
         return storage.getPrevThreadForNode(ni, h);
     }
 
-    private void build_corner(final SimpleSchema storage, final Size size,
+    private void build_corner(final Schema storage, final Size size,
             final int j, final H hDirection) {
         ColumnTemplate column = size.columnTemplate(j);
         if (column.isShort(H.LEFT) && hDirection == H.LEFT) {

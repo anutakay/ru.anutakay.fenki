@@ -2,8 +2,8 @@ package ru.anutakay.fenki.controller;
 
 import java.util.Random;
 
-import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.Arrow;
+import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.size.ColumnTemplate;
 import ru.anutakay.fenki.model.size.Size;
 
