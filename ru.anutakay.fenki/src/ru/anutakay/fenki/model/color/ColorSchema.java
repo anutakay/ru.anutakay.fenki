@@ -4,6 +4,6 @@ import java.awt.Color;
 
 public interface ColorSchema {
 
-    Color getColorByID(final ColorID colorID);
+    Color getColorByID(Integer threadID);
 
 }

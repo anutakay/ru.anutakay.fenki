@@ -6,20 +6,17 @@ public class ThreadColorSchemaImpl implements ThreadColorSchema {
 
     private static final Color EMPTY_COLOR = Color.WHITE;
 
-    GroupColorSchema groupColorSchema;
-
     ColorSchema colorSchema;
 
-    public ThreadColorSchemaImpl(final GroupColorSchema groupColorSchema,
+    public ThreadColorSchemaImpl(
             final ColorSchema colorSchema) {
-        this.groupColorSchema = groupColorSchema;
         this.colorSchema = colorSchema;
     }
 
     @Override
     public Color getColorByThreadID(final Integer threadID) {
-        final ColorID colorID = this.groupColorSchema.getColorID(threadID);
-        final Color color = this.colorSchema.getColorByID(colorID);
+        final Color color = this.colorSchema.getColorByID(threadID);
+        //TODO убрать возвращениe нуля
         if (color == null) {
             return EMPTY_COLOR;
         } else {

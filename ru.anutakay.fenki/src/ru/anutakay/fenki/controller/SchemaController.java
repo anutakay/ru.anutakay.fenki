@@ -24,15 +24,21 @@ public class SchemaController {
     }
 
     public void build() {
-        buildAll(schema);
-    }
-
-    private void buildAll(final Schema storage) {
         final Size size = schema.getSize();
         for (int j = 0; j < size.columns(); j++) {
             buildCorner(size, j, H.LEFT);
             buildColumn(size, j);
             buildCorner(size, j, H.RIGHT);
+        }
+    }
+    
+    private void buildCorner(final Size size, final int j, final H h) {
+        ColumnTemplate column = size.columnTemplate(j);
+        H reverse = H.reverse(h);
+        if (column.hasCorner(h)) {
+            NodeIndex index = column.getCornerIndex(h);
+            Integer value = schema.getPrevThreadForNode(index, reverse);
+            schema.setNextThreadForNode(index, reverse, value);
         }
     }
 
@@ -53,15 +59,5 @@ public class SchemaController {
         schema.setNextThreadForNode(nodeIndex, H.RIGHT, node.getEnd(H.RIGHT));
         schema.setNextThreadForNode(nodeIndex, H.LEFT, node.getEnd(H.LEFT));
 
-    }
-
-    private void buildCorner(final Size size, final int j, final H h) {
-        ColumnTemplate column = size.columnTemplate(j);
-        H reverse = H.reverse(h);
-        if (column.hasCorner(h)) {
-            NodeIndex index = column.getCornerIndex(h);
-            Integer value = schema.getPrevThreadForNode(index, reverse);
-            schema.setNextThreadForNode(index, reverse, value);
-        }
     }
 }

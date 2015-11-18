@@ -4,23 +4,11 @@ import java.awt.Color;
 
 public class ColorSchemaImpl implements ColorSchema {
 
-    Color[] colors = { new Color(180, 50, 200), new Color(0, 200, 180) };
+    Color[] colors = { new Color(180, 50, 200), new Color(0, 200, 180), new Color(192, 64, 0) };
 
     @Override
-    public Color getColorByID(final ColorID colorID) {
-        if (checkID(colorID)) {
-            return colors[colorID.id];
-        } else {
-            return null;
-        }
-    }
-
-    private boolean checkID(final ColorID colorID) {
-        if (colorID.id < 0 || colorID.id >= colors.length) {
-            return false;
-        } else {
-            return true;
-        }
+    public Color getColorByID( Integer colorID) {
+        return colors[Math.abs(colorID%colors.length)];
     }
 
 }
