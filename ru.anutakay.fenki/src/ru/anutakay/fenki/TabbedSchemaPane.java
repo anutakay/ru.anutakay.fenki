@@ -13,8 +13,6 @@ import ru.anutakay.fenki.model.Schema;
 import ru.anutakay.fenki.model.color.ColorAdapter;
 import ru.anutakay.fenki.model.color.ColorSchema;
 import ru.anutakay.fenki.model.color.ColorSchemaImpl;
-import ru.anutakay.fenki.model.color.GroupColorSchema;
-import ru.anutakay.fenki.model.color.GroupColorSchemaImpl;
 import ru.anutakay.fenki.model.color.ThreadColorSchema;
 import ru.anutakay.fenki.model.color.ThreadColorSchemaImpl;
 import ru.anutakay.fenki.view.Adapter;
@@ -82,8 +80,7 @@ public class TabbedSchemaPane extends JTabbedPane {
 
     private ThreadColorSchema createThreadColorSchema() {
         ColorSchema colorSchema = new ColorSchemaImpl();
-        GroupColorSchema groupColorSchema = new GroupColorSchemaImpl();
-        return new ThreadColorSchemaImpl(groupColorSchema, colorSchema);
+        return new ThreadColorSchemaImpl(colorSchema);
     }
 
     public SchemaController getSchemaController() {

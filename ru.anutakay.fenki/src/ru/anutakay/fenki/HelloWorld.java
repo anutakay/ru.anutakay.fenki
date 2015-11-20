@@ -39,7 +39,7 @@ public class HelloWorld extends JFrame implements ChangeListener {
 
     private static final long serialVersionUID = 3431369082324981806L;
 
-    boolean IS_MAC;
+    private static boolean IS_MAC;
 
     public HelloWorld(String string) {
         super(string);
@@ -49,15 +49,19 @@ public class HelloWorld extends JFrame implements ChangeListener {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 HelloWorld frame = new HelloWorld("Феньки");
+                IS_MAC = isMacOS();
+                setGuiProperties();
                 frame.createGUI();
             }
         });
     }
-
-    public void createGUI() {
-
+    
+    private static boolean isMacOS() {
         String lcOSName = System.getProperty("os.name").toLowerCase();
-        IS_MAC = lcOSName.startsWith("mac os x");
+        return lcOSName.startsWith("mac os x");
+    }
+    
+    private static void setGuiProperties() {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("com.apple.mrj.application.apple.menu.about.name",
                 "WikiTeX");
@@ -82,9 +86,23 @@ public class HelloWorld extends JFrame implements ChangeListener {
             e.printStackTrace();
         }
         System.setProperty("com.apple.macos.smallTabs", "true");
+    }
+
+    public void createGUI() {
+        JPanel panel = createPanel();   
+        setContentPane(panel);
+
+        JMenuBar menuBar = createMenuBar();
+        setJMenuBar(menuBar);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(600, 600));
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
 
+    private JPanel createPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
@@ -92,27 +110,13 @@ public class HelloWorld extends JFrame implements ChangeListener {
         controlPanel = ControlPanel.getInstance();
         panel.add(tabbedPane, BorderLayout.CENTER);
         panel.add(controlPanel, BorderLayout.EAST);
-        setContentPane(panel);
-
-        setJMenuBar(createMenuBar());
-
-        setPreferredSize(new Dimension(600, 600));
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+        
+        return panel;
     }
 
     private JComponent createTabbedPane() {
         JTabbedPane tp;
         tp = new JTabbedPane();
-
-        /*
-         * tp.addTab("", new MyTabbedPane());
-         * tp.setTabComponentAt(tp.getTabCount() - 1, tab("Безымянный"));
-         * 
-         * /*tp.addTab("", new MyTabbedPane());
-         * tp.setTabComponentAt(tp.getTabCount() - 1, tab("Безымянный2"));
-         */
 
         tp.addChangeListener(this);
         return tp;
