@@ -90,5 +90,5 @@ public class TabbedSchemaPane extends JTabbedPane {
     public Schema getSchema() {
         return getSchemaController().getSchema();
     }
-
+///add comment
 }
